@@ -1,0 +1,13 @@
+# ツール依存ファイル
+.idea
+.cache
+
+# ビルドファイル
+.next
+bin
+
+# node_modules
+node_modules
+
+# log
+yarn-error.log
