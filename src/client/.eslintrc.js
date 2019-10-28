@@ -25,7 +25,10 @@ module.exports = {
   ],
   rules: {
     "import/prefer-default-export": OFF,
+    "jsx-a11y/anchor-is-valid": OFF,
     "react/jsx-filename-extension": OFF,
+    "react/prop-types": OFF,
+    "react/jsx-fragments": [ERROR, "element"],
     "@typescript-eslint/explicit-member-accessibility": OFF,
     "@typescript-eslint/explicit-function-return-type": OFF,
     "prettier/prettier": [
