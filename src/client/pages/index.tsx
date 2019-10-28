@@ -1,34 +1,66 @@
-import React, { useState } from "react"
-import { Button, List } from "antd"
-import QueueAnim from "rc-queue-anim"
-import uuid from "uuid"
+/**
+ * import node_modules
+ */
+import React from "react"
+import Link from "next/link"
+import styled from "styled-components"
+import { Button } from "antd"
 
+/**
+ * main
+ */
 const Top = () => {
-  const [items, changeItems] = useState([uuid(), uuid()])
-  const handleAddItem = () => changeItems([...items, uuid()])
-  const handleRemoveItem = targetId => changeItems(items.filter(value => value !== targetId))
-  const listItems = items.map(value => (
-    <List.Item onClick={() => handleRemoveItem(value)} key={value}>
-      {value}
-    </List.Item>
-  ))
-
-  const listProps = {
-    bordered: true,
-    footer: (
-      <Button type="primary" onClick={() => handleAddItem()}>
-        追加
-      </Button>
-    ),
-  }
-
   return (
-    <div>
-      <QueueAnim component={List} componentProps={listProps} type={["right", "left"]} leaveReverse>
-        {listItems}
-      </QueueAnim>
-    </div>
+    <Wrapper>
+      <MenuList>
+        <MenuItem>
+          <Link href="/todo" passHref>
+            <a>
+              <Button>Button</Button>
+            </a>
+          </Link>
+        </MenuItem>
+
+        <MenuItem>
+          <Link href="/pc-components" passHref>
+            <a>
+              <Button>PC components</Button>
+            </a>
+          </Link>
+        </MenuItem>
+
+        <MenuItem>
+          <Link href="/sp-components" passHref>
+            <a>
+              <Button>SP component</Button>
+            </a>
+          </Link>
+        </MenuItem>
+      </MenuList>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+`
+
+const MenuList = styled.ul`
+  margin: 0;
+  padding: 0;
+`
+
+const MenuItem = styled.li`
+  list-style: none;
+  text-align: center;
+
+  & + & {
+    margin-top: 20px;
+  }
+`
 
 export default Top
