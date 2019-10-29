@@ -1,9 +1,21 @@
+/**
+ * import node_modules
+ */
 import React, { useState } from "react"
+import { NextPage } from "next"
 import { Button, List } from "antd"
 import QueueAnim from "rc-queue-anim"
 import uuid from "uuid"
 
-const Top = () => {
+/**
+ * import others
+ */
+import { pageNameMap } from "../../shared/const/common"
+
+/**
+ * main
+ */
+const Top: NextPage = () => {
   const [items, changeItems] = useState([uuid(), uuid()])
   const handleAddItem = () => changeItems([...items, uuid()])
   const handleRemoveItem = targetId => changeItems(items.filter(value => value !== targetId))
@@ -29,6 +41,12 @@ const Top = () => {
       </QueueAnim>
     </div>
   )
+}
+
+Top.getInitialProps = async () => {
+  return {
+    currentPage: pageNameMap.todo,
+  }
 }
 
 export default Top

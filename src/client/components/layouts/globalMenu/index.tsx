@@ -1,51 +1,40 @@
 /**
  * import node_modules
  */
-import React from "react"
+import React, { FunctionComponent } from "react"
 import Link from "next/link"
 import styled from "styled-components"
-import { Button as PcButton } from "antd"
+import { Menu } from "antd"
 import { Button as SpButton } from "antd-mobile"
 
-interface MenuItem {
-  href: string
-  buttonLabel: string
+/**
+ * import others
+ */
+import { menuData, PageName } from "../../../shared/const/common"
+
+/**
+ * main
+ */
+interface GlobalMenuProps {
+  currentPage: PageName
 }
 
-const menuData: MenuItem[] = [
-  {
-    href: "/",
-    buttonLabel: "Top",
-  },
-  {
-    href: "/todo",
-    buttonLabel: "Todo",
-  },
-  {
-    href: "/pc-components",
-    buttonLabel: "PC Components",
-  },
-  {
-    href: "/sp-components",
-    buttonLabel: "SP Components",
-  },
-]
-
-const GlobalMenu = () => {
+const GlobalMenu: FunctionComponent<GlobalMenuProps> = props => {
+  const { currentPage } = props
   return (
     <Nav>
-      <ul data-media="pc">
+      <Menu mode="horizontal" theme="dark" selectedKeys={[currentPage]} data-media="pc">
         {menuData.map(data => {
-          const { href, buttonLabel } = data
+          const { id, href, buttonLabel } = data
           return (
-            <PcMenuItemWrapper key={encodeURI(href + buttonLabel)}>
+            <Menu.Item key={id}>
               <Link href={href}>
-                <PcButton>{buttonLabel}</PcButton>
+                {buttonLabel}
               </Link>
-            </PcMenuItemWrapper>
+            </Menu.Item>
           )
         })}
-      </ul>
+      </Menu>
       <ul data-media="sp">
         {menuData.map(data => {
           const { href, buttonLabel } = data

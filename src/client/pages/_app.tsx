@@ -17,6 +17,9 @@ import reset from "../../assets/styles/reset"
 import base from "../../assets/styles/base"
 import ant from "../../assets/styles/ant"
 
+/**
+ * main
+ */
 const GlobalStyle = createGlobalStyle`
   ${reset}
   ${base}
@@ -26,11 +29,12 @@ const GlobalStyle = createGlobalStyle`
 class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props
+    const { currentPage } = pageProps
 
     return (
       <Fragment>
         <GlobalStyle />
-        <Layout>
+        <Layout currentPage={currentPage}>
           {/* eslint-disable-next-line react/jsx-props-no-spreading */}
           <Component {...pageProps} />
         </Layout>

@@ -1,7 +1,18 @@
+/**
+ * import node_modules
+ */
 import React, { Fragment } from "react"
+import { NextPage } from "next"
 import { DatePicker, Select } from "antd"
-import styled from "styled-components"
 
+/**
+ * import others
+ */
+import { pageNameMap } from "../../shared/const/common"
+
+/**
+ * main
+ */
 const { Option } = Select
 
 const values = [
@@ -11,7 +22,7 @@ const values = [
 
 const optionList = values.map((value, index) => (<Option key={index}>{value}</Option>))
 
-const PcComponents = () => {
+const PcComponents: NextPage = () => {
   return (
     <Fragment>
       <h1>pc components</h1>
@@ -30,8 +41,10 @@ const PcComponents = () => {
   )
 }
 
-const CustomSelect = styled(Select)<any>`
-  width: 100%;
-`
+PcComponents.getInitialProps = async () => {
+  return {
+    currentPage: pageNameMap.pcComponents,
+  }
+}
 
 export default PcComponents

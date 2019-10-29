@@ -2,14 +2,20 @@
  * import node_modules
  */
 import React from "react"
+import { NextPage } from "next"
 import Link from "next/link"
 import styled from "styled-components"
 import { Button } from "antd"
 
 /**
+ * import others
+ */
+import { pageNameMap } from "../shared/const/common"
+
+/**
  * main
  */
-const Top = () => {
+const Top: NextPage = () => {
   return (
     <Wrapper>
       <ul>
@@ -39,6 +45,12 @@ const Top = () => {
       </ul>
     </Wrapper>
   )
+}
+
+Top.getInitialProps = async () => {
+  return {
+    currentPage: pageNameMap.top,
+  }
 }
 
 const Wrapper = styled.div`

@@ -1,6 +1,18 @@
+/**
+ * import node_modules
+ */
 import React, { Fragment } from "react"
+import { NextPage } from "next"
 import { DatePicker, Picker, List } from "antd-mobile"
 
+/**
+ * import others
+ */
+import { pageNameMap } from "../../shared/const/common"
+
+/**
+ * main
+ */
 const values = [
   {
     label:
@@ -26,7 +38,7 @@ const indicatorStyle = {
   border: "1px solid #000",
 }
 
-const PcComponents = () => {
+const PcComponents: NextPage = () => {
   return (
     <Fragment>
       <h1>sp components</h1>
@@ -47,6 +59,12 @@ const PcComponents = () => {
       </div>
     </Fragment>
   )
+}
+
+PcComponents.getInitialProps = async () => {
+  return {
+    currentPage: pageNameMap.spComponents,
+  }
 }
 
 export default PcComponents
