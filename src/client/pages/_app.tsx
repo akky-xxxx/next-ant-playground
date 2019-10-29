@@ -1,17 +1,24 @@
+/**
+ * import node_modules
+ */
 import App from "next/app"
 import React, { Fragment } from "react"
 import { createGlobalStyle } from "styled-components"
 
+/**
+ * import components
+ */
 import Layout from "../components/layouts/layout"
 
+/**
+ * import others
+ */
+import reset from "../../assets/styles/reset"
+import ant from "../../assets/styles/ant"
+
 const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0
-  }
-  
-  .ant-select-dropdown-menu-item {
-    white-space: normal;
-  }
+  ${reset}
+  ${ant}
 `
 
 class MyApp extends App {

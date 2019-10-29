@@ -68,8 +68,6 @@ const Nav = styled.nav`
 `
 
 const PcMenuList = styled.ul`
-  padding: 0;
-
   @media (max-width:480px) {
     display: none;
   }
@@ -85,16 +83,12 @@ const PcMenuItemWrapper = styled.li`
 `
 
 const SpMenuList = styled.ul`
-  padding: 0;
-
   @media (min-width:481px) {
     display: none;
   }
 `
 
 const SpMenuListItemWrapper = styled.li`
-  list-style: none;
-
   & + & {
     margin-top: 4px;
   } 

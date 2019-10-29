@@ -12,7 +12,7 @@ import { Button } from "antd"
 const Top = () => {
   return (
     <Wrapper>
-      <MenuList>
+      <ul>
         <MenuItem>
           <Link href="/todo" passHref>
             <a>
@@ -36,7 +36,7 @@ const Top = () => {
             </a>
           </Link>
         </MenuItem>
-      </MenuList>
+      </ul>
     </Wrapper>
   )
 }
@@ -49,13 +49,7 @@ const Wrapper = styled.div`
   height: 100vh;
 `
 
-const MenuList = styled.ul`
-  margin: 0;
-  padding: 0;
-`
-
 const MenuItem = styled.li`
-  list-style: none;
   text-align: center;
 
   & + & {
