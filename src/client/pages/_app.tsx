@@ -14,10 +14,12 @@ import Layout from "../components/layouts/layout"
  * import others
  */
 import reset from "../../assets/styles/reset"
+import base from "../../assets/styles/base"
 import ant from "../../assets/styles/ant"
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
+  ${base}
   ${ant}
 `
 
@@ -38,4 +40,3 @@ class MyApp extends App {
 }
 
 export default MyApp
-

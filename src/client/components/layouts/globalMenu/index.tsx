@@ -7,12 +7,12 @@ import styled from "styled-components"
 import { Button as PcButton } from "antd"
 import { Button as SpButton } from "antd-mobile"
 
-interface Menu {
+interface MenuItem {
   href: string
   buttonLabel: string
 }
 
-const menuData: Menu[] = [
+const menuData: MenuItem[] = [
   {
     href: "/",
     buttonLabel: "Top",
@@ -34,7 +34,7 @@ const menuData: Menu[] = [
 const GlobalMenu = () => {
   return (
     <Nav>
-      <PcMenuList>
+      <ul data-media="pc">
         {menuData.map(data => {
           const { href, buttonLabel } = data
           return (
@@ -45,8 +45,8 @@ const GlobalMenu = () => {
             </PcMenuItemWrapper>
           )
         })}
-      </PcMenuList>
-      <SpMenuList>
+      </ul>
+      <ul data-media="sp">
         {menuData.map(data => {
           const { href, buttonLabel } = data
           return (
@@ -57,7 +57,7 @@ const GlobalMenu = () => {
             </SpMenuListItemWrapper>
           )
         })}
-      </SpMenuList>
+      </ul>
     </Nav>
   )
 }
@@ -67,24 +67,12 @@ const Nav = styled.nav`
   padding: 20px;
 `
 
-const PcMenuList = styled.ul`
-  @media (max-width:480px) {
-    display: none;
-  }
-`
-
 const PcMenuItemWrapper = styled.li`
   display: inline-block;
   list-style: none;
 
   & + & {
     margin-left: 20px;
-  }
-`
-
-const SpMenuList = styled.ul`
-  @media (min-width:481px) {
-    display: none;
   }
 `
 
