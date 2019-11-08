@@ -19,6 +19,7 @@
     "lint": "run-p lint:*",
     "lint:api": "eslint -c ./src/api/.eslintrc.js --ext .ts ./src/api",
     "lint:client": "eslint -c src/client/.eslintrc.js --ext .ts,.tsx ./src/client",
+    "lint:css": "stylelint './src/**/*.{js,jsx,ts,tsx}'",
     "lint:root": "eslint ./*.js",
     "lint:server": "eslint -c ./src/server/.eslintrc.js --ext .ts, ./src/server",
     "serve": "run-p serve:*",
