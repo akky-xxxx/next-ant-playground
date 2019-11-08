@@ -20,7 +20,7 @@ const values = [
   "あいうえおかきくえこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんあいうえおかきくえこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんあいうえおかきくえこさしすせそたちつ",
 ] as const
 
-const optionList = values.map((value, index) => (<Option key={index}>{value}</Option>))
+const optionList = values.map((value, index) => <Option key={index}>{value}</Option>)
 
 const PcComponents: NextPage = () => {
   return (
@@ -33,9 +33,7 @@ const PcComponents: NextPage = () => {
 
       <h2>Select</h2>
       <div>
-        <Select style={{ width: "100%" }}>
-          {optionList}
-        </Select>
+        <Select style={{ width: "100%" }}>{optionList}</Select>
       </div>
     </Fragment>
   )

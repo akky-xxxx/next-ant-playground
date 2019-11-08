@@ -28,9 +28,7 @@ const GlobalMenu: FunctionComponent<GlobalMenuProps> = props => {
           const { id, href, buttonLabel } = data
           return (
             <Menu.Item key={id}>
-              <Link href={href}>
-                {buttonLabel}
-              </Link>
+              <Link href={href}>{buttonLabel}</Link>
             </Menu.Item>
           )
         })}
@@ -68,7 +66,7 @@ const PcMenuItemWrapper = styled.li`
 const SpMenuListItemWrapper = styled.li`
   & + & {
     margin-top: 4px;
-  } 
+  }
 `
 
 export default GlobalMenu
