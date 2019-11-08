@@ -16,8 +16,10 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "preserve"
+    "checkJs": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noEmit": true
   },
   "exclude": [
     "node_modules"

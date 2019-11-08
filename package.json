@@ -25,7 +25,11 @@
     "serve": "run-p serve:*",
     "serve:api": "agreed-server --path ./src/api/agreed.ts --port 3010",
     "serve:customServer": "cross-env DEBUG=app:server:* node bin/start-server.js",
-    "spell-check": "cspell './src/**/*.{ts,tsx}'"
+    "spell-check": "cspell './src/**/*.{ts,tsx}'",
+    "type-check": "run-p type-check:*",
+    "type-check:api": "tsc -p ./src/api --noEmit",
+    "type-check:client": "tsc -p ./src/client --noEmit",
+    "type-check:server": "tsc -p ./src/server --noEmit"
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
