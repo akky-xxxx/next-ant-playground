@@ -5,11 +5,12 @@ export default css`
     font-family: arial, sans-serif;
     margin: 0;
   }
-  
-  ul, ol {
-    padding: 0
+
+  ul,
+  ol {
+    padding: 0;
   }
-  
+
   li {
     list-style: none;
   }
