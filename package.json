@@ -110,5 +110,19 @@
     "ts-node": "^8.4.1",
     "typescript": "^3.7.2"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn check-all"
+    }
+  },
+  "lint-staged": {
+    "*.ts*": [
+      "yarn fix:client",
+      "yarn lint:client",
+      "yarn lint:css",
+      "git add"
+    ]
+  },
   "private": true
 }
