@@ -4,6 +4,7 @@
 import React, { Fragment } from "react"
 import { NextPage } from "next"
 import { DatePicker, Select } from "antd"
+import uuid from "uuid"
 
 /**
  * import others
@@ -20,7 +21,7 @@ const values = [
   "あいうえおかきくえこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんあいうえおかきくえこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんあいうえおかきくえこさしすせそたちつ",
 ] as const
 
-const optionList = values.map((value, index) => <Option key={index}>{value}</Option>)
+const optionList = values.map(value => <Option key={uuid()}>{value}</Option>)
 
 const PcComponents: NextPage = () => {
   return (

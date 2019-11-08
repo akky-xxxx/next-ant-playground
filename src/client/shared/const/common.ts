@@ -33,7 +33,7 @@ export const menuData: MenuItem[] = [
 
 export const pageNameMap: PageNameMap = menuData.reduce((obj, menuItem) => {
   const { id } = menuItem
-  const newObj = { ...obj }
+  const newObj: PageNameMap = { ...obj }
   newObj[id] = id
   return newObj
 }, {})

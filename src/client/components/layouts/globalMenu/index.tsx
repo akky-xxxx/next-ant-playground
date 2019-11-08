@@ -53,16 +53,6 @@ const Nav = styled.nav`
   background-color: #333;
   padding: 20px;
 `
-
-const PcMenuItemWrapper = styled.li`
-  display: inline-block;
-  list-style: none;
-
-  & + & {
-    margin-left: 20px;
-  }
-`
-
 const SpMenuListItemWrapper = styled.li`
   & + & {
     margin-top: 4px;

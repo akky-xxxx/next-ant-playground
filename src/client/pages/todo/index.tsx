@@ -18,7 +18,7 @@ import { pageNameMap } from "../../shared/const/common"
 const Top: NextPage = () => {
   const [items, changeItems] = useState([uuid(), uuid()])
   const handleAddItem = () => changeItems([...items, uuid()])
-  const handleRemoveItem = targetId => changeItems(items.filter(value => value !== targetId))
+  const handleRemoveItem = (targetId: string) => changeItems(items.filter(value => value !== targetId))
   const listItems = items.map(value => (
     <List.Item onClick={() => handleRemoveItem(value)} key={value}>
       {value}
