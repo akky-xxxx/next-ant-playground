@@ -1,19 +1,12 @@
 {
   "version": "0.1",
   "language": "en",
-  "dictionaries": [
-    "en",
-    "typescript",
-    "html",
-    "css"
-  ],
+  "dictionaries": ["en", "typescript", "html", "css"],
   "dictionaryDefinitions": [
     {
       "name": "en",
       "path": "./cspell.txt"
     }
   ],
-  "ignorePaths": [
-    "node_modules/**"
-  ]
+  "ignorePaths": ["node_modules/**"]
 }
