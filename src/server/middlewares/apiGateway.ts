@@ -29,6 +29,9 @@ function makeServiceAdapter(service: BaseService) {
   }
   methods1.forEach(method => {
     if (service[method]) {
+      // TODO: types 解決
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       adapter[method] = async (
         req: Request,
         resource: string,
@@ -51,6 +54,9 @@ function makeServiceAdapter(service: BaseService) {
   // create と update
   methods2.forEach(method => {
     if (service[method]) {
+      // TODO: types 解決
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       adapter[method] = async (
         req: Request,
         resource: string,
