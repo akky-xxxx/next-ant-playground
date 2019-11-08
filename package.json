@@ -24,7 +24,8 @@
     "lint:server": "eslint -c ./src/server/.eslintrc.js --ext .ts, ./src/server",
     "serve": "run-p serve:*",
     "serve:api": "agreed-server --path ./src/api/agreed.ts --port 3010",
-    "serve:customServer": "cross-env DEBUG=app:server:* node bin/start-server.js"
+    "serve:customServer": "cross-env DEBUG=app:server:* node bin/start-server.js",
+    "spell-check": "cspell './src/**/*.{ts,tsx}'"
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
@@ -75,6 +76,7 @@
     "agreed": "^3.2.2",
     "babel-loader": "^8.0.6",
     "babel-plugin-import": "^1.12.2",
+    "cspell": "^4.0.33",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.5.0",
