@@ -14,6 +14,7 @@
     "fix": "run-p fix:*",
     "fix:api": "eslint -c ./src/api/.eslintrc.js --ext .ts ./src/api --fix",
     "fix:client": "eslint -c src/client/.eslintrc.js --ext .ts,.tsx ./src/client --fix",
+    "fix:json": "prettier ./src/**/*.json --write",
     "fix:pack": "fixpack",
     "fix:root": "eslint ./*.js --fix",
     "fix:server": "eslint -c ./src/server/.eslintrc.js --ext .ts, ./src/server --fix",
