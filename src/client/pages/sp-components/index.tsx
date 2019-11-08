@@ -52,7 +52,7 @@ const PcComponents: NextPage = () => {
       <h2>Picker</h2>
       <div>
         <List>
-          <Picker data={values} cols={1} className="forss" itemStyle={style} indicatorStyle={indicatorStyle}>
+          <Picker data={values} cols={1} itemStyle={style} indicatorStyle={indicatorStyle}>
             <List.Item>picker</List.Item>
           </Picker>
         </List>
