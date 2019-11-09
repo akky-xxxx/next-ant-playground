@@ -1,4 +1,4 @@
-export type PageName = "top" | "todo" | "pcComponents" | "spComponents"
+export type PageName = "top" | "todo" | "pcComponents" | "spComponents" | "formTest"
 type PageNameMap = {
   [key in PageName]?: PageName
 }
@@ -28,6 +28,11 @@ export const menuData: MenuItem[] = [
     id: "spComponents",
     href: "/sp-components",
     buttonLabel: "SP Components",
+  },
+  {
+    id: "formTest",
+    href: "/form-test",
+    buttonLabel: "form test",
   },
 ]
 
