@@ -40,11 +40,11 @@ const FormRow: FunctionComponent<FormRowProps> = props => {
   const self = useRef(null)
 
   useEffect(() => {
-    if (self && self.current) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      self.current.focus()
-    }
+    // TODO: linter が optional chaining に対応したら disable comment 削除
+    /* eslint-disable no-unused-expressions,no-undef,prettier/prettier,no-restricted-globals,@typescript-eslint/ban-ts-ignore */
+    // @ts-ignore
+    self?.current?.focus()
+    /* eslint-enable no-unused-expressions,no-undef,prettier/prettier,no-restricted-globals,@typescript-eslint/ban-ts-ignore */
   }, [self])
 
   return (
