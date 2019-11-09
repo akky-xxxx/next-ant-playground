@@ -5,12 +5,11 @@ import { useReducer } from "react"
 import { createAction, handleActions } from "redux-actions"
 import uuid from "uuid"
 import { clone } from "remeda"
-import { combine } from "favalid"
 
 /**
  * import others
  */
-import { validatorRequired, validatorNumber } from "../../../shared/utils/validator"
+import getValidator from "../../../shared/utils/validator/getValidator"
 
 /**
  * main
@@ -78,13 +77,7 @@ const reducer = handleActions<InitialState, any>(
         payload: { newValue, targetId, isRequire },
       } = action
 
-      const validatorRules = []
-      if (isRequire) validatorRules.push(validatorRequired)
-      if (newValue) {
-        validatorRules.push(validatorNumber)
-      }
-      const validator = combine(...validatorRules)
-
+      const validator = getValidator("number", isRequire, Boolean(newValue))
       const validateResult = validator(newValue)
 
       return {
