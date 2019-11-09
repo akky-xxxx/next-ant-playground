@@ -5,6 +5,12 @@ import { useReducer } from "react"
 import { createAction, handleActions } from "redux-actions"
 import uuid from "uuid"
 import { clone } from "remeda"
+import { combine } from "favalid"
+
+/**
+ * import others
+ */
+import { validatorRequired, validatorNumber } from "../../../shared/utils/validator"
 
 /**
  * main
@@ -14,6 +20,7 @@ export interface Field {
   inputValue: null | string
   isInput: boolean
   isValid: boolean
+  errorMessage: null | string
 }
 
 interface InitialState {
@@ -56,6 +63,7 @@ const initialState: InitialState = {
       inputValue: null,
       isInput: false,
       isValid: false,
+      errorMessage: null,
     },
   ],
 }
@@ -69,8 +77,15 @@ const reducer = handleActions<InitialState, any>(
       const {
         payload: { newValue, targetId, isRequire },
       } = action
-      // eslint-disable-next-line no-console
-      console.log({ isRequire })
+
+      const validatorRules = []
+      if (isRequire) validatorRules.push(validatorRequired)
+      if (newValue) {
+        validatorRules.push(validatorNumber)
+      }
+      const validator = combine(...validatorRules)
+
+      const validateResult = validator(newValue)
 
       return {
         ...newState,
@@ -82,7 +97,8 @@ const reducer = handleActions<InitialState, any>(
             id: targetId,
             inputValue: newValue,
             isInput: true,
-            isValid: true,
+            isValid: !validateResult.error,
+            errorMessage: validateResult.error ? validateResult.message : null,
           }
         }),
       }
@@ -95,6 +111,7 @@ const reducer = handleActions<InitialState, any>(
         inputValue: null,
         isInput: false,
         isValid: false,
+        errorMessage: null,
       }
 
       return {

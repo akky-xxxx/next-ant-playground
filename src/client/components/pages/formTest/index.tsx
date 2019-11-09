@@ -21,7 +21,7 @@ const FormTest: NextPage = () => {
   return (
     <Form>
       {state.fields.map((field, index) => {
-        const { id, inputValue, isInput, isValid } = field
+        const { id, inputValue, isInput, isValid, errorMessage } = field
 
         return (
           <FormRow
@@ -30,6 +30,7 @@ const FormTest: NextPage = () => {
             inputValue={inputValue}
             isInput={isInput}
             isValid={isValid}
+            errorMessage={errorMessage}
             handleChangeValue={handleChangeValue}
             handleAddField={handleAddField}
             handleRemoveField={handleRemoveField}

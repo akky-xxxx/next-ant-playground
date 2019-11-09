@@ -2,8 +2,13 @@
  * import node_modules
  */
 import React, { useRef, useEffect, FunctionComponent } from "react"
-import { Form, Button, Input, Row, Col } from "antd"
+import { Form, Button, Input, Row, Col, Popover } from "antd"
 import styled from "styled-components"
+
+/**
+ * import components
+ */
+import ErrorMessage from "../../atoms/errorMessage"
 
 /**
  * import others
@@ -21,7 +26,17 @@ interface FormRowProps extends Field {
 }
 
 const FormRow: FunctionComponent<FormRowProps> = props => {
-  const { id, inputValue, index, handleChangeValue, handleAddField, handleRemoveField } = props
+  const {
+    id,
+    inputValue,
+    isInput,
+    isValid,
+    errorMessage,
+    index,
+    handleChangeValue,
+    handleAddField,
+    handleRemoveField,
+  } = props
   const self = useRef(null)
 
   useEffect(() => {
@@ -30,17 +45,23 @@ const FormRow: FunctionComponent<FormRowProps> = props => {
       // @ts-ignore
       self.current.focus()
     }
-  })
+  }, [self])
 
   return (
     <Form.Item>
       <Row type="flex" justify="space-between">
         <Col sm={21}>
-          <Input
-            value={inputValue || ""}
-            onChange={event => handleChangeValue(id, event.target.value, index === 0)}
-            ref={self}
-          />
+          <Popover
+            content={<ErrorMessage message={errorMessage} />}
+            visible={isInput && !isValid}
+            placement="bottomLeft"
+          >
+            <Input
+              value={inputValue || ""}
+              onChange={event => handleChangeValue(id, event.target.value, index === 0)}
+              ref={self}
+            />
+          </Popover>
         </Col>
         <Col sm={3} style={{ flexBasis: 100 }}>
           <Row type="flex" justify="space-between">
