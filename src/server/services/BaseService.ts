@@ -13,7 +13,9 @@ type Method1 = (
   params: Record<string, unknown>,
   config: unknown,
   callback: Function,
-) => AxiosPromise<any>
+) => // TODO: any を外せたら外す
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+AxiosPromise<any>
 type Method2 = (
   req: Request,
   resource: string,
@@ -21,7 +23,9 @@ type Method2 = (
   body: Record<string, unknown>,
   config: unknown,
   callback: Function,
-) => AxiosPromise<any>
+) => // TODO: any を外せたら外す
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+AxiosPromise<any>
 
 export type ReadMethod = Method1
 export type DeleteMethod = Method1
@@ -42,14 +46,20 @@ export interface BaseService {
 }
 
 export default class BaseServiceClass implements BaseService {
+  // TODO: any を外せたら外す
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   axios: any
 
   name: string
 
   pathname: string
 
+  // TODO: any を外せたら外す
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params: any
 
+  // TODO: any を外せたら外す
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(_config: unknown, name: string, pathname: string, params: any = {}) {
     // axiosは継承先でcreateAxiosする
     this.axios = null
@@ -76,7 +86,7 @@ export default class BaseServiceClass implements BaseService {
    * @param params - request parameter
    * @param _config - その他リクエスト時の処理で渡したい値
    */
-  read(_req: Request, resource: string, params: Record<string, unknown>, _config: unknown) {
+  read(_req: Request, resource: string, params: Record<string, unknown>) {
     debug(`[${resource}][GET]: ${this.getFormattedUrl(params)}`)
     debug(`[${resource}][GET](params): `)
     debug(params)
@@ -110,7 +120,6 @@ export default class BaseServiceClass implements BaseService {
     resource: string,
     params: Record<string, unknown>,
     body: Record<string, unknown>,
-    _config: unknown,
   ) {
     debug(`[${resource}][POST]:`)
     debug(`body: `)
@@ -142,7 +151,7 @@ export default class BaseServiceClass implements BaseService {
    * @param body - request body
    * @param _config - その他リクエスト時の処理で渡したい値
    */
-  update(_req: Request, resource: string, params: Record<string, unknown>, body: unknown, _config: unknown) {
+  update(_req: Request, resource: string, params: Record<string, unknown>, body: unknown) {
     debug(`[${resource}][UPDATE]: body: ${body}`)
     debug(`[${resource}][UPDATE](params): `)
     debug(params)
@@ -170,7 +179,7 @@ export default class BaseServiceClass implements BaseService {
    * @param params - request parameter
    * @param _config - その他リクエスト時の処理で渡したい値
    */
-  delete(_req: Request, resource: string, params: Record<string, unknown>, _config: unknown) {
+  delete(_req: Request, resource: string, params: Record<string, unknown>) {
     debug(`[${resource}][DELETE]: DELETE ${this.getFormattedUrl(params)}`)
     debug(`[${resource}][DELETE](params): `)
     debug(params)

@@ -7,7 +7,7 @@ import { Request, Response, NextFunction } from "express"
 /**
  * import others
  */
-import services from "../services"
+import services, { Services } from "../services"
 import { FetchrConstructor } from "../types/Fetchr"
 import { BaseService, ReadMethod, DeleteMethod, CreateMethod, UpdateMethod } from "../services/BaseService"
 
@@ -40,6 +40,8 @@ function makeServiceAdapter(service: BaseService) {
         callback: Function,
       ) => {
         service[method](req, resource, params, config, callback).then(
+          // TODO: any を外せたら外す -> おそらく agreed との連携が必要
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (result: any) => {
             callback(null, result)
           },
@@ -66,6 +68,8 @@ function makeServiceAdapter(service: BaseService) {
         callback: Function,
       ) => {
         service[method](req, resource, params, body, config, callback).then(
+          // TODO: any を外せたら外す -> おそらく agreed との連携が必要
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (result: any) => {
             callback(null, result)
           },
@@ -87,7 +91,7 @@ function makeServiceAdapter(service: BaseService) {
  */
 export default function apiGateway(config: unknown, Fetchr: FetchrConstructor) {
   debug("------------------------------------")
-  Object.values(services).forEach((Service: any) => {
+  Object.values(services).forEach((Service: Services) => {
     const service = new Service(config)
     debug(`❇️ Registering service: ${service.name}`)
     return Fetchr.registerService(makeServiceAdapter(service))
