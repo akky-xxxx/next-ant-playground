@@ -33,7 +33,7 @@ const GlobalMenu: FunctionComponent<GlobalMenuProps> = props => {
           )
         })}
       </Menu>
-      <ul data-media="sp">
+      <ul data-media="tb">
         {menuData.map(data => {
           const { href, buttonLabel } = data
           return (

@@ -6,19 +6,21 @@ import { css } from "styled-components"
 /**
  * import others
  */
-import theme from "./theme"
+import STYLE_VARIABLES from "./variables"
+
+const { MEDIA_QUERIES } = STYLE_VARIABLES
 
 export default css`
-  @media ${theme.media.pc} {
+  @media ${MEDIA_QUERIES.PC} {
     /* data-media属性を持ち、その属性値にpcが含まれなかったら */
     [data-media]:not([data-media~="pc"]) {
       display: none;
     }
   }
 
-  @media ${theme.media.sp} {
-    /* data-media属性を持ち、その属性値にspが含まれなかったら */
-    [data-media]:not([data-media~="sp"]) {
+  @media ${MEDIA_QUERIES.TB} {
+    /* data-media属性を持ち、その属性値にtbが含まれなかったら */
+    [data-media]:not([data-media~="tb"]) {
       display: none;
     }
   }
