@@ -3,3 +3,5 @@ antd
 middlewares
 remeda
 favalid
+memorystore
+DEVTOOLS
