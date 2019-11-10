@@ -115,12 +115,7 @@ export default class BaseServiceClass implements BaseService {
    * @param body - request body
    * @param _config - その他リクエスト時の処理で渡したい値
    */
-  create(
-    _req: Request,
-    resource: string,
-    params: Record<string, unknown>,
-    body: Record<string, unknown>,
-  ) {
+  create(_req: Request, resource: string, params: Record<string, unknown>, body: Record<string, unknown>) {
     debug(`[${resource}][POST]:`)
     debug(`body: `)
     debug(body)
