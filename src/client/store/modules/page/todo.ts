@@ -1,0 +1,137 @@
+/**
+ * import node_modules
+ */
+import { createAction, handleActions } from "redux-actions"
+import uuid from "uuid"
+import { clone } from "remeda"
+
+/**
+ * import others
+ */
+import getValidator from "../../../shared/utils/validator/getValidator"
+
+/**
+ * main
+ */
+export interface Field {
+  id: string
+  inputValue: null | string
+  isInput: boolean
+  isValid: boolean
+  errorMessage: null | string
+}
+
+export interface InitialState {
+  fields: Field[]
+}
+
+interface ChangeValuePayload {
+  targetId: string
+  newValue: string
+  isRequire: boolean
+}
+
+interface ChangeValueAction {
+  payload: ChangeValuePayload
+}
+
+interface RemoveFieldPayload {
+  targetId: string
+}
+
+interface RemoveFieldAction {
+  payload: RemoveFieldPayload
+}
+
+// create action types
+const CHANGE_VALUE = "changeValue"
+const FIELD_ADD = "field/add"
+const FIELD_REMOVE = "field/remove"
+
+// create action
+const changeValue = createAction<ChangeValuePayload>(CHANGE_VALUE)
+const addField = createAction(FIELD_ADD)
+const removeField = createAction<RemoveFieldPayload>(FIELD_REMOVE)
+
+export const actions = {
+  changeValue,
+  addField,
+  removeField,
+}
+
+// initialState
+const initialState: InitialState = {
+  fields: [
+    {
+      id: uuid(),
+      inputValue: null,
+      isInput: false,
+      isValid: false,
+      errorMessage: null,
+    },
+  ],
+}
+
+// reducer
+// TODO: resolve any warning
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const reducer = handleActions<InitialState, any>(
+  {
+    [CHANGE_VALUE]: (state, action: ChangeValueAction) => {
+      const newState = clone(state)
+      const {
+        payload: { newValue, targetId, isRequire },
+      } = action
+
+      const validator = getValidator("number", isRequire, Boolean(newValue))
+      const validateResult = validator(newValue)
+
+      return {
+        ...newState,
+        fields: newState.fields.map(field => {
+          const { id } = field
+          if (id !== targetId) return field
+
+          return {
+            id: targetId,
+            inputValue: newValue,
+            isInput: true,
+            isValid: !validateResult.error,
+            errorMessage: validateResult.error ? validateResult.message : null,
+          }
+        }),
+      }
+    },
+
+    [FIELD_ADD]: state => {
+      const newState = clone(state)
+      const additionData: Field = {
+        id: uuid(),
+        inputValue: null,
+        isInput: false,
+        isValid: false,
+        errorMessage: null,
+      }
+
+      return {
+        ...newState,
+        fields: [...newState.fields, additionData],
+      }
+    },
+
+    [FIELD_REMOVE]: (state, action: RemoveFieldAction) => {
+      const newState = clone(state)
+      const {
+        payload: { targetId },
+      } = action
+
+      return {
+        ...newState,
+        fields: newState.fields.filter(field => field.id !== targetId),
+      }
+    },
+  },
+  initialState,
+)
+
+export default reducer

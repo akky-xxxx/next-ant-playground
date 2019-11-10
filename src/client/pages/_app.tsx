@@ -3,7 +3,9 @@
  */
 import App from "next/app"
 import React, { Fragment } from "react"
+import { Store } from "redux"
 import { createGlobalStyle } from "styled-components"
+import { Provider } from "react-redux"
 
 /**
  * import components
@@ -16,6 +18,8 @@ import Layout from "../components/layouts/layout"
 import reset from "../assets/styles/reset"
 import base from "../assets/styles/base"
 import ant from "../assets/styles/ant"
+import { InitialState } from "../store/modules"
+import withRedux from "../store/with-redux-store"
 
 /**
  * main
@@ -26,21 +30,24 @@ const GlobalStyle = createGlobalStyle`
   ${ant}
 `
 
-class MyApp extends App {
+// TODO: modules を拡張するやり方に変えられたら変える
+class MyApp extends App<{ reduxStore: Store<InitialState> }> {
   render() {
-    const { Component, pageProps } = this.props
+    const { Component, pageProps, reduxStore } = this.props
     const { currentPage } = pageProps
 
     return (
       <Fragment>
         <GlobalStyle />
         <Layout currentPage={currentPage}>
-          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-          <Component {...pageProps} />
+          <Provider store={reduxStore}>
+            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+            <Component {...pageProps} />
+          </Provider>
         </Layout>
       </Fragment>
     )
   }
 }
 
-export default MyApp
+export default withRedux(MyApp)
