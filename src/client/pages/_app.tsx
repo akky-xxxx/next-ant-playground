@@ -13,9 +13,9 @@ import Layout from "../components/layouts/layout"
 /**
  * import others
  */
-import reset from "../../assets/styles/reset"
-import base from "../../assets/styles/base"
-import ant from "../../assets/styles/ant"
+import reset from "../assets/styles/reset"
+import base from "../assets/styles/base"
+import ant from "../assets/styles/ant"
 
 /**
  * main
