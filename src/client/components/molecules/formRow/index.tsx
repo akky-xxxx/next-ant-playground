@@ -13,16 +13,16 @@ import ErrorMessage from "../../atoms/errorMessage"
 /**
  * import others
  */
-import { Field } from "../../pages/formTest/useFormReducer"
+import { Field, HandleAddField, HandleChangeValue, HandleRemoveField } from "../../../store/modules/page/todo"
 
 /**
  * main
  */
 interface FormRowProps extends Field {
   index: number
-  handleChangeValue: Function
-  handleAddField: Function
-  handleRemoveField: Function
+  handleChangeValue: HandleChangeValue
+  handleAddField: HandleAddField
+  handleRemoveField: HandleRemoveField
 }
 
 const FormRow: FunctionComponent<FormRowProps> = props => {
@@ -58,7 +58,7 @@ const FormRow: FunctionComponent<FormRowProps> = props => {
           >
             <Input
               value={inputValue || ""}
-              onChange={event => handleChangeValue(id, event.target.value, index === 0)}
+              onChange={event => handleChangeValue({ targetId: id, newValue: event.target.value, isRequire: index === 0 })}
               ref={self}
             />
           </Popover>
@@ -66,7 +66,7 @@ const FormRow: FunctionComponent<FormRowProps> = props => {
         <Col sm={3} style={{ flexBasis: 100 }}>
           <Row type="flex" justify="space-between">
             {index !== 0 ? (
-              <MinusButton shape="circle" onClick={() => handleRemoveField(id)}>
+              <MinusButton shape="circle" onClick={() => handleRemoveField({ targetId: id })}>
                 -
               </MinusButton>
             ) : (

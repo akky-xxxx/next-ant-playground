@@ -1,7 +1,7 @@
 /**
  * import node_modules
  */
-import { createAction, handleActions } from "redux-actions"
+import { createAction, handleActions, Action } from "redux-actions"
 import uuid from "uuid"
 import { clone } from "remeda"
 
@@ -25,23 +25,29 @@ export interface InitialState {
   fields: Field[]
 }
 
-interface ChangeValuePayload {
+export type HandleAddField = () => void
+
+export interface ChangeValuePayload {
   targetId: string
   newValue: string
   isRequire: boolean
 }
 
-interface ChangeValueAction {
+export interface ChangeValueAction {
   payload: ChangeValuePayload
 }
 
-interface RemoveFieldPayload {
+export type HandleChangeValue = (payload: ChangeValuePayload) => Action<ChangeValuePayload>
+
+export interface RemoveFieldPayload {
   targetId: string
 }
 
 interface RemoveFieldAction {
   payload: RemoveFieldPayload
 }
+
+export type HandleRemoveField = (payload: RemoveFieldPayload) => Action<RemoveFieldPayload>
 
 // create action types
 const CHANGE_VALUE = "changeValue"

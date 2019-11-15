@@ -13,14 +13,24 @@ import FormRow from "../../molecules/formRow"
 /**
  * import others
  */
-import useFormReducer from "./useFormReducer"
+import { HandleAddField, HandleChangeValue, HandleRemoveField, Field } from "../../../store/modules/page/todo"
 
-const FormTest: NextPage = () => {
-  const { state, handleChangeValue, handleAddField, handleRemoveField } = useFormReducer()
+/**
+ * main
+ */
+interface FormTestProps {
+  handleAddField: HandleAddField
+  handleChangeValue: HandleChangeValue
+  handleRemoveField: HandleRemoveField
+  fields: Field[]
+}
+
+const FormTest: NextPage<FormTestProps, any> = props => {
+  const { handleAddField, handleChangeValue, handleRemoveField, fields } = props
 
   return (
     <Form>
-      {state.fields.map((field, index) => {
+      {fields.map((field, index) => {
         const { id, inputValue, isInput, isValid, errorMessage } = field
 
         return (
