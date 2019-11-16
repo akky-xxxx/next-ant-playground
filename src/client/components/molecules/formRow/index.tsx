@@ -13,7 +13,7 @@ import ErrorMessage from "../../atoms/errorMessage"
 /**
  * import others
  */
-import { Field, HandleAddField, HandleChangeValue, HandleRemoveField } from "../../../store/modules/page/todo"
+import { Field, HandleAddField, HandleChangeValue, HandleRemoveField } from "../../../store/modules/page/todo/types"
 
 /**
  * main

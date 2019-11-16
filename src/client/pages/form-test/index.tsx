@@ -14,7 +14,7 @@ import FormTest from "../../components/pages/formTest"
  */
 import { pageNameMap } from "../../shared/const/common"
 import { InitialState, actions } from "../../store/modules"
-import { HandleRemoveField, HandleAddField, HandleChangeValue } from "../../store/modules/page/todo"
+import { HandleRemoveField, HandleAddField, HandleChangeValue } from "../../store/modules/page/todo/types"
 
 /**
  * main

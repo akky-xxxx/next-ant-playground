@@ -15,7 +15,7 @@ import FormRow from "../../molecules/formRow"
  * import others
  */
 import { GetInitialPropsReturn } from "../../../shared/types/common"
-import { HandleAddField, HandleChangeValue, HandleRemoveField, Field } from "../../../store/modules/page/todo"
+import { HandleAddField, HandleChangeValue, HandleRemoveField, Field } from "../../../store/modules/page/todo/types"
 
 /**
  * main

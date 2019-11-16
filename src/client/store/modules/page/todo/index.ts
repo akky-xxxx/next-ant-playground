@@ -1,54 +1,26 @@
 /**
  * import node_modules
  */
-import { createAction, handleActions, Action } from "redux-actions"
+import { createAction, handleActions } from "redux-actions"
 import uuid from "uuid"
 import { clone } from "remeda"
 
 /**
  * import others
  */
-import getValidator from "../../../shared/utils/validator/getValidator"
+import {
+  Field,
+  InitialState,
+  ChangeValuePayload,
+  ChangeValueAction,
+  RemoveFieldPayload,
+  RemoveFieldAction,
+} from "./types"
+import getValidator from "../../../../shared/utils/validator/getValidator"
 
 /**
  * main
  */
-export interface Field {
-  id: string
-  inputValue: null | string
-  isInput: boolean
-  isValid: boolean
-  errorMessage: null | string
-}
-
-export interface InitialState {
-  fields: Field[]
-}
-
-export type HandleAddField = () => void
-
-interface ChangeValuePayload {
-  targetId: string
-  newValue: string
-  isRequire: boolean
-}
-
-interface ChangeValueAction {
-  payload: ChangeValuePayload
-}
-
-export type HandleChangeValue = (payload: ChangeValuePayload) => Action<ChangeValuePayload>
-
-interface RemoveFieldPayload {
-  targetId: string
-}
-
-interface RemoveFieldAction {
-  payload: RemoveFieldPayload
-}
-
-export type HandleRemoveField = (payload: RemoveFieldPayload) => Action<RemoveFieldPayload>
-
 // create action types
 const CHANGE_VALUE = "changeValue"
 const FIELD_ADD = "field/add"
