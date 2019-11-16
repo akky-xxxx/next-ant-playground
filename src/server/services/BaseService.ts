@@ -52,11 +52,9 @@ export default class BaseServiceClass implements BaseService {
 
   pathname: string
 
-  // TODO: any を外せたら外す
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params: any
 
-  // TODO: any を外せたら外す
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(_config: unknown, name: string, pathname: string, params: any = {}) {
     // axiosは継承先でcreateAxiosする
