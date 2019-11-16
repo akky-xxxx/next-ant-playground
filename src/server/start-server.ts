@@ -34,9 +34,7 @@ app
     server.use(router(Fetchr))
     server.use(handle)
 
-    // TODO: any を外せたら外す
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    server.listen(port, (err: any) => {
+    server.listen(port, (err: Error) => {
       if (err) throw err
       console.log(`> Ready on http://localhost:${port}`)
       console.log(`-------------------------------------`)
