@@ -26,7 +26,7 @@ export interface AddFieldAction {
   payload: AddFieldPayload
 }
 
-export type HandleAddField = (payload: AddFieldPayload) => Action<AddFieldPayload>
+type HandleAddField = (payload: AddFieldPayload) => Action<AddFieldPayload>
 
 export interface ChangeValuePayload {
   targetId: string
@@ -38,7 +38,7 @@ export interface ChangeValueAction {
   payload: ChangeValuePayload
 }
 
-export type HandleChangeValue = (payload: ChangeValuePayload) => Action<ChangeValuePayload>
+type HandleChangeValue = (payload: ChangeValuePayload) => Action<ChangeValuePayload>
 
 export interface RemoveFieldPayload {
   targetId: string
@@ -48,4 +48,10 @@ export interface RemoveFieldAction {
   payload: RemoveFieldPayload
 }
 
-export type HandleRemoveField = (payload: RemoveFieldPayload) => Action<RemoveFieldPayload>
+type HandleRemoveField = (payload: RemoveFieldPayload) => Action<RemoveFieldPayload>
+
+export interface HandleActions {
+  handleAddField: HandleAddField
+  handleChangeValue: HandleChangeValue
+  handleRemoveField: HandleRemoveField
+}

@@ -15,15 +15,12 @@ import FormRow from "../../molecules/formRow"
  * import others
  */
 import { GetInitialPropsReturn } from "../../../shared/types/common"
-import { HandleAddField, HandleChangeValue, HandleRemoveField, Field } from "../../../store/modules/page/todo/types"
+import { HandleActions, Field } from "../../../store/modules/page/todo/types"
 
 /**
  * main
  */
-interface FormTestProps {
-  handleAddField: HandleAddField
-  handleChangeValue: HandleChangeValue
-  handleRemoveField: HandleRemoveField
+interface FormTestProps extends HandleActions {
   fields: Field[]
 }
 

@@ -13,16 +13,13 @@ import ErrorMessage from "../../atoms/errorMessage"
 /**
  * import others
  */
-import { Field, HandleAddField, HandleChangeValue, HandleRemoveField } from "../../../store/modules/page/todo/types"
+import { Field, HandleActions } from "../../../store/modules/page/todo/types"
 
 /**
  * main
  */
-interface FormRowProps extends Field {
+interface FormRowProps extends Field, HandleActions {
   index: number
-  handleChangeValue: HandleChangeValue
-  handleAddField: HandleAddField
-  handleRemoveField: HandleRemoveField
 }
 
 const FormRow: FunctionComponent<FormRowProps> = props => {

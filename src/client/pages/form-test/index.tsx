@@ -2,7 +2,6 @@
  * import node_modules
  */
 import { connect } from "react-redux"
-import { Dispatch } from "redux"
 
 /**
  * import components
@@ -14,7 +13,7 @@ import FormTest from "../../components/pages/formTest"
  */
 import { pageNameMap } from "../../shared/const/common"
 import { InitialState, actions } from "../../store/modules"
-import { HandleRemoveField, HandleAddField, HandleChangeValue } from "../../store/modules/page/todo/types"
+import { HandleActions } from "../../store/modules/page/todo/types"
 
 /**
  * main
@@ -31,19 +30,11 @@ const {
   },
 } = actions
 
-const mapStateToProps = (state: InitialState) => state.pages.todo
-const mapDispatchToProps = (dispatch: Dispatch) => {
-  const handleActions: {
-    handleAddField: HandleAddField
-    handleChangeValue: HandleChangeValue
-    handleRemoveField: HandleRemoveField
-  } = {
+export default connect<{}, HandleActions, {}, InitialState>(
+  state => state.pages.todo,
+  dispatch => ({
     handleAddField: payload => dispatch(addField(payload)),
     handleChangeValue: payload => dispatch(changeValue(payload)),
     handleRemoveField: payload => dispatch(removeField(payload)),
-  }
-
-  return handleActions
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(FormTest)
+  }),
+)(FormTest)
