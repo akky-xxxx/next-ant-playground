@@ -30,8 +30,11 @@ const GlobalStyle = createGlobalStyle`
   ${ant}
 `
 
-// TODO: modules を拡張するやり方に変えられたら変える
-class MyApp extends App<{ reduxStore: Store<InitialState> }> {
+interface MyAppProps {
+  reduxStore: Store<InitialState>
+}
+
+class MyApp extends App<MyAppProps> {
   render() {
     const { Component, pageProps, reduxStore } = this.props
     const { currentPage } = pageProps
