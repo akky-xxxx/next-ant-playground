@@ -74,7 +74,7 @@ const FormRow: FunctionComponent<FormRowProps> = props => {
             ) : (
               <span />
             )}
-            <Button shape="circle" onClick={() => handleAddField()} disabled={!inputValue}>
+            <Button shape="circle" onClick={() => handleAddField({ targetId: id })} disabled={!inputValue}>
               +
             </Button>
           </Row>

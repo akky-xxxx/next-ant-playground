@@ -11,6 +11,8 @@ import { clone } from "remeda"
 import {
   Field,
   InitialState,
+  AddFieldPayload,
+  AddFieldAction,
   ChangeValuePayload,
   ChangeValueAction,
   RemoveFieldPayload,
@@ -29,7 +31,7 @@ const FIELD_RESET = "field/reset"
 
 // create action
 const changeValue = createAction<ChangeValuePayload>(CHANGE_VALUE)
-const addField = createAction(FIELD_ADD)
+const addField = createAction<AddFieldPayload>(FIELD_ADD)
 const removeField = createAction<RemoveFieldPayload>(FIELD_REMOVE)
 const resetField = createAction(FIELD_RESET)
 
@@ -83,7 +85,10 @@ const reducer = handleActions<InitialState, any>(
       }
     },
 
-    [FIELD_ADD]: state => {
+    [FIELD_ADD]: (state, action: AddFieldAction) => {
+      const {
+        payload: { targetId },
+      } = action
       const newState = clone(state)
       const additionData: Field = {
         id: uuid(),
@@ -92,10 +97,14 @@ const reducer = handleActions<InitialState, any>(
         isValid: false,
         errorMessage: null,
       }
+      const { fields } = newState
+      const dividePoint = fields.findIndex(filed => filed.id === targetId) + 1
+      const beforeFields = fields.slice(0, dividePoint)
+      const afterFields = fields.slice(dividePoint, fields.length)
 
       return {
         ...newState,
-        fields: [...newState.fields, additionData],
+        fields: [...beforeFields, additionData, ...afterFields],
       }
     },
 

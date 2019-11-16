@@ -18,7 +18,15 @@ export interface InitialState {
   fields: Field[]
 }
 
-export type HandleAddField = () => void
+export interface AddFieldPayload {
+  targetId: string
+}
+
+export interface AddFieldAction {
+  payload: AddFieldPayload
+}
+
+export type HandleAddField = (payload: AddFieldPayload) => Action<AddFieldPayload>
 
 export interface ChangeValuePayload {
   targetId: string
