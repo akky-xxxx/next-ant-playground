@@ -14,7 +14,7 @@ import FormTest from "../../components/pages/formTest"
  */
 import { pageNameMap } from "../../shared/const/common"
 import { InitialState, actions } from "../../store/modules"
-import { ChangeValuePayload, RemoveFieldPayload } from "../../store/modules/page/todo"
+import { HandleRemoveField, HandleAddField, HandleChangeValue } from "../../store/modules/page/todo"
 
 /**
  * main
@@ -32,11 +32,18 @@ const {
 } = actions
 
 const mapStateToProps = (state: InitialState) => state.pages.todo
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  handleAddField: () => dispatch(addField()),
-  handleChangeValue: ({ targetId, newValue, isRequire }: ChangeValuePayload) =>
-    dispatch(changeValue({ targetId, newValue, isRequire })),
-  handleRemoveField: ({ targetId }: RemoveFieldPayload) => dispatch(removeField({ targetId })),
-})
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  const handleActions: {
+    handleAddField: HandleAddField
+    handleChangeValue: HandleChangeValue
+    handleRemoveField: HandleRemoveField
+  } = {
+    handleAddField: () => dispatch(addField()),
+    handleChangeValue: ({ targetId, newValue, isRequire }) => dispatch(changeValue({ targetId, newValue, isRequire })),
+    handleRemoveField: ({ targetId }) => dispatch(removeField({ targetId })),
+  }
+
+  return handleActions
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormTest)

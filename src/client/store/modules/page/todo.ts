@@ -27,19 +27,19 @@ export interface InitialState {
 
 export type HandleAddField = () => void
 
-export interface ChangeValuePayload {
+interface ChangeValuePayload {
   targetId: string
   newValue: string
   isRequire: boolean
 }
 
-export interface ChangeValueAction {
+interface ChangeValueAction {
   payload: ChangeValuePayload
 }
 
 export type HandleChangeValue = (payload: ChangeValuePayload) => Action<ChangeValuePayload>
 
-export interface RemoveFieldPayload {
+interface RemoveFieldPayload {
   targetId: string
 }
 
