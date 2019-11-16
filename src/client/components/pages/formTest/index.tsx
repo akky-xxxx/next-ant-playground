@@ -3,6 +3,7 @@
  */
 import React from "react"
 import { NextPage } from "next"
+import Head from "next/head"
 import { Form } from "antd"
 
 /**
@@ -31,6 +32,9 @@ const FormTest: NextPage<FormTestProps, GetInitialPropsReturn> = props => {
 
   return (
     <Form>
+      <Head>
+        <title>form test</title>
+      </Head>
       {fields.map((field, index) => {
         const { id, inputValue, isInput, isValid, errorMessage } = field
 

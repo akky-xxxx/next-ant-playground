@@ -3,6 +3,7 @@
  */
 import React, { Fragment } from "react"
 import { NextPage } from "next"
+import Head from "next/head"
 import { DatePicker, Select } from "antd"
 import uuid from "uuid"
 
@@ -26,6 +27,9 @@ const optionList = values.map(value => <Option key={uuid()}>{value}</Option>)
 const PcComponents: NextPage = () => {
   return (
     <Fragment>
+      <Head>
+        <title>components of ant design</title>
+      </Head>
       <h1>pc components</h1>
       <h2>DatePicker</h2>
       <div>

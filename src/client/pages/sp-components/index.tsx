@@ -3,6 +3,7 @@
  */
 import React, { Fragment } from "react"
 import { NextPage } from "next"
+import Head from "next/head"
 import { DatePicker, Picker, List } from "antd-mobile"
 
 /**
@@ -41,6 +42,9 @@ const indicatorStyle = {
 const PcComponents: NextPage = () => {
   return (
     <Fragment>
+      <Head>
+        <title>components of ant design mobile</title>
+      </Head>
       <h1>sp components</h1>
       <h2>DatePicker</h2>
       <div>

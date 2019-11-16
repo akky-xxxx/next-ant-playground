@@ -3,6 +3,7 @@
  */
 import React from "react"
 import { NextPage } from "next"
+import Head from "next/head"
 import Link from "next/link"
 import styled from "styled-components"
 import { Button } from "antd"
@@ -18,6 +19,9 @@ import { pageNameMap } from "../shared/const/common"
 const Top: NextPage = () => {
   return (
     <Wrapper>
+      <Head>
+        <title>playground of Next.js and ant design</title>
+      </Head>
       <ul>
         <MenuItem>
           <Link href="/todo" passHref>

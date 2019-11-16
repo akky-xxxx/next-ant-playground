@@ -3,6 +3,7 @@
  */
 import React, { useState } from "react"
 import { NextPage } from "next"
+import Head from "next/head"
 import { Button, List } from "antd"
 import QueueAnim from "rc-queue-anim"
 import uuid from "uuid"
@@ -36,6 +37,9 @@ const Top: NextPage = () => {
 
   return (
     <div>
+      <Head>
+        <title>todo list</title>
+      </Head>
       <QueueAnim component={List} componentProps={listProps} type={["right", "left"]} leaveReverse>
         {listItems}
       </QueueAnim>
