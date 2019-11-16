@@ -11,7 +11,7 @@ import { Button } from "antd"
 /**
  * import others
  */
-import { pageNameMap } from "../shared/const/common"
+import { menuData, pageNameMap } from "../shared/const/common"
 
 /**
  * main
@@ -23,29 +23,20 @@ const Top: NextPage = () => {
         <title>playground of Next.js and ant design</title>
       </Head>
       <ul>
-        <MenuItem>
-          <Link href="/todo" passHref>
-            <a>
-              <Button>Button</Button>
-            </a>
-          </Link>
-        </MenuItem>
-
-        <MenuItem>
-          <Link href="/pc-components" passHref>
-            <a>
-              <Button>PC components</Button>
-            </a>
-          </Link>
-        </MenuItem>
-
-        <MenuItem>
-          <Link href="/sp-components" passHref>
-            <a>
-              <Button>SP component</Button>
-            </a>
-          </Link>
-        </MenuItem>
+        {menuData
+          .filter((_, index) => index > 0)
+          .map(page => {
+            const { href, buttonLabel } = page
+            return (
+              <MenuItem key={href}>
+                <Link href={href} passHref>
+                  <a>
+                    <Button>{buttonLabel}</Button>
+                  </a>
+                </Link>
+              </MenuItem>
+            )
+          })}
       </ul>
     </Wrapper>
   )
