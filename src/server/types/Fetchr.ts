@@ -16,9 +16,7 @@ import { Request, Response, NextFunction } from "express"
  * @constructor
  */
 export interface FetchrConstructor {
-  // TODO: any を外せたら外す
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  registerService(fetcher: any): void | Error
+  registerService(fetcher: unknown): void | Error
   getService(name: string): Function | Error
   isRegistered(name: string): boolean
   read(resource: string, params: {}, config: {}, callback: Function): void
@@ -30,9 +28,7 @@ export interface FetchrConstructor {
   delete(resource: string, params: {}, config: {}, callback: Function): void
   delete(resource: string, params: {}, config: {}, callback: null): Promise<Record<string, unknown>>
   middleware(options: {
-    // TODO: any を外せたら外す
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    responseFormatter?: (req: Request, res: Response, data: any) => any
+    responseFormatter?: (req: Request, res: Response, data: unknown) => unknown
     statsCollector?: Function
     paramsProcessor?: Function
   }): (req: Request, res: Response, next: NextFunction) => void
