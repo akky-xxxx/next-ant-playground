@@ -53,16 +53,19 @@ export type HandleRemoveField = (payload: RemoveFieldPayload) => Action<RemoveFi
 const CHANGE_VALUE = "changeValue"
 const FIELD_ADD = "field/add"
 const FIELD_REMOVE = "field/remove"
+const FIELD_RESET = "field/reset"
 
 // create action
 const changeValue = createAction<ChangeValuePayload>(CHANGE_VALUE)
 const addField = createAction(FIELD_ADD)
 const removeField = createAction<RemoveFieldPayload>(FIELD_REMOVE)
+const resetField = createAction(FIELD_RESET)
 
 export const actions = {
   changeValue,
   addField,
   removeField,
+  resetField,
 }
 
 // initialState
@@ -135,6 +138,8 @@ const reducer = handleActions<InitialState, any>(
         fields: newState.fields.filter(field => field.id !== targetId),
       }
     },
+
+    [FIELD_RESET]: () => initialState,
   },
   initialState,
 )
