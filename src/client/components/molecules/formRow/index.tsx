@@ -90,7 +90,7 @@ const MinusButton = styled(Button)`
 
 type IsNoReRender<T> = (beforeProps: T, afterProps: T) => boolean
 
-const isNoRerender: IsNoReRender<FormRowProps> = (beforeProps, afterProps) =>
+const isNoReRender: IsNoReRender<FormRowProps> = (beforeProps, afterProps) =>
   beforeProps.inputValue === afterProps.inputValue
 
-export default memo(FormRow, isNoRerender)
+export default memo(FormRow, isNoReRender)
