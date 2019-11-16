@@ -79,7 +79,6 @@ const initialState: InitialState = {
 }
 
 // reducer
-// TODO: resolve any warning
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const reducer = handleActions<InitialState, any>(
   {
