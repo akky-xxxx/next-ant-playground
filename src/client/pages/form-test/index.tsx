@@ -38,9 +38,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     handleChangeValue: HandleChangeValue
     handleRemoveField: HandleRemoveField
   } = {
-    handleAddField: ({ targetId }) => dispatch(addField({ targetId })),
-    handleChangeValue: ({ targetId, newValue, isRequire }) => dispatch(changeValue({ targetId, newValue, isRequire })),
-    handleRemoveField: ({ targetId }) => dispatch(removeField({ targetId })),
+    handleAddField: payload => dispatch(addField(payload)),
+    handleChangeValue: payload => dispatch(changeValue(payload)),
+    handleRemoveField: payload => dispatch(removeField(payload)),
   }
 
   return handleActions
