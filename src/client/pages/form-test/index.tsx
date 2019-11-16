@@ -39,7 +39,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleRemoveField: ({ targetId }: RemoveFieldPayload) => dispatch(removeField({ targetId })),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(FormTest)
+export default connect(mapStateToProps, mapDispatchToProps)(FormTest)

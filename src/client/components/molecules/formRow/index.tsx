@@ -58,7 +58,9 @@ const FormRow: FunctionComponent<FormRowProps> = props => {
           >
             <Input
               value={inputValue || ""}
-              onChange={event => handleChangeValue({ targetId: id, newValue: event.target.value, isRequire: index === 0 })}
+              onChange={event =>
+                handleChangeValue({ targetId: id, newValue: event.target.value, isRequire: index === 0 })
+              }
               ref={self}
             />
           </Popover>

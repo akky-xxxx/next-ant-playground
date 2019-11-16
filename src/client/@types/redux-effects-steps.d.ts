@@ -6,6 +6,7 @@ declare module "redux-effects-steps" {
       | [(f: unknown) => MaybePromise<Record<string, unknown>>, (e: Error) => MaybePromise<Record<string, unknown>>]
       | [(f: unknown) => MaybePromise<Record<string, unknown>>]
       | [MaybePromise<Record<string, unknown>>]
-      | MaybePromise<Record<string, unknown>>)[]
+      | MaybePromise<Record<string, unknown>>
+    )[]
   ): Promise<unknown>
 }
