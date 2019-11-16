@@ -13,8 +13,7 @@ type Method1 = (
   params: Record<string, unknown>,
   config: unknown,
   callback: Function,
-) => // TODO: any を外せたら外す
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
 Promise<any>
 type Method2 = (
   req: Request,
@@ -23,8 +22,7 @@ type Method2 = (
   body: Record<string, unknown>,
   config: unknown,
   callback: Function,
-) => // TODO: any を外せたら外す
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
 Promise<any>
 
 export type ReadMethod = Method1
