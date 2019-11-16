@@ -1,7 +1,11 @@
-export type PageName = "top" | "todo" | "pcComponents" | "spComponents" | "formTest"
-type PageNameMap = {
-  [key in PageName]?: PageName
-}
+/**
+ * import
+ */
+import { PageName, PageNameMap } from "../types/common"
+
+/**
+ * main
+ */
 interface MenuItem {
   id: PageName
   href: string

@@ -10,7 +10,8 @@ import { Button as SpButton } from "antd-mobile"
 /**
  * import others
  */
-import { menuData, PageName } from "../../../shared/const/common"
+import { PageName } from "../../../shared/types/common"
+import { menuData } from "../../../shared/const/common"
 
 /**
  * main

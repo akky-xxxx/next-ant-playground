@@ -13,6 +13,7 @@ import FormRow from "../../molecules/formRow"
 /**
  * import others
  */
+import { GetInitialPropsReturn } from "../../../shared/types/common"
 import { HandleAddField, HandleChangeValue, HandleRemoveField, Field } from "../../../store/modules/page/todo"
 
 /**
@@ -25,7 +26,7 @@ interface FormTestProps {
   fields: Field[]
 }
 
-const FormTest: NextPage<FormTestProps, any> = props => {
+const FormTest: NextPage<FormTestProps, GetInitialPropsReturn> = props => {
   const { handleAddField, handleChangeValue, handleRemoveField, fields } = props
 
   return (

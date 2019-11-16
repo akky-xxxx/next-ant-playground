@@ -11,7 +11,7 @@ import GlobalMenu from "../globalMenu"
 /**
  * import
  */
-import { PageName } from "../../../shared/const/common"
+import { PageName } from "../../../shared/types/common"
 
 interface LayoutProps {
   children: ReactNode
