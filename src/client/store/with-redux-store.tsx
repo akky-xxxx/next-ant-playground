@@ -22,6 +22,10 @@ declare global {
   }
 }
 
+interface AppWithReduxProps {
+  initialReduxState: InitialState
+}
+
 const isServer = typeof window === "undefined"
 
 function getOrCreateStore(initialState?: InitialState) {
@@ -64,9 +68,7 @@ export default (App: any) => {
       }
     }
 
-    // TODO: resolve any warning
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    constructor(props: any) {
+    constructor(props: AppWithReduxProps) {
       super(props)
       this.reduxStore = getOrCreateStore(props.initialReduxState)
     }
