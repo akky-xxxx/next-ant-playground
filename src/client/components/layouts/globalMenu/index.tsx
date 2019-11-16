@@ -29,7 +29,9 @@ const GlobalMenu: FunctionComponent<GlobalMenuProps> = props => {
           const { id, href, buttonLabel } = data
           return (
             <Menu.Item key={id}>
-              <Link href={href}>{buttonLabel}</Link>
+              <Link href={href} passHref>
+                <a>{buttonLabel}</a>
+              </Link>
             </Menu.Item>
           )
         })}
