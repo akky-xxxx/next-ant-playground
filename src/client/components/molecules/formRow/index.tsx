@@ -1,7 +1,7 @@
 /**
  * import node_modules
  */
-import React, { useRef, useEffect, FunctionComponent } from "react"
+import React, { useRef, useEffect, memo, FunctionComponent } from "react"
 import { Form, Button, Input, Row, Col, Popover } from "antd"
 import styled from "styled-components"
 
@@ -74,7 +74,7 @@ const FormRow: FunctionComponent<FormRowProps> = props => {
             ) : (
               <span />
             )}
-            <Button shape="circle" onClick={() => handleAddField()}>
+            <Button shape="circle" onClick={() => handleAddField()} disabled={!inputValue}>
               +
             </Button>
           </Row>
@@ -88,4 +88,9 @@ const MinusButton = styled(Button)`
   margin-right: 8px;
 `
 
-export default FormRow
+type IsNoReRender<T> = (beforeProps: T, afterProps: T) => boolean
+
+const isNoRerender: IsNoReRender<FormRowProps> = (beforeProps, afterProps) =>
+  beforeProps.inputValue === afterProps.inputValue
+
+export default memo(FormRow, isNoRerender)
