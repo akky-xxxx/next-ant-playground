@@ -29,9 +29,6 @@ function makeServiceAdapter(service: BaseService) {
   }
   methods1.forEach(method => {
     if (service[method]) {
-      // TODO: types 解決
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
       adapter[method] = async (
         req: Request,
         resource: string,
@@ -40,9 +37,7 @@ function makeServiceAdapter(service: BaseService) {
         callback: Function,
       ) => {
         service[method](req, resource, params, config, callback).then(
-          // TODO: any を外せたら外す -> おそらく agreed との連携が必要
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (result: any) => {
+          result => {
             callback(null, result)
           },
           (error: Record<string, unknown>) => {
@@ -56,9 +51,6 @@ function makeServiceAdapter(service: BaseService) {
   // create と update
   methods2.forEach(method => {
     if (service[method]) {
-      // TODO: types 解決
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
       adapter[method] = async (
         req: Request,
         resource: string,
@@ -68,9 +60,7 @@ function makeServiceAdapter(service: BaseService) {
         callback: Function,
       ) => {
         service[method](req, resource, params, body, config, callback).then(
-          // TODO: any を外せたら外す -> おそらく agreed との連携が必要
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (result: any) => {
+          result => {
             callback(null, result)
           },
           (error: Record<string, unknown>) => {

@@ -5,7 +5,7 @@ import { format as formatUrl } from "url"
 import debugFactory from "debug"
 import { Request } from "express"
 import util from "util"
-import { AxiosStatic, AxiosPromise, AxiosResponse, AxiosError } from "axios"
+import { AxiosStatic, AxiosResponse, AxiosError } from "axios"
 
 type Method1 = (
   req: Request,
@@ -15,7 +15,7 @@ type Method1 = (
   callback: Function,
 ) => // TODO: any を外せたら外す
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-AxiosPromise<any>
+Promise<any>
 type Method2 = (
   req: Request,
   resource: string,
@@ -25,7 +25,7 @@ type Method2 = (
   callback: Function,
 ) => // TODO: any を外せたら外す
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-AxiosPromise<any>
+Promise<any>
 
 export type ReadMethod = Method1
 export type DeleteMethod = Method1
