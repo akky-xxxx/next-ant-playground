@@ -26,12 +26,12 @@ const Top: NextPage = () => {
         {menuData
           .filter((_, index) => index > 0)
           .map(page => {
-            const { href, buttonLabel } = page
+            const { href, label } = page
             return (
               <MenuItem key={href}>
                 <Link href={href} passHref>
                   <a>
-                    <Button>{buttonLabel}</Button>
+                    <Button>{label}</Button>
                   </a>
                 </Link>
               </MenuItem>

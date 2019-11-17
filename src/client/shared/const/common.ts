@@ -9,34 +9,34 @@ import { PageName, PageNameMap } from "../types/common"
 interface MenuItem {
   id: PageName
   href: string
-  buttonLabel: string
+  label: string
 }
 
 export const menuData: MenuItem[] = [
   {
     id: "top",
     href: "/",
-    buttonLabel: "Top",
+    label: "Top",
   },
   {
     id: "todo",
     href: "/todo",
-    buttonLabel: "Todo",
+    label: "Todo",
   },
   {
     id: "pcComponents",
     href: "/pc-components",
-    buttonLabel: "PC Components",
+    label: "PC Components",
   },
   {
     id: "spComponents",
     href: "/sp-components",
-    buttonLabel: "SP Components",
+    label: "SP Components",
   },
   {
     id: "formTest",
     href: "/form-test",
-    buttonLabel: "form test",
+    label: "form test",
   },
 ]
 

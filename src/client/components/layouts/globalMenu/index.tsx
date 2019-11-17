@@ -26,11 +26,11 @@ const GlobalMenu: FunctionComponent<GlobalMenuProps> = props => {
     <Nav>
       <Menu mode="horizontal" theme="dark" selectedKeys={[currentPage]} data-media="pc">
         {menuData.map(data => {
-          const { id, href, buttonLabel } = data
+          const { id, href, label } = data
           return (
             <Menu.Item key={id}>
               <Link href={href} passHref>
-                <a>{buttonLabel}</a>
+                <a>{label}</a>
               </Link>
             </Menu.Item>
           )
@@ -38,11 +38,11 @@ const GlobalMenu: FunctionComponent<GlobalMenuProps> = props => {
       </Menu>
       <ul data-media="tb">
         {menuData.map(data => {
-          const { href, buttonLabel } = data
+          const { href, label } = data
           return (
-            <SpMenuListItemWrapper key={encodeURI(href + buttonLabel)}>
+            <SpMenuListItemWrapper key={encodeURI(href + label)}>
               <Link href={href}>
-                <SpButton>{buttonLabel}</SpButton>
+                <SpButton>{label}</SpButton>
               </Link>
             </SpMenuListItemWrapper>
           )
