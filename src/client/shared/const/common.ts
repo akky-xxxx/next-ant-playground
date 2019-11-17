@@ -38,6 +38,11 @@ export const menuData: MenuItem[] = [
     href: "/form-test",
     label: "form test",
   },
+  {
+    id: "conditionForm",
+    href: "/condition-form",
+    label: "conditions",
+  },
 ]
 
 export const pageNameMap: PageNameMap = menuData.reduce((obj, menuItem) => {

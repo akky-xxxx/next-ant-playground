@@ -1,4 +1,4 @@
-export type PageName = "top" | "todo" | "pcComponents" | "spComponents" | "formTest"
+export type PageName = "top" | "todo" | "pcComponents" | "spComponents" | "formTest" | "conditionForm"
 
 export type PageNameMap = {
   [key in PageName]?: PageName
