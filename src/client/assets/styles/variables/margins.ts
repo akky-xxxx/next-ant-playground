@@ -1,0 +1,15 @@
+const MARGIN4 = 4
+const MARGIN8 = MARGIN4 * 2
+const MARGIN12 = MARGIN4 * 3
+const MARGIN16 = MARGIN4 * 4
+const MARGIN20 = MARGIN4 * 5
+
+const MARGINS = {
+  MARGIN4,
+  MARGIN8,
+  MARGIN12,
+  MARGIN16,
+  MARGIN20,
+} as const
+
+export default MARGINS
