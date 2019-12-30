@@ -6,17 +6,21 @@
  */
 import next from "next"
 import express from "express"
+import session from "express-session"
 import Fetchr from "fetchr"
 import * as path from "path"
 import Routes from "next-routes"
+import passport from "passport"
 
 /**
  * import others
  */
 import router from "./index"
+import sessionConfig from "./const/sessionConfig"
+import oauth from "./middlewares/oauth"
+import isDev from "./utils/isDev"
 
 const port = 3000
-const isDev = process.env.NODE_ENV !== "production"
 const rootDir = path.resolve(__dirname, "../")
 const dir = path.resolve(rootDir, "src/client")
 const app = next({
@@ -30,6 +34,16 @@ app
   .prepare()
   .then(() => {
     const server = express()
+
+    server.use(session(sessionConfig))
+
+    if (!isDev) {
+      server.use(session(sessionConfig))
+      server.use(passport.initialize())
+      server.use(passport.session())
+      server.use(oauth.router)
+      server.use(oauth.required)
+    }
 
     server.use(router(Fetchr))
     server.use(handle)

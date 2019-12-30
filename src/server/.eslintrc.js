@@ -21,6 +21,7 @@ module.exports = {
     "prettier/@typescript-eslint",
   ],
   rules: {
+    "no-console": OFF,
     "import/prefer-default-export": OFF,
     "import/extensions": [
       "error",
