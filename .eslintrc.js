@@ -20,6 +20,13 @@ module.exports = {
   ],
   rules: {
     "import/prefer-default-export": OFF,
+    "import/extensions": [
+      "error",
+      {
+        "js": "never",
+        "ts": "never",
+      }
+    ],
     "prettier/prettier": [
       ERROR,
       {

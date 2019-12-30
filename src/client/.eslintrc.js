@@ -25,6 +25,13 @@ module.exports = {
   ],
   rules: {
     "import/prefer-default-export": OFF,
+    "import/extensions": [
+      "error",
+      {
+        "js": "never",
+        "ts": "never",
+      }
+    ],
     "jsx-a11y/anchor-is-valid": OFF,
     "react/jsx-filename-extension": OFF,
     "react/prop-types": OFF,

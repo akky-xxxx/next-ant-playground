@@ -33,6 +33,7 @@ const wrapperCol = {
 
 const input1 = {
   inputValue: 123,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   handleChangeValue: () => {},
   errorMessage: null,
   isInput: false,
@@ -42,6 +43,7 @@ const input1 = {
 
 const input2 = {
   inputValue: 457,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   handleChangeValue: () => {},
   errorMessage: null,
   isInput: false,
@@ -50,8 +52,10 @@ const input2 = {
 }
 
 const fields = {
+  /* eslint-disable @typescript-eslint/no-empty-function */
   handleAddField: () => {},
   handleRemoveField: () => {},
+  /* eslint-enable @typescript-eslint/no-empty-function */
   isValid: false,
   rowId: "123",
   input1,
@@ -61,12 +65,14 @@ const fields = {
 const ConditionForm: NextPage<{}, GetInitialPropsReturn> = () => {
   return (
     <Form labelCol={labelCol} wrapperCol={wrapperCol}>
+      {/* eslint-disable @typescript-eslint/no-empty-function */}
       <LogicalOperationRow index={0} selectedValue={1} handleChangeLogicalOperation={() => {}} />
       <FieldsRow index={0} fields={fields} />
       <LogicalOperationRow index={1} selectedValue={1} handleChangeLogicalOperation={() => {}} />
       <FieldsRow index={1} fields={fields} />
       <LogicalOperationRow index={2} selectedValue={0} handleChangeLogicalOperation={() => {}} />
       <FieldsRow index={2} fields={fields} />
+      {/* eslint-enable @typescript-eslint/no-empty-function */}
     </Form>
   )
 }

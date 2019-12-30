@@ -22,6 +22,13 @@ module.exports = {
   ],
   rules: {
     "import/prefer-default-export": OFF,
+    "import/extensions": [
+      "error",
+      {
+        "js": "never",
+        "ts": "never",
+      }
+    ],
     "@typescript-eslint/explicit-member-accessibility": OFF,
     "@typescript-eslint/explicit-function-return-type": OFF,
     "prettier/prettier": [
