@@ -10,7 +10,7 @@
     "build:client": "next build ./src/client",
     "build:server": "parcel build src/server/start-server.ts -d bin --target node",
     "check-all": "npm-run-all fix -p lint type-check spell-check",
-    "dev": "npm-run-all build serve",
+    "dev": "run-s build serve",
     "fix": "run-p fix:*",
     "fix:api": "eslint -c ./src/api/.eslintrc.js --ext .ts ./src/api --fix",
     "fix:client": "eslint -c src/client/.eslintrc.js --ext .ts,.tsx ./src/client --fix",
