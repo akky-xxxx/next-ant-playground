@@ -43,6 +43,11 @@ export const menuData: MenuItem[] = [
     href: "/condition-form",
     label: "conditions",
   },
+  {
+    id: "antTable",
+    href: "/ant-table",
+    label: "ant Table",
+  },
 ]
 
 export const pageNameMap: PageNameMap = menuData.reduce((obj, menuItem) => {
