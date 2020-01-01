@@ -1,0 +1,15 @@
+.cache
+.idea
+node_modules
+.dockerignore
+.editorconfig
+.eslintrc.js
+.fixpackrc
+.gitignore
+.node-version
+cspell.json
+cspell.txt
+Dockerfile
+stylelint.config.js
+yarn-error.log
+bin
