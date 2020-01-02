@@ -65,6 +65,7 @@
     "antd-mobile": "^2.3.1",
     "antd-pro": "^0.7.0",
     "axios": "^0.19.0",
+    "axios-middleware": "^0.3.1",
     "babel-loader": "^8.0.6",
     "babel-plugin-import": "^1.13.0",
     "cross-env": "^6.0.3",

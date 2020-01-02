@@ -4,11 +4,17 @@
 import { format as formatUrl } from "url"
 import debugFactory from "debug"
 import { Request } from "express"
-// import util from "util"
-import axios, { AxiosInstance } from "axios"
+import { AxiosInstance } from "axios"
 
+/**
+ * import others
+ */
 import commonConfigs from "../configs"
+import axios from "../utils/axios"
 
+/**
+ * main
+ */
 const { axios: axiosConfig } = commonConfigs
 
 type Method1 = (
@@ -86,7 +92,15 @@ export default class BaseServiceClass implements BaseService {
   }
 
   async read() {
-    const configs = this.configs || {}
+    const configs = {
+      data: {
+        // MEMO: 本来は api token を取得して格納する箇所
+        bearerToken: "bearerTokenValue",
+      },
+      headers: {
+        ...this.configs,
+      },
+    }
     const endpoints = this.getFormattedUrl()
     debug(`
 [GET]
