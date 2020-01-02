@@ -1,7 +1,7 @@
 /**
  * import node_modules
  */
-import React from "react"
+import React, { useEffect } from "react"
 import { NextPage } from "next"
 import Head from "next/head"
 import { Form } from "antd"
@@ -25,7 +25,11 @@ interface FormTestProps extends HandleActions {
 }
 
 const FormTest: NextPage<FormTestProps, GetInitialPropsReturn> = props => {
-  const { handleAddField, handleChangeValue, handleRemoveField, fields } = props
+  const { handleAddField, handleChangeValue, handleRemoveField, fields, handleGetTodoList } = props
+
+  useEffect(() => {
+    handleGetTodoList()
+  }, [])
 
   return (
     <Form>

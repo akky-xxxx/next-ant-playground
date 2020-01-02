@@ -16,6 +16,9 @@ export interface Field {
 
 export interface InitialState {
   fields: Field[]
+  master: {
+    isLoading: boolean
+  }
 }
 
 export interface AddFieldPayload {
@@ -54,4 +57,5 @@ export interface HandleActions {
   handleAddField: HandleAddField
   handleChangeValue: HandleChangeValue
   handleRemoveField: HandleRemoveField
+  handleGetTodoList: () => void
 }

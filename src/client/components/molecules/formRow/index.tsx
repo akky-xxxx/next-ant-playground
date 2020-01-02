@@ -18,7 +18,7 @@ import { Field, HandleActions } from "../../../store/modules/page/todo/types"
 /**
  * main
  */
-interface FormRowProps extends Field, HandleActions {
+interface FormRowProps extends Field, Omit<HandleActions, "handleGetTodoList"> {
   index: number
 }
 
