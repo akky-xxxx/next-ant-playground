@@ -3,12 +3,13 @@
  */
 import debugFactory from "debug"
 import { Request, Response, NextFunction } from "express"
+import Fetchr from "fetchr"
+import { FetchrConstructor } from "../types/Fetchr"
 
 /**
  * import others
  */
 import services, { Services } from "../services"
-import { FetchrConstructor } from "../types/Fetchr"
 import { BaseService, ReadMethod, DeleteMethod, CreateMethod, UpdateMethod } from "../services/BaseService"
 
 const debug = debugFactory("app:server:middleware:apiGateway")
@@ -27,47 +28,44 @@ function makeServiceAdapter(service: BaseService) {
   const adapter: Adapter = {
     name: service.name,
   }
+  // read と delete
   methods1.forEach(method => {
-    if (service[method]) {
-      adapter[method] = async (
-        req: Request,
-        resource: string,
-        params: Record<string, unknown>,
-        config: unknown,
-        callback: Function,
-      ) => {
-        service[method](req, resource, params, config, callback).then(
-          result => {
-            callback(null, result)
-          },
-          (error: Record<string, unknown>) => {
-            callback(error)
-          },
-        )
-      }
+    adapter[method] = async (
+      req: Request,
+      resource: string,
+      params: Record<string, unknown>,
+      config: unknown,
+      callback: Function,
+    ) => {
+      service[method](req, resource, params, config, callback).then(
+        result => {
+          callback(null, result)
+        },
+        (error: Record<string, unknown>) => {
+          callback(error)
+        },
+      )
     }
   })
 
   // create と update
   methods2.forEach(method => {
-    if (service[method]) {
-      adapter[method] = async (
-        req: Request,
-        resource: string,
-        params: Record<string, unknown>,
-        body: Record<string, unknown>,
-        config: unknown,
-        callback: Function,
-      ) => {
-        service[method](req, resource, params, body, config, callback).then(
-          result => {
-            callback(null, result)
-          },
-          (error: Record<string, unknown>) => {
-            callback(error)
-          },
-        )
-      }
+    adapter[method] = async (
+      req: Request,
+      resource: string,
+      params: Record<string, unknown>,
+      body: Record<string, unknown>,
+      config: unknown,
+      callback: Function,
+    ) => {
+      service[method](req, resource, params, body, config, callback).then(
+        result => {
+          callback(null, result)
+        },
+        (error: Record<string, unknown>) => {
+          callback(error)
+        },
+      )
     }
   })
 
@@ -76,26 +74,25 @@ function makeServiceAdapter(service: BaseService) {
 
 /**
  * service を Fetchr に登録する
- * @param config
- * @param Fetchr
  */
-export default function apiGateway(config: unknown, Fetchr: FetchrConstructor) {
+export default function apiGateway() {
   debug("------------------------------------")
   Object.values(services).forEach((Service: Services) => {
-    const service = new Service(config)
+    const service = new Service()
     debug(`❇️ Registering service: ${service.name}`)
     return Fetchr.registerService(makeServiceAdapter(service))
   })
   debug("------------------------------------")
 
   return (req: Request, res: Response, next: NextFunction) => {
-    return Fetchr.middleware({
+    return (Fetchr as FetchrConstructor).middleware({
       responseFormatter: (_req, _res, data) => {
         // レスポンスヘッダーを変更したいときはここをいじれば変えられる
         // TODO: 一旦 no-cache だけ入れとく必要なかったら消す
         _res.header("Cache-Control", ["no-store", "no-cache"].join(","))
         _res.header("Pragma", "no-cache")
-        return data
+        // TODO: fail の場合多分エラーになるため、何らかの情報をもとにハンドリングが必要
+        return data.data[0].data
       },
     })(req, res, next)
   }

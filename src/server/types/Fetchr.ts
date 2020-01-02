@@ -28,7 +28,8 @@ export interface FetchrConstructor {
   delete(resource: string, params: {}, config: {}, callback: Function): void
   delete(resource: string, params: {}, config: {}, callback: null): Promise<Record<string, unknown>>
   middleware(options: {
-    responseFormatter?: (req: Request, res: Response, data: unknown) => unknown
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    responseFormatter?: (req: Request, res: Response, data: any) => unknown
     statsCollector?: Function
     paramsProcessor?: Function
   }): (req: Request, res: Response, next: NextFunction) => void

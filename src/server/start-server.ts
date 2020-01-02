@@ -7,7 +7,6 @@
 import next from "next"
 import express from "express"
 import session from "express-session"
-import Fetchr from "fetchr"
 import * as path from "path"
 import Routes from "next-routes"
 import passport from "passport"
@@ -45,7 +44,7 @@ app
       server.use(oauth.required)
     }
 
-    server.use(router(Fetchr))
+    server.use(router())
     server.use(handle)
 
     server.listen(port, (err: Error) => {
