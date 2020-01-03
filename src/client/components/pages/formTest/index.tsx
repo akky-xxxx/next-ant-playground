@@ -15,7 +15,7 @@ import FormRow from "../../molecules/formRow"
  * import others
  */
 import { GetInitialPropsReturn } from "../../../shared/types/common"
-import { HandleActions, Field } from "../../../store/modules/page/todo/types"
+import { HandleActions, Field } from "../../../store/modules/page/formTest/types"
 
 /**
  * main

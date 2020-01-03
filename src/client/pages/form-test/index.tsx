@@ -13,7 +13,7 @@ import FormTest from "../../components/pages/formTest"
  */
 import { pageNameMap } from "../../shared/const/common"
 import { InitialState, actions } from "../../store/modules"
-import { HandleActions } from "../../store/modules/page/todo/types"
+import { HandleActions } from "../../store/modules/page/formTest/types"
 
 /**
  * main

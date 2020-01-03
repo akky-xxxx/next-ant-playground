@@ -1,6 +1,6 @@
 import { combineReducers } from "redux"
-import { InitialState as TodoState } from "./page/todo/types"
-import todo, { actions as todoActions } from "./page/todo"
+import { InitialState as TodoState } from "./page/formTest/types"
+import todo, { actions as todoActions } from "./page/formTest"
 
 export const actions = {
   pages: {
