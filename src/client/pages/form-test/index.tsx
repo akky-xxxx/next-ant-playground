@@ -26,7 +26,7 @@ FormTest.getInitialProps = async () => {
 
 const {
   pages: {
-    formTest: { addField, changeValue, removeField, getTodoList },
+    formTest: { addField, changeValue, removeField },
   },
 } = actions
 
@@ -36,6 +36,5 @@ export default connect<{}, HandleActions, {}, InitialState>(
     handleAddField: payload => dispatch(addField(payload)),
     handleChangeValue: payload => dispatch(changeValue(payload)),
     handleRemoveField: payload => dispatch(removeField(payload)),
-    handleGetTodoList: () => dispatch(getTodoList()),
   }),
 )(FormTest)

@@ -18,7 +18,7 @@ import { Field, HandleActions } from "../../../store/modules/page/formTest/types
 /**
  * main
  */
-interface FormRowProps extends Field, Omit<HandleActions, "handleGetTodoList"> {
+interface FormRowProps extends Field, HandleActions {
   index: number
 }
 

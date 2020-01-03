@@ -4,8 +4,6 @@
 import { createAction, handleActions } from "redux-actions"
 import uuid from "uuid"
 import { clone } from "remeda"
-import { steps } from "redux-effects-steps"
-import { fetchrRead } from "redux-effects-fetchr"
 
 /**
  * import others
@@ -21,7 +19,6 @@ import {
   RemoveFieldAction,
 } from "./types"
 import getValidator from "../../../../shared/utils/validator/getValidator"
-import { createAsyncActionTypes } from "../../utils"
 
 /**
  * main
@@ -31,35 +28,21 @@ const CHANGE_VALUE = "changeValue"
 const FIELD_ADD = "field/add"
 const FIELD_REMOVE = "field/remove"
 const FIELD_RESET = "field/reset"
-// TODO form 関連と todo のファイルをわける
-const TODO_LIST = "todo"
-const [TODO_LIST_REQUEST, TODO_LIST_SUCCESS, TODO_LIST_FAIL] = createAsyncActionTypes(TODO_LIST)
 
 // create action
 const changeValue = createAction<ChangeValuePayload>(CHANGE_VALUE)
 const addField = createAction<AddFieldPayload>(FIELD_ADD)
 const removeField = createAction<RemoveFieldPayload>(FIELD_REMOVE)
 const resetField = createAction(FIELD_RESET)
-const todoListRequest = createAction(TODO_LIST_REQUEST)
-const todoListSuccess = createAction(TODO_LIST_SUCCESS)
-const todoListFail = createAction(TODO_LIST_FAIL)
-const getTodoList = () => {
-  return steps(todoListRequest(), fetchrRead("getTodo"), [todoListSuccess, todoListFail])
-}
-
 export const actions = {
   changeValue,
   addField,
   removeField,
   resetField,
-  getTodoList,
 }
 
 // initialState
 const initialState: InitialState = {
-  master: {
-    isLoading: true,
-  },
   fields: [
     {
       id: uuid(),
@@ -137,40 +120,6 @@ const reducer = handleActions<InitialState, any>(
     },
 
     [FIELD_RESET]: () => initialState,
-
-    [TODO_LIST_REQUEST]: state => {
-      const { master } = state
-
-      return {
-        ...state,
-        master: {
-          ...master,
-          isLoading: true,
-        },
-      }
-    },
-    [TODO_LIST_SUCCESS]: state => {
-      const { master } = state
-
-      return {
-        ...state,
-        master: {
-          ...master,
-          isLoading: false,
-        },
-      }
-    },
-    [TODO_LIST_FAIL]: state => {
-      const { master } = state
-
-      return {
-        ...state,
-        master: {
-          ...master,
-          isLoading: false,
-        },
-      }
-    },
   },
   initialState,
 )
