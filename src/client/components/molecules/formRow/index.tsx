@@ -13,7 +13,7 @@ import ErrorMessage from "../../atoms/errorMessage"
 /**
  * import others
  */
-import { Field, HandleActions } from "../../../store/modules/page/todo/types"
+import { Field, HandleActions } from "../../../store/modules/page/formTest/types"
 
 /**
  * main

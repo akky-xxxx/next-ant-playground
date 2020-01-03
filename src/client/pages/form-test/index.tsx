@@ -13,7 +13,7 @@ import FormTest from "../../components/pages/formTest"
  */
 import { pageNameMap } from "../../shared/const/common"
 import { InitialState, actions } from "../../store/modules"
-import { HandleActions } from "../../store/modules/page/todo/types"
+import { HandleActions } from "../../store/modules/page/formTest/types"
 
 /**
  * main
@@ -26,12 +26,12 @@ FormTest.getInitialProps = async () => {
 
 const {
   pages: {
-    todo: { addField, changeValue, removeField },
+    formTest: { addField, changeValue, removeField },
   },
 } = actions
 
 export default connect<{}, HandleActions, {}, InitialState>(
-  state => state.pages.todo,
+  state => state.pages.formTest,
   dispatch => ({
     handleAddField: payload => dispatch(addField(payload)),
     handleChangeValue: payload => dispatch(changeValue(payload)),

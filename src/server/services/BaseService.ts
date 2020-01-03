@@ -4,8 +4,18 @@
 import { format as formatUrl } from "url"
 import debugFactory from "debug"
 import { Request } from "express"
-import util from "util"
-import { AxiosStatic, AxiosResponse, AxiosError } from "axios"
+import { AxiosInstance } from "axios"
+
+/**
+ * import others
+ */
+import commonConfigs from "../configs"
+import axios from "../utils/axios"
+
+/**
+ * main
+ */
+const { axios: axiosConfig } = commonConfigs
 
 type Method1 = (
   req: Request,
@@ -33,161 +43,129 @@ export type UpdateMethod = Method2
 const debug = debugFactory("app:server:services")
 
 export interface BaseService {
-  axios: Pick<AxiosStatic, "create">
+  axios: AxiosInstance
   name: string
-  pathname: string
-  params: unknown
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  options?: Record<string, any>
+  configs?: Record<string, any>
+  /* eslint-enable @typescript-eslint/no-explicit-any */
+  endpoints: string[]
   read: ReadMethod
+  delete: DeleteMethod
   create: CreateMethod
   update: UpdateMethod
-  delete: DeleteMethod
 }
 
 export default class BaseServiceClass implements BaseService {
-  // TODO: any を外せたら外す
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  axios: any
+  axios: AxiosInstance = axios.create(axiosConfig)
 
   name: string
 
-  pathname: string
+  endpoints: string[]
+
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  options?: Record<string, any>
+
+  configs?: Record<string, any>
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  params: any
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  constructor(_config: unknown, name: string, pathname: string, params: any = {}) {
-    // axiosは継承先でcreateAxiosする
-    this.axios = null
-    this.name = name
-    this.pathname = pathname
-    this.params = params
+  constructor(name: string, endpoints: string[], options?: Record<string, any>, configs?: Record<string, any>) {
+    this.name = name // fetchr との紐付け
+    this.endpoints = endpoints
+    this.options = options // query param や request body
+    this.configs = configs // header 情報等
   }
 
   /**
    * get parameterを使ってリクエスト URL を生成する
-   * @param params
    */
-  private getFormattedUrl(params: Record<string, unknown>): string {
-    return formatUrl({
-      pathname: this.pathname,
-      query: { ...this.params, ...params },
+  getFormattedUrl() {
+    if (!this.options) return this.endpoints
+
+    return this.endpoints.map(endpoint => {
+      return formatUrl({
+        pathname: endpoint,
+        query: { ...this.options },
+      })
     })
   }
 
-  /**
-   * read axios.get
-   * @param _req - express の req, リクエストに関連する情報が入っている
-   * @param resource - 呼び出し時のデータサービス名が入ってくる
-   * @param params - request parameter
-   * @param _config - その他リクエスト時の処理で渡したい値
-   */
-  read(_req: Request, resource: string, params: Record<string, unknown>) {
-    debug(`[${resource}][GET]: ${this.getFormattedUrl(params)}`)
-    debug(`[${resource}][GET](params): `)
-    debug(params)
-
-    return this.axios.get(this.getFormattedUrl(params)).then(
-      // Success
-      (response: AxiosResponse) => {
-        debug("[response.data]")
-        debug(util.inspect(response.data, { depth: null, colors: true }))
-        return response.data.results
+  async read() {
+    const configs = {
+      data: {
+        // MEMO: 本来は api token を取得して格納する箇所
+        bearerToken: "bearerTokenValue",
       },
-
-      // Fail
-      (error: AxiosError) => {
-        debug(util.inspect(error, { depth: null, colors: true }))
-        return Promise.reject(error)
+      headers: {
+        ...this.configs,
       },
-    )
+    }
+    const endpoints = this.getFormattedUrl()
+    debug(`
+[GET]
+NAME: ${this.name}
+ENDPOINTS:${endpoints.reduce((str, endpoint) => `${str}\n- ${endpoint}`, "")}
+`)
+
+    try {
+      const results = await Promise.all(endpoints.map(endpoint => this.axios.get(endpoint, configs)))
+      return results
+    } catch (error) {
+      console.error(error)
+      return error
+    }
   }
 
-  /**
-   *
-   * @param _req - express の req, リクエストに関連する情報が入っている
-   * @param resource - 呼び出し時のデータサービス名が入ってくる
-   * @param params - request parameter
-   * @param body - request body
-   * @param _config - その他リクエスト時の処理で渡したい値
-   */
-  create(_req: Request, resource: string, params: Record<string, unknown>, body: Record<string, unknown>) {
-    debug(`[${resource}][POST]:`)
-    debug(`body: `)
-    debug(body)
-    debug(`[${resource}][POST](params): `)
-    debug(params)
+  async delete() {
+    const configs = this.configs || {}
+    const endpoints = this.getFormattedUrl()
+    debug(`
+[DELETE]
+NAME: ${this.name}
+ENDPOINTS:${endpoints.reduce((str, endpoint) => `${str}\n- ${endpoint}`, "")}
+`)
 
-    return this.axios.post(this.pathname, body).then(
-      // Success
-      (response: AxiosResponse) => {
-        debug("[response.data]")
-        debug(util.inspect(response.data, { depth: null, colors: true }))
-        return response.data.results
-      },
-
-      // Fail
-      (error: AxiosError) => {
-        debug(util.inspect(error, { depth: null, colors: true }))
-        return Promise.reject(error)
-      },
-    )
+    try {
+      const results = await Promise.all(endpoints.map(endpoint => this.axios.delete(endpoint, configs)))
+      return results
+    } catch (error) {
+      console.error(error)
+      return error
+    }
   }
 
-  /**
-   * update axios.patch
-   * @param _req - express の req, リクエストに関連する情報が入っている
-   * @param resource - 呼び出し時のデータサービス名が入ってくる
-   * @param params - request parameter
-   * @param body - request body
-   * @param _config - その他リクエスト時の処理で渡したい値
-   */
-  update(_req: Request, resource: string, params: Record<string, unknown>, body: unknown) {
-    debug(`[${resource}][UPDATE]: body: ${body}`)
-    debug(`[${resource}][UPDATE](params): `)
-    debug(params)
+  async create() {
+    const options = this.options || {}
+    const configs = this.configs || {}
+    debug(`
+[POST]
+NAME: ${this.name}
+ENDPOINTS: ${this.endpoints}`)
 
-    return this.axios.patch(this.getFormattedUrl(params)).then(
-      // Success
-      (response: AxiosResponse) => {
-        debug("[response.data]")
-        debug(response.data)
-        return response.data.results
-      },
-
-      // Fail
-      (error: AxiosError) => {
-        debug(error)
-        return Promise.reject(error)
-      },
-    )
+    try {
+      const results = await Promise.all(this.endpoints.map(endpoint => this.axios.post(endpoint, options, configs)))
+      return results
+    } catch (error) {
+      console.error(error)
+      return error
+    }
   }
 
-  /**
-   * read axios.delete
-   * @param _req - express の req, リクエストに関連する情報が入っている
-   * @param resource - 呼び出し時のデータサービス名が入ってくる
-   * @param params - request parameter
-   * @param _config - その他リクエスト時の処理で渡したい値
-   */
-  delete(_req: Request, resource: string, params: Record<string, unknown>) {
-    debug(`[${resource}][DELETE]: DELETE ${this.getFormattedUrl(params)}`)
-    debug(`[${resource}][DELETE](params): `)
-    debug(params)
+  async update() {
+    const options = this.options || {}
+    const configs = this.configs || {}
+    debug(`
+[PUT]
+NAME: ${this.name}
+ENDPOINTS: ${this.endpoints}`)
 
-    return this.axios.delete(this.getFormattedUrl(params)).then(
-      // Success
-      (response: AxiosResponse) => {
-        debug("[response.data]")
-        debug(response.data)
-        return response.data.results
-      },
-
-      // Fail
-      (error: AxiosError) => {
-        debug(error)
-        return Promise.reject(error)
-      },
-    )
+    try {
+      const results = await Promise.all(this.endpoints.map(endpoint => this.axios.put(endpoint, options, configs)))
+      return results
+    } catch (error) {
+      console.error(error)
+      return error
+    }
   }
 }
