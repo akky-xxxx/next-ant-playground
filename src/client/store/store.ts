@@ -16,13 +16,6 @@ import isServer from "../shared/utils/isServer"
 /**
  * main
  */
-declare global {
-  interface Window {
-    // eslint-disable-next-line no-undef
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose
-  }
-}
-
 const fetchr = new Fetchr(bffConfig.fetchr.clientConfig)
 
 export function initializeStore(initialState?: InitialState) {

@@ -1,10 +1,11 @@
+/* eslint-disable no-underscore-dangle */
 /**
  * import node_modules
  */
-import React from "react"
+import React, { Component } from "react"
 import { NextPageContext } from "next"
-import { compose } from "redux"
 import { clone } from "remeda"
+import { Router } from "next/router"
 
 /**
  * import others
@@ -15,15 +16,10 @@ import { InitialState } from "./modules"
 /**
  * main
  */
-declare global {
-  interface Window {
-    // eslint-disable-next-line no-undef
-    __NEXT_REDUX_STORE__?: typeof compose
-  }
-}
-
-interface AppWithReduxProps {
-  initialReduxState: InitialState
+interface Props {
+  Component: Component
+  router: Router
+  pageProps: unknown
 }
 
 const isServer = typeof window === "undefined"
@@ -34,20 +30,17 @@ function getOrCreateStore(initialState?: InitialState) {
     return initializeStore(initialState)
   }
 
-  // Create store if unavailable on the client and set it on the window object
-  // eslint-disable-next-line no-underscore-dangle
   if (!window.__NEXT_REDUX_STORE__) {
-    // eslint-disable-next-line no-underscore-dangle
     window.__NEXT_REDUX_STORE__ = initializeStore(initialState)
   }
-  // eslint-disable-next-line no-underscore-dangle
+
   return window.__NEXT_REDUX_STORE__
 }
 
 // TODO: resolve any warning
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (App: any) => {
-  return class AppWithRedux extends React.Component {
+  return class AppWithRedux extends Component<Props> {
     reduxStore: InitialState
 
     static async getInitialProps(appContext: NextPageContext) {
@@ -68,14 +61,15 @@ export default (App: any) => {
       }
     }
 
-    constructor(props: AppWithReduxProps) {
+    constructor(props: Props) {
       super(props)
-      this.reduxStore = getOrCreateStore(props.initialReduxState)
+      this.reduxStore = getOrCreateStore()
     }
 
     render() {
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      return <App {...this.props} reduxStore={this.reduxStore} />
+      const { Component: thisComponent, router, pageProps } = this.props
+
+      return <App Component={thisComponent} router={router} pageProps={pageProps} reduxStore={this.reduxStore} />
     }
   }
 }
