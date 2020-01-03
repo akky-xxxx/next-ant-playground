@@ -4,7 +4,6 @@
 import debugFactory from "debug"
 import { Request, Response, NextFunction } from "express"
 import Fetchr from "fetchr"
-import { FetchrConstructor } from "../types/Fetchr"
 
 /**
  * import others
@@ -85,12 +84,13 @@ export default function apiGateway() {
   debug("------------------------------------")
 
   return (req: Request, res: Response, next: NextFunction) => {
-    return (Fetchr as FetchrConstructor).middleware({
-      responseFormatter: (_req, _res, data) => {
+    return Fetchr.middleware({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      responseFormatter: (_req: Request, responseFormatterRes: Response, data: any) => {
         // レスポンスヘッダーを変更したいときはここをいじれば変えられる
         // TODO: 一旦 no-cache だけ入れとく必要なかったら消す
-        _res.header("Cache-Control", ["no-store", "no-cache"].join(","))
-        _res.header("Pragma", "no-cache")
+        responseFormatterRes.header("Cache-Control", ["no-store", "no-cache"].join(","))
+        responseFormatterRes.header("Pragma", "no-cache")
         // TODO: fail の場合多分エラーになるため、何らかの情報をもとにハンドリングが必要
         return data.data[0].data
       },

@@ -9,7 +9,6 @@ import fetchrMiddleware from "redux-effects-fetchr"
 /**
  * import others
  */
-import { FetchrConstructor } from "../../server/types/Fetchr"
 import bffConfig from "../../server/configs"
 import reducer, { InitialState } from "./modules"
 import isServer from "../shared/utils/isServer"
@@ -24,7 +23,7 @@ declare global {
   }
 }
 
-const fetchr: FetchrConstructor = new Fetchr(bffConfig.fetchr.clientConfig)
+const fetchr = new Fetchr(bffConfig.fetchr.clientConfig)
 
 export function initializeStore(initialState?: InitialState) {
   const composeEnhancers = (isServer && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
