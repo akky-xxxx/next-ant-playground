@@ -3,7 +3,6 @@
  */
 import React from "react"
 import { NextPageContext } from "next"
-import { compose } from "redux"
 import { clone } from "remeda"
 
 /**
@@ -15,13 +14,6 @@ import { InitialState } from "./modules"
 /**
  * main
  */
-declare global {
-  interface Window {
-    // eslint-disable-next-line no-undef
-    __NEXT_REDUX_STORE__?: typeof compose
-  }
-}
-
 interface AppWithReduxProps {
   initialReduxState: InitialState
 }
