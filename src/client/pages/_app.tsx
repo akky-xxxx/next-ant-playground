@@ -32,7 +32,7 @@ const GlobalStyle = createGlobalStyle`
 
 const {
   pages: {
-    todo: { resetField },
+    formTest: { resetField },
   },
 } = actions
 

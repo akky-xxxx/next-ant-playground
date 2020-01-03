@@ -1,21 +1,21 @@
 import { combineReducers } from "redux"
-import { InitialState as TodoState } from "./page/formTest/types"
-import todo, { actions as todoActions } from "./page/formTest"
+import { InitialState as FormTestState } from "./page/formTest/types"
+import formTest, { actions as formTestActions } from "./page/formTest"
 
 export const actions = {
   pages: {
-    todo: todoActions,
+    formTest: formTestActions,
   },
 }
 
 export interface InitialState {
   pages: {
-    todo: TodoState
+    formTest: FormTestState
   }
 }
 
 export default combineReducers({
   pages: combineReducers({
-    todo,
+    formTest,
   }),
 })
