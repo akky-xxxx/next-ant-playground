@@ -1,56 +1,38 @@
 /**
  * import node_modules
  */
-import React, { useState } from "react"
-import { NextPage } from "next"
-import Head from "next/head"
-import { Button, List } from "antd"
-import QueueAnim from "rc-queue-anim"
-import uuid from "uuid"
+import { connect } from "react-redux"
 
 /**
  * import others
  */
 import { pageNameMap } from "../../shared/const/common"
+import { InitialState, actions } from "../../store/modules"
+import { HandleActions } from "../../store/modules/page/todo/types"
+
+/**
+ * import components
+ */
+import Todo from "../../components/pages/todo"
 
 /**
  * main
  */
-const Top: NextPage = () => {
-  const [items, changeItems] = useState([uuid(), uuid()])
-  const handleAddItem = () => changeItems([...items, uuid()])
-  const handleRemoveItem = (targetId: string) => changeItems(items.filter(value => value !== targetId))
-  const listItems = items.map(value => (
-    <List.Item onClick={() => handleRemoveItem(value)} key={value}>
-      {value}
-    </List.Item>
-  ))
+const {
+  pages: {
+    todo: { getTodoList },
+  },
+} = actions
 
-  const listProps = {
-    bordered: true,
-    footer: (
-      <Button type="primary" onClick={() => handleAddItem()}>
-        追加
-      </Button>
-    ),
-  }
-
-  return (
-    <div>
-      <Head>
-        <title>todo list</title>
-      </Head>
-      <QueueAnim component={List} componentProps={listProps} type={["right", "left"]} leaveReverse>
-        {listItems}
-      </QueueAnim>
-    </div>
-  )
-}
-
-Top.getInitialProps = async () => {
+Todo.getInitialProps = async () => {
   return {
     currentPage: pageNameMap.todo,
   }
 }
 
-export default Top
+export default connect<{}, HandleActions, {}, InitialState>(
+  state => state.pages.todo,
+  dispatch => ({
+    handleGetTodoList: () => dispatch(getTodoList()),
+  }),
+)(Todo)

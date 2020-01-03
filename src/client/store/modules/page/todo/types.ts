@@ -1,4 +1,9 @@
 /**
+ * import node_modules
+ */
+import { Action } from "redux-actions"
+
+/**
  * main
  */
 export interface InitialState {
@@ -8,5 +13,5 @@ export interface InitialState {
 }
 
 export interface HandleActions {
-  handleGetTodoList: () => void
+  handleGetTodoList: () => Action<void>
 }
