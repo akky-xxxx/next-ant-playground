@@ -15,9 +15,7 @@ export interface ToDoItem {
   isDone: boolean
 }
 
-interface ResponseBodyType {
-  results: ToDoItem[]
-}
+type ResponseBodyType = ToDoItem[]
 
 export type ApiType = AgreedUi &
   APIDef<
@@ -27,5 +25,5 @@ export type ApiType = AgreedUi &
     {}, // request query
     undefined, // request body
     {}, // response header
-    ResponseDef<Success200, ResponseBodyType> | ResponseDef<Error400, { error: "不正操作が行われました" }> // response body
+    ResponseDef<Success200, ResponseBodyType> | ResponseDef<Error400, { errorMessage: "error message" }> // response body
   >

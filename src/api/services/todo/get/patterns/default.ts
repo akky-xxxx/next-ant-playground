@@ -14,9 +14,7 @@ const defaultPattern: ApiType = {
   },
   response: {
     status: 200,
-    body: {
-      results: createToDoItems(10, "default pattern"),
-    },
+    body: createToDoItems(10, "default pattern"),
   },
 }
 

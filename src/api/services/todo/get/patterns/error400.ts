@@ -13,7 +13,7 @@ const error400: ApiType = {
   },
   response: {
     status: 400,
-    body: undefined,
+    body: { errorMessage: "error message" },
   },
 }
 
