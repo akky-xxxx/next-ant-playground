@@ -110,10 +110,10 @@ ENDPOINTS:${endpoints.reduce((str, endpoint) => `${str}\n- ${endpoint}`, "")}
 
     try {
       const results = await Promise.all(endpoints.map(endpoint => this.axios.get(endpoint, configs)))
-      return results
+      return results[0].data
     } catch (error) {
       console.error(error)
-      return error
+      return error.response.data
     }
   }
 
