@@ -1,6 +1,7 @@
 /**
  * import node_modules
  */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { convert } from "agreed-typed"
 
 import getTodoList from "./services/todo/get"

@@ -1,6 +1,7 @@
 /**
  * import node_modules
  */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { APIDef, GET, ResponseDef, Success200, Error400 } from "agreed-typed"
 
 /**
