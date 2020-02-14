@@ -4,5 +4,6 @@ module.exports = {
   extends: ["stylelint-config-standard", "stylelint-config-styled-components"],
   rules: {
     "order/properties-alphabetical-order": true,
+    "value-keyword-case": ["lower", { ignoreKeywords: ["dummyValue"] }],
   },
 }
