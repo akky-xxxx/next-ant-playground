@@ -1,24 +1,20 @@
 {
-  "extends": [
-    "config:base",
-    ":preserveSemverRanges"
-  ],
+  "extends": ["config:base", ":preserveSemverRanges"],
   "timezone": "Asia/Tokyo",
   "schedule": ["on friday"],
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": [
-      "on friday"
-    ]
+    "schedule": ["before 3am on the first day of the month"]
   },
   "minor": {
-    "groupName": "all dependencies",
-    "automerge": true
+    "groupName": "all dependencies"
+  },
+  "patch": {
+    "groupName": "all dependencies"
   },
   "packageRules": [
     {
-      "packagePatterns": ["date-fns"],
-      "automerge": false
+      "packagePatterns": ["date-fns"]
     }
   ]
 }
