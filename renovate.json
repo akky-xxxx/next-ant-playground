@@ -9,6 +9,6 @@
     "schedule": ["before 3am on the first day of the month"]
   },
   "patch": {
-    "groupName": "all patches"
+    "groupName": "all dependencies"
   }
 }
