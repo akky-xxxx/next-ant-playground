@@ -1,0 +1,12 @@
+pipeline:
+  install:
+    image: node:12.16.1-alpine
+    commands:
+      - yarn
+
+  check:
+    image: node:12.16.1-alpine
+    commands:
+      - yarn spell-check
+      - yarn type-check
+      - yarn lint
