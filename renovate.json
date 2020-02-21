@@ -1,5 +1,5 @@
 {
-  "extends": ["config:base", ":preserveSemverRanges"],
+  "extends": ["config:base"],
   "timezone": "Asia/Tokyo",
   "schedule": ["on friday"],
   "lockFileMaintenance": {
@@ -11,10 +11,5 @@
   },
   "patch": {
     "groupName": "all dependencies"
-  },
-  "packageRules": [
-    {
-      "packagePatterns": ["date-fns"]
-    }
-  ]
+  }
 }
