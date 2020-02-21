@@ -65,7 +65,7 @@
     "rc-queue-anim": "1.8.3",
     "react": "16.12.0",
     "react-dom": "16.12.0",
-    "react-redux": "7.1.3",
+    "react-redux": "7.2.0",
     "redux": "4.0.5",
     "redux-actions": "2.6.5",
     "redux-effects-fetchr": "1.1.0",
