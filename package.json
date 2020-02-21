@@ -103,7 +103,7 @@
     "agreed-typed": "1.0.1",
     "babel-loader": "8.0.6",
     "babel-plugin-import": "1.13.0",
-    "cspell": "4.0.46",
+    "cspell": "4.0.50",
     "eslint": "6.8.0",
     "eslint-config-airbnb": "18.0.1",
     "eslint-config-prettier": "6.10.0",
