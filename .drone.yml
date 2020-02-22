@@ -4,9 +4,17 @@ pipeline:
     commands:
       - yarn
 
-  check:
+  spell-check:
     image: node:12.16.1-alpine
     commands:
       - yarn spell-check
+
+  type-check:
+    image: node:12.16.1-alpine
+    commands:
       - yarn type-check
+
+  lint:
+    image: node:12.16.1-alpine
+    commands:
       - yarn lint
