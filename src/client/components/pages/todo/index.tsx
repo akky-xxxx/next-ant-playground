@@ -6,7 +6,7 @@ import { NextPage } from "next"
 import Head from "next/head"
 import { Button, List } from "antd"
 import QueueAnim from "rc-queue-anim"
-import uuid from "uuid"
+import { v4 as uuid } from "uuid"
 
 /**
  * import others
