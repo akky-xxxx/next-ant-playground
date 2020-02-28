@@ -5,7 +5,7 @@ import React, { Fragment } from "react"
 import { NextPage } from "next"
 import Head from "next/head"
 import { DatePicker, Select } from "antd"
-import uuid from "uuid"
+import { v4 as uuid } from "uuid"
 
 /**
  * import others
