@@ -40,8 +40,12 @@ const LogicalOperationRow: FC<LogicalOperationRowProps> = props => {
             defaultValue={selectedValue.toString()}
             onChange={newValue => handleChangeLogicalOperation({ newValue })}
           >
-            <Option key={LOGICAL_OPERATION.AND}>AND</Option>
-            <Option key={LOGICAL_OPERATION.OR}>OR</Option>
+            <Option key={LOGICAL_OPERATION.AND} value={LOGICAL_OPERATION.AND}>
+              AND
+            </Option>
+            <Option key={LOGICAL_OPERATION.OR} value={LOGICAL_OPERATION.OR}>
+              OR
+            </Option>
           </StyledSelect>
         </StyledSelectWrapper>
       </Col>

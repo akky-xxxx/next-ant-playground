@@ -2,8 +2,13 @@
  * import node_modules
  */
 import React, { FC } from "react"
-import { Form, Row, Input, Popover, Button } from "antd"
+import { Form, Input, Popover, Button } from "antd"
 import styled from "styled-components"
+
+/**
+ * import components
+ */
+import FlexBlock from "../../atoms/flexBlock"
 
 /**
  * import others
@@ -48,8 +53,8 @@ const FieldsRow: FC<FieldsRowProps> = props => {
 
   return (
     <StyledRow label={`条件 ${index + 1}`} colon={false}>
-      <Row type="flex" justify="space-between">
-        <Row type="flex">
+      <FlexBlock justifyContent="space-between">
+        <FlexBlock>
           <div>
             <Popover
               content={<ErrorMessage message={input1.errorMessage} />}
@@ -89,10 +94,10 @@ const FieldsRow: FC<FieldsRowProps> = props => {
               />
             </Popover>
           </div>
-        </Row>
+        </FlexBlock>
 
         <div>
-          <Row type="flex" justify="space-between">
+          <FlexBlock justifyContent="space-between">
             {index !== 0 ? (
               <MinusButton shape="circle" onClick={() => handleRemoveField({ targetId: rowId })}>
                 -
@@ -103,9 +108,9 @@ const FieldsRow: FC<FieldsRowProps> = props => {
             <Button shape="circle" onClick={() => handleAddField({ targetId: rowId })} disabled={!isValid}>
               +
             </Button>
-          </Row>
+          </FlexBlock>
         </div>
-      </Row>
+      </FlexBlock>
     </StyledRow>
   )
 }

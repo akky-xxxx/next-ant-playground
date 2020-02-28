@@ -2,13 +2,14 @@
  * import node_modules
  */
 import React, { useRef, useEffect, memo, FunctionComponent } from "react"
-import { Form, Button, Input, Row, Col, Popover } from "antd"
+import { Form, Button, Input, Col, Popover } from "antd"
 import styled from "styled-components"
 
 /**
  * import components
  */
 import ErrorMessage from "../../atoms/errorMessage"
+import FlexBlock from "../../atoms/flexBlock"
 
 /**
  * import others
@@ -46,7 +47,7 @@ const FormRow: FunctionComponent<FormRowProps> = props => {
 
   return (
     <Form.Item>
-      <Row type="flex" justify="space-between">
+      <FlexBlock justifyContent="space-between">
         <Col sm={21}>
           <Popover
             content={<ErrorMessage message={errorMessage} />}
@@ -63,7 +64,7 @@ const FormRow: FunctionComponent<FormRowProps> = props => {
           </Popover>
         </Col>
         <Col sm={3} style={{ flexBasis: 100 }}>
-          <Row type="flex" justify="space-between">
+          <FlexBlock justifyContent="space-between">
             {index !== 0 ? (
               <MinusButton shape="circle" onClick={() => handleRemoveField({ targetId: id })}>
                 -
@@ -74,9 +75,9 @@ const FormRow: FunctionComponent<FormRowProps> = props => {
             <Button shape="circle" onClick={() => handleAddField({ targetId: id })} disabled={!inputValue}>
               +
             </Button>
-          </Row>
+          </FlexBlock>
         </Col>
-      </Row>
+      </FlexBlock>
     </Form.Item>
   )
 }

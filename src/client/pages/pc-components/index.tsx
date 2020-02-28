@@ -22,7 +22,11 @@ const values = [
   "あいうえおかきくえこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんあいうえおかきくえこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんあいうえおかきくえこさしすせそたちつ",
 ] as const
 
-const optionList = values.map(value => <Option key={uuid()}>{value}</Option>)
+const optionList = values.map(value => (
+  <Option key={uuid()} value={value}>
+    {value}
+  </Option>
+))
 
 const PcComponents: NextPage = () => {
   return (
