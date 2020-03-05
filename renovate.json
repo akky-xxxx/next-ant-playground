@@ -6,9 +6,5 @@
   "schedule": ["on saturday"],
   "minor": {
     "groupName": "all dependencies"
-  },
-  "lockFileMaintenance": {
-    "enabled": true,
-    "schedule": ["before 3am on the first day of the month"]
   }
 }
