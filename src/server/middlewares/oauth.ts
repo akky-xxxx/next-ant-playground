@@ -77,6 +77,9 @@ const extractProfile = (profile: Profile) =>
 const authRequired = (req: Request, res: Response, next: NextFunction) => {
   if (!req.user && req.session && !req.isAuthenticated()) {
     req.session.oauth2return = req.originalUrl
+    // TODO: 謎の `does not exist` error がなくなったら ignore 削除
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     return res.redirect(URLS.LOGIN)
   }
   return next()

@@ -89,8 +89,13 @@ export default function apiGateway() {
       responseFormatter: (_req: Request, responseFormatterRes: Response, result: any) => {
         // レスポンスヘッダーを変更したいときはここをいじれば変えられる
         // TODO: 一旦 no-cache だけ入れとく必要なかったら消す
+        /* eslint-disable @typescript-eslint/ban-ts-ignore */
+        // TODO: 謎の `does not exist` error がなくなったら ignore 削除
+        // @ts-ignore
         responseFormatterRes.header("Cache-Control", ["no-store", "no-cache"].join(","))
+        // @ts-ignore
         responseFormatterRes.header("Pragma", "no-cache")
+        /* eslint-enable @typescript-eslint/ban-ts-ignore */
         return result.data
       },
     })(req, res, next)
