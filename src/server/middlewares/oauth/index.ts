@@ -10,6 +10,7 @@ import dotenv from "dotenv"
  * import handlers
  */
 import loginHandler from "./handlers/loginHandler"
+import callbackHandler from "./handlers/callbackHandler"
 
 /**
  * import others
@@ -50,17 +51,7 @@ router.get(URLS.LOGIN, loginHandler, passport.authenticate(STRATEGY, STRATEGY_AU
 /**
  * ログイン後処理URLへのアクセス時のハンドリング
  */
-router.get(URLS.CALLBACK, passport.authenticate(STRATEGY), async (req, res) => {
-  if (!req.session) {
-    console.error("セッション情報を取得できませんでした。")
-    return Promise.reject()
-  }
-
-  const redirectUrl = req.session.oauth2return || "/"
-  delete req.session.oauth2return
-
-  res.redirect(redirectUrl)
-})
+router.get(URLS.CALLBACK, passport.authenticate(STRATEGY), callbackHandler)
 
 /**
  * ログインアウトURLへのアクセス時のハンドリング
