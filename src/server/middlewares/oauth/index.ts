@@ -1,7 +1,7 @@
 /**
  * import node_modules
  */
-import express, { NextFunction, Request, Response } from "express"
+import express from "express"
 import passport from "passport"
 import oauth20 from "passport-google-oauth20"
 import dotenv from "dotenv"
@@ -11,6 +11,7 @@ import dotenv from "dotenv"
  */
 import { URLS, STRATEGY } from "./const"
 import extractProfile from "./modules/extractProfile"
+import authRequired from "./modules/authRequired"
 
 /**
  * main
@@ -19,23 +20,6 @@ dotenv.config()
 
 const GoogleStrategy = oauth20.Strategy
 const router = express.Router()
-
-/**
- * 未ログインアクセス時にアクセスしたURLを保持し、ログインURLへリダイレクトさせる
- * @param req
- * @param res
- * @param next
- */
-const authRequired = (req: Request, res: Response, next: NextFunction) => {
-  if (!req.user && req.session && !req.isAuthenticated()) {
-    req.session.oauth2return = req.originalUrl
-    // TODO: 謎の `does not exist` error がなくなったら ignore 削除
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
-    return res.redirect(URLS.LOGIN)
-  }
-  return next()
-}
 
 passport.use(
   new GoogleStrategy(
