@@ -11,6 +11,7 @@ import dotenv from "dotenv"
  */
 import loginHandler from "./handlers/loginHandler"
 import callbackHandler from "./handlers/callbackHandler"
+import logoutHandler from "./handlers/logoutHandler"
 
 /**
  * import others
@@ -56,10 +57,7 @@ router.get(URLS.CALLBACK, passport.authenticate(STRATEGY), callbackHandler)
 /**
  * ログインアウトURLへのアクセス時のハンドリング
  */
-router.get(URLS.LOGOUT, (req, res) => {
-  req.logout()
-  res.redirect("/")
-})
+router.get(URLS.LOGOUT, logoutHandler)
 
 const oauth = {
   router,
