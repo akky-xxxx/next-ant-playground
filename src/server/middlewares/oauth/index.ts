@@ -76,7 +76,6 @@ router.get(URLS.LOGOUT, (req, res) => {
 })
 
 const oauth = {
-  extractProfile,
   router,
   required: authRequired,
 }
