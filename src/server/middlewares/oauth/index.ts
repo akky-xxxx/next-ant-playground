@@ -2,14 +2,14 @@
  * import node_modules
  */
 import express, { NextFunction, Request, Response } from "express"
-import passport, { Profile } from "passport"
+import passport from "passport"
 import oauth20 from "passport-google-oauth20"
 import dotenv from "dotenv"
 
 /**
  * import others
  */
-import { UserInfo } from "../../types/common"
+import extractProfile from "./modules/extractProfile"
 
 /**
  * main
@@ -25,18 +25,6 @@ const URLS = {
 const STRATEGY = "google" // passport で認証の対象となる strategy の指定
 const GoogleStrategy = oauth20.Strategy
 const router = express.Router()
-
-/**
- * ログイン情報から必要なユーザ情報だけを抜き出す
- * @param profile
- */
-const extractProfile = (profile: Profile) =>
-  ({
-    googleId: profile.id,
-    displayName: profile.displayName,
-    email: profile.emails ? profile.emails[0].value : "",
-    photo: profile.photos ? profile.photos[0].value : "",
-  } as UserInfo)
 
 /**
  * 未ログインアクセス時にアクセスしたURLを保持し、ログインURLへリダイレクトさせる
