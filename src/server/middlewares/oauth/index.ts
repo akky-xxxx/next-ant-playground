@@ -16,8 +16,8 @@ import logoutHandler from "./handlers/logoutHandler"
 /**
  * import others
  */
-import { URLS, STRATEGY, STRATEGY_AUTH_OPTIONS } from "./const"
-import extractProfile from "./modules/extractProfile"
+import { URLS, STRATEGY, STRATEGY_OPTION, STRATEGY_AUTH_OPTIONS } from "./const"
+import verify from "./modules/verify"
 import authRequired from "./modules/authRequired"
 
 /**
@@ -28,18 +28,7 @@ dotenv.config()
 const GoogleStrategy = oauth20.Strategy
 const router = express.Router()
 
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.OAUTH2_CLIENT_ID as string,
-      clientSecret: process.env.OAUTH2_CLIENT_SECRET as string,
-      callbackURL: process.env.OAUTH2_CALLBACK as string,
-    },
-    (_accessToken, _refreshToken, profile, callback) => {
-      callback(undefined, extractProfile(profile))
-    },
-  ),
-)
+passport.use(new GoogleStrategy(STRATEGY_OPTION, verify))
 
 passport.serializeUser((user, callback) => callback(null, user))
 passport.deserializeUser((obj, callback) => callback(null, obj))
