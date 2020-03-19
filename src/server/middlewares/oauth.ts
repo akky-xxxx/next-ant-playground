@@ -10,8 +10,6 @@ import dotenv from "dotenv"
  * import others
  */
 import { UserInfo } from "../types/common"
-// import { ENDPOINTS } from "../const/common"
-// import getToken from "../utils/getGoogleToken"
 
 /**
  * main
@@ -27,34 +25,6 @@ const URLS = {
 const STRATEGY = "google" // passport で認証の対象となる strategy の指定
 const GoogleStrategy = oauth20.Strategy
 const router = express.Router()
-
-/**
- * ユーザー情報が存在するかチェックし、存在しない時は新規登録し、エラーが帰ってきた場合は画面を表示しない
- * @param req
- * @param res
- */
-// const checkUser = async (req: Request, res: Response): Promise<void> => {
-//   if (!req.session) {
-//     console.error("セッション情報を取得できませんでした。")
-//     return Promise.reject()
-//   }
-//
-//   const redirectUrl = req.session.oauth2return || "/"
-//   delete req.session.oauth2return
-//
-//   try {
-//     // セッションにIAMのトークンをセットする
-//     req.session.token = await getToken()
-//
-//     res.redirect(redirectUrl)
-//     return Promise.resolve()
-//   } catch (error) {
-//     req.logout()
-//     console.error(error)
-//     res.status(error.response.data.code).end()
-//     return Promise.reject()
-//   }
-// }
 
 /**
  * ログイン情報から必要なユーザ情報だけを抜き出す
