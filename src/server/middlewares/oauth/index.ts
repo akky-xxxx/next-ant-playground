@@ -9,6 +9,7 @@ import dotenv from "dotenv"
 /**
  * import others
  */
+import { URLS, STRATEGY } from "./const"
 import extractProfile from "./modules/extractProfile"
 
 /**
@@ -16,13 +17,6 @@ import extractProfile from "./modules/extractProfile"
  */
 dotenv.config()
 
-// 認証関連で使用される url 一覧
-const URLS = {
-  LOGIN: "/auth/login",
-  LOGOUT: "/auth/logout",
-  CALLBACK: "/auth/google/callback",
-}
-const STRATEGY = "google" // passport で認証の対象となる strategy の指定
 const GoogleStrategy = oauth20.Strategy
 const router = express.Router()
 
