@@ -7,6 +7,11 @@ import oauth20 from "passport-google-oauth20"
 import dotenv from "dotenv"
 
 /**
+ * import handlers
+ */
+import loginHandler from "./handlers/loginHandler"
+
+/**
  * import others
  */
 import { URLS, STRATEGY, STRATEGY_AUTH_OPTIONS } from "./const"
@@ -40,17 +45,7 @@ passport.deserializeUser((obj, callback) => callback(null, obj))
 /**
  * ログインURLへのアクセス時のハンドリング
  */
-router.get(
-  URLS.LOGIN,
-  (req, _next, next) => {
-    if (req.query.return && req.session) {
-      req.session.oauth2return = req.query.return
-    }
-
-    next()
-  },
-  passport.authenticate(STRATEGY, STRATEGY_AUTH_OPTIONS),
-)
+router.get(URLS.LOGIN, loginHandler, passport.authenticate(STRATEGY, STRATEGY_AUTH_OPTIONS))
 
 /**
  * ログイン後処理URLへのアクセス時のハンドリング
