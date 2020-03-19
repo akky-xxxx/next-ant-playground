@@ -18,6 +18,7 @@ import router from "./index"
 import sessionConfig from "./const/sessionConfig"
 import oauth from "./middlewares/oauth"
 import isDev from "./utils/isDev"
+import createLogger from "./utils/createLogger"
 
 const port = 3000
 const rootDir = path.resolve(__dirname, "../")
@@ -28,13 +29,19 @@ const app = next({
 })
 const routes = new Routes()
 const handle = routes.getRequestHandler(app)
+const { sillyLogger, infoLogger, errorLogger } = createLogger("start server")
 
+infoLogger({
+  message: "prepare server",
+  data: {
+    mode: isDev ? "develop" : "production",
+  },
+})
 app
   .prepare()
   .then(() => {
     const server = express()
-
-    server.use(session(sessionConfig))
+    sillyLogger("create server")
 
     if (!isDev) {
       server.use(session(sessionConfig))
@@ -47,14 +54,19 @@ app
     server.use(router())
     server.use(handle)
 
-    server.listen(port, (err: Error) => {
-      if (err) throw err
-      console.log(`> Ready on http://localhost:${port}`)
-      console.log(`-------------------------------------`)
-      console.log(`Serving files from: ${dir}`)
+    server.listen(port, (error: Error) => {
+      if (error) {
+        errorLogger({ error })
+        throw error
+      }
+
+      sillyLogger("========================================")
+      sillyLogger(`Ready on http://localhost:${port}`)
+      sillyLogger(`Serving files from: ${dir}`)
+      sillyLogger("========================================")
     })
   })
   .catch(error => {
-    console.error(error.stack)
+    errorLogger({ error })
     process.exit(1)
   })
