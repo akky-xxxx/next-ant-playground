@@ -9,7 +9,7 @@ import dotenv from "dotenv"
 /**
  * import others
  */
-import { UserInfo } from "../types/common"
+import { UserInfo } from "../../types/common"
 
 /**
  * main
