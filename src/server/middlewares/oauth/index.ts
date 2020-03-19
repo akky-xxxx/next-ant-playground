@@ -9,7 +9,7 @@ import dotenv from "dotenv"
 /**
  * import others
  */
-import { URLS, STRATEGY } from "./const"
+import { URLS, STRATEGY, STRATEGY_AUTH_OPTIONS } from "./const"
 import extractProfile from "./modules/extractProfile"
 import authRequired from "./modules/authRequired"
 
@@ -49,7 +49,7 @@ router.get(
 
     next()
   },
-  passport.authenticate(STRATEGY, { scope: ["email", "profile"] }),
+  passport.authenticate(STRATEGY, STRATEGY_AUTH_OPTIONS),
 )
 
 /**
