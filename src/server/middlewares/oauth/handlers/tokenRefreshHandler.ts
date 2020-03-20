@@ -60,6 +60,13 @@ const tokenRefreshHandler: RequestHandler = async (req, _res, next) => {
     return
   }
 
+  infoLogger({
+    message: "access token が無効です",
+    data: {
+      email,
+      expire,
+    },
+  })
   // token の発行と有効期限の取得
   try {
     const newToken = await getNewToken(refreshToken)
