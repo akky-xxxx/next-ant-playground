@@ -135,7 +135,7 @@ ENDPOINTS:${endpoints.reduce((str, endpoint) => `${str}\n- ${endpoint}`, "")}
     }
   }
 
-  async create() {
+  async create(_req: Request) {
     const options = this.options || {}
     const configs = this.configs || {}
     debug(`
