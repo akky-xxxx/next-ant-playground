@@ -5,23 +5,26 @@ import axios, { AxiosRequestConfig } from "axios"
 import { Service } from "axios-middleware"
 
 /**
+ * import others
+ */
+import createLogger from "./createLogger"
+
+/**
  * main
  */
 const service = new Service(axios)
+const { infoLogger } = createLogger("axios middleware")
 
 service.register({
   onRequest(config: AxiosRequestConfig) {
-    const parsedData = JSON.parse(config.data)
-    config.headers = {
-      ...config.headers,
-      Authorization: `Bearer ${parsedData.bearerToken}`,
+    if (config.headers.bearerToken) {
+      config.headers = {
+        ...config.headers,
+        Authorization: `Bearer ${config.headers.bearerToken}`,
+      }
     }
 
-    console.log("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓")
-    console.log(config)
-    console.log("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑")
+    infoLogger({ data: config })
     return config
   },
 })
-
-export default axios
