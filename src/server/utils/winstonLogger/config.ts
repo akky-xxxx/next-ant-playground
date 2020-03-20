@@ -9,7 +9,7 @@ import { format, transports, LoggerOptions } from "winston"
  * import others
  */
 import formatParams from "./modules/formatParams"
-import isDev from "../isDev"
+import isLocal from "../isLocal"
 
 /**
  * main
@@ -19,7 +19,7 @@ dotenv.config()
 const { timestamp, align, printf, colorize, combine } = format
 
 const formats: Format[] = [timestamp(), align(), printf(formatParams)]
-if (isDev) {
+if (isLocal) {
   formats.unshift(colorize())
 }
 
