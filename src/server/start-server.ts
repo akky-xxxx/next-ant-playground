@@ -47,6 +47,7 @@ app
       server.use(session(sessionConfig))
       server.use(passport.initialize())
       server.use(passport.session())
+      server.use(oauth.tokenRefreshHandler)
       server.use(oauth.router)
       server.use(oauth.required)
     }

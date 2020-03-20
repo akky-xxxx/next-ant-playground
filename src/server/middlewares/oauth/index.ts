@@ -12,6 +12,7 @@ import dotenv from "dotenv"
 import loginHandler from "./handlers/loginHandler"
 import callbackHandler from "./handlers/callbackHandler"
 import logoutHandler from "./handlers/logoutHandler"
+import tokenRefreshHandler from "./handlers/tokenRefreshHandler"
 
 /**
  * import others
@@ -51,6 +52,7 @@ router.get(URLS.LOGOUT, logoutHandler)
 const oauth = {
   router,
   required: authRequired,
+  tokenRefreshHandler,
 }
 
 export default oauth
