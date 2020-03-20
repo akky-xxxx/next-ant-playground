@@ -5,12 +5,12 @@ import { format as formatUrl } from "url"
 import debugFactory from "debug"
 import { Request } from "express"
 import { AxiosInstance } from "axios"
+import axios from "axios"
 
 /**
  * import others
  */
 import commonConfigs from "../configs"
-import axios from "../utils/axios"
 
 /**
  * main

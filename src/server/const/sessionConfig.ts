@@ -8,7 +8,7 @@ import dotenv from "dotenv"
 /**
  * import others
  */
-import isDev from "../utils/isDev"
+import isLocal from "../utils/isLocal"
 
 /**
  * main
@@ -25,8 +25,8 @@ const sessionConfig = {
   saveUninitialized: false,
   secret: process.env.SESSION_SECRET as string,
   cookie: {
-    secure: !isDev,
-    maxAge: 86400000,
+    secure: !isLocal,
+    maxAge: 1000 * 60 * 60 * 24,
     httpOnly: true,
   },
 }

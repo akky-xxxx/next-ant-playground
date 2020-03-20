@@ -30,6 +30,7 @@ module.exports = {
         "ts": "never",
       }
     ],
+    "@typescript-eslint/camelcase": OFF,
     "@typescript-eslint/explicit-member-accessibility": OFF,
     "@typescript-eslint/explicit-function-return-type": OFF,
     "prettier/prettier": [
