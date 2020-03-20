@@ -3,4 +3,6 @@ export interface UserInfo {
   displayName: string
   email: string
   photo: string
+  accessToken?: string
+  refreshToken?: string
 }

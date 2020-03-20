@@ -27,4 +27,6 @@ export const STRATEGY_OPTION: StrategyOptions = {
 
 export const STRATEGY_AUTH_OPTIONS: AuthenticateOptionsGoogle = {
   scope: ["email", "profile"],
+  accessType: "offline",
+  prompt: "consent",
 }

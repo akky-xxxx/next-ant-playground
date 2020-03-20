@@ -13,8 +13,8 @@ import extractProfile from "./extractProfile"
  */
 type Verify = (accessToken: string, refreshToken: string, profile: Profile, done: VerifyCallback) => void
 
-const verify: Verify = (_accessToken, _refreshToken, profile, callback) => {
-  callback(undefined, extractProfile(profile))
+const verify: Verify = (accessToken, refreshToken, profile, callback) => {
+  callback(undefined, extractProfile(profile, accessToken, refreshToken))
 }
 
 export default verify
