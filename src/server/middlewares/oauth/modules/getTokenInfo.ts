@@ -42,6 +42,7 @@ const getTokenInfo: GetTokenInfo = async accessToken => {
   sillyLogger("token 情報取得開始")
   requestData.params.accessToken = accessToken
   try {
+    /* cspell:disable-next-line */
     const result = await connectGoogleApi.get<TokenInfo>("/oauth2/v3/tokeninfo", requestData)
     const {
       data: { exp },

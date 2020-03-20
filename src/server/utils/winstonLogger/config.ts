@@ -16,6 +16,7 @@ import isLocal from "../isLocal"
  */
 dotenv.config()
 
+/* cspell:disable-next-line */
 const { timestamp, align, printf, colorize, combine } = format
 
 const formats: Format[] = [timestamp(), align(), printf(formatParams)]
