@@ -8,17 +8,17 @@ import { connect } from "react-redux"
  */
 import { pageNameMap } from "../../shared/const/common"
 import { InitialState, actions } from "../../store/modules"
-import { HandleActions } from "../../store/modules/page/todo/types"
 
 /**
  * import components
  */
-import Todo from "../../components/pages/todo"
+import Todo, { HandleActions } from "../../components/pages/todo"
 
 /**
  * main
  */
 const {
+  app: { checkToken },
   pages: {
     todo: { getTodoList },
   },
@@ -33,6 +33,7 @@ Todo.getInitialProps = async () => {
 export default connect<{}, HandleActions, {}, InitialState>(
   state => state.pages.todo,
   dispatch => ({
+    handleCheckToken: () => dispatch(checkToken()),
     handleGetTodoList: () => dispatch(getTodoList()),
   }),
 )(Todo)
