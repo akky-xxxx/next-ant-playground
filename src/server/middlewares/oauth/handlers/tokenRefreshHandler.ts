@@ -49,7 +49,13 @@ const tokenRefreshHandler: RequestHandler = async (req, _res, next) => {
   }
 
   if (expire && new Date(expire) >= new Date()) {
-    sillyLogger("access token は有効です")
+    infoLogger({
+      message: "access token は有効です",
+      data: {
+        email,
+        expire,
+      },
+    })
     next()
     return
   }
