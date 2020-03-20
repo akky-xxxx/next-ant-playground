@@ -6,11 +6,6 @@ import memorystore from "memorystore"
 import dotenv from "dotenv"
 
 /**
- * import others
- */
-import isDev from "../utils/isDev"
-
-/**
  * main
  */
 dotenv.config()
@@ -25,8 +20,8 @@ const sessionConfig = {
   saveUninitialized: false,
   secret: process.env.SESSION_SECRET as string,
   cookie: {
-    secure: !isDev,
-    maxAge: 86400000,
+    secure: process.env.ENV !== "LOCAL",
+    maxAge: 1000 * 60 * 60 * 24,
     httpOnly: true,
   },
 }
