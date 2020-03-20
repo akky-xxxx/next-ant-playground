@@ -8,7 +8,9 @@ import { RequestHandler } from "express"
  */
 const logoutHandler: RequestHandler = (req, res) => {
   req.logout()
-  res.redirect("/")
+  req.session?.destroy(() => {
+    res.redirect("/")
+  })
 }
 
 export default logoutHandler
