@@ -49,7 +49,7 @@ const Todo: NextPage<HandleActions, GetInitialPropsReturn> = props => {
         <title>todo list</title>
       </Head>
       <QueueAnim component={List} componentProps={listProps} type={["right", "left"]} leaveReverse>
-        {listItems}
+        <ul>{listItems}</ul>
       </QueueAnim>
     </div>
   )
