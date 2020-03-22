@@ -1,46 +1,25 @@
 /**
  * import node_modules
  */
-import React from "react"
-import { NextPage } from "next"
-import Head from "next/head"
-import Link from "next/link"
-import styled from "styled-components"
-import { Button } from "antd"
+import { connect } from "react-redux"
+
+/**
+ * import components
+ */
+import Top, { HandleActions } from "../components/pages/top"
 
 /**
  * import others
  */
-import { menuData, pageNameMap } from "../shared/const/common"
+import { pageNameMap } from "../shared/const/common"
+import { InitialState, actions } from "../store/modules"
 
 /**
  * main
  */
-const Top: NextPage = () => {
-  return (
-    <Wrapper>
-      <Head>
-        <title>playground of Next.js and ant design</title>
-      </Head>
-      <ul>
-        {menuData
-          .filter((_, index) => index > 0)
-          .map(page => {
-            const { href, label } = page
-            return (
-              <MenuItem key={href}>
-                <Link href={href} passHref>
-                  <a>
-                    <Button>{label}</Button>
-                  </a>
-                </Link>
-              </MenuItem>
-            )
-          })}
-      </ul>
-    </Wrapper>
-  )
-}
+const {
+  app: { checkToken },
+} = actions
 
 Top.getInitialProps = async () => {
   return {
@@ -48,20 +27,9 @@ Top.getInitialProps = async () => {
   }
 }
 
-const Wrapper = styled.div`
-  align-items: center;
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  width: 100vw;
-`
-
-const MenuItem = styled.li`
-  text-align: center;
-
-  & + & {
-    margin-top: 20px;
-  }
-`
-
-export default Top
+export default connect<{}, HandleActions, {}, InitialState>(
+  () => ({}),
+  dispatch => ({
+    handleCheckToken: () => dispatch(checkToken()),
+  }),
+)(Top)
