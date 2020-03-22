@@ -1,7 +1,7 @@
 /**
  * import node_modules
  */
-import React from "react"
+import React, { useEffect } from "react"
 import { NextPage } from "next"
 import Head from "next/head"
 import { Form } from "antd"
@@ -15,17 +15,25 @@ import FormRow from "../../molecules/formRow"
  * import others
  */
 import { GetInitialPropsReturn } from "../../../shared/types/common"
-import { HandleActions, Field } from "../../../store/modules/page/formTest/types"
+import { HandleActions as HandleFormTestActions, Field } from "../../../store/modules/page/formTest/types"
+import { HandleActions as HandleCheckTokenActions } from "../../../store/modules/app/checkToken/types"
+import isDev from "../../../shared/utils/isDev"
 
 /**
  * main
  */
+export interface HandleActions extends HandleCheckTokenActions, HandleFormTestActions {}
+
 interface FormTestProps extends HandleActions {
   fields: Field[]
 }
 
 const FormTest: NextPage<FormTestProps, GetInitialPropsReturn> = props => {
-  const { handleAddField, handleChangeValue, handleRemoveField, fields } = props
+  const { handleAddField, handleChangeValue, handleRemoveField, handleCheckToken, fields } = props
+
+  useEffect(() => {
+    if (!isDev) handleCheckToken()
+  }, [])
 
   return (
     <Form>

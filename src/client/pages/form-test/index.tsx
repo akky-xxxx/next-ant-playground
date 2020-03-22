@@ -6,14 +6,13 @@ import { connect } from "react-redux"
 /**
  * import components
  */
-import FormTest from "../../components/pages/formTest"
+import FormTest, { HandleActions } from "../../components/pages/formTest"
 
 /**
  * import others
  */
 import { pageNameMap } from "../../shared/const/common"
 import { InitialState, actions } from "../../store/modules"
-import { HandleActions } from "../../store/modules/page/formTest/types"
 
 /**
  * main
@@ -25,6 +24,7 @@ FormTest.getInitialProps = async () => {
 }
 
 const {
+  app: { checkToken },
   pages: {
     formTest: { addField, changeValue, removeField },
   },
@@ -33,6 +33,7 @@ const {
 export default connect<{}, HandleActions, {}, InitialState>(
   state => state.pages.formTest,
   dispatch => ({
+    handleCheckToken: () => dispatch(checkToken()),
     handleAddField: payload => dispatch(addField(payload)),
     handleChangeValue: payload => dispatch(changeValue(payload)),
     handleRemoveField: payload => dispatch(removeField(payload)),
