@@ -24,15 +24,21 @@ const updateToken: UpdateToken = async (req, next) => {
   if (!session) {
     sillyLogger("session がありません")
 
-    if (next) next()
-    return Promise.resolve()
+    if (next) {
+      next()
+      return Promise.resolve()
+    }
+    return Promise.reject()
   }
 
   if (!user) {
     sillyLogger("user がありません")
 
-    if (next) next()
-    return Promise.resolve()
+    if (next) {
+      next()
+      return Promise.resolve()
+    }
+    return Promise.reject()
   }
 
   const { displayName, email, expire, refreshToken } = user
@@ -40,8 +46,11 @@ const updateToken: UpdateToken = async (req, next) => {
   if (!refreshToken) {
     sillyLogger("refreshToken がありません")
 
-    if (next) next()
-    return Promise.resolve()
+    if (next) {
+      next()
+      return Promise.resolve()
+    }
+    return Promise.reject()
   }
 
   if (expire && new Date(expire) >= new Date()) {
