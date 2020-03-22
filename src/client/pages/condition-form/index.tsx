@@ -1,20 +1,35 @@
 /**
+ * import node_modules
+ */
+import { connect } from "react-redux"
+
+/**
  * import components
  */
-import ConditionForm from "../../components/pages/conditionForm"
+import ConditionForm, { HandleActions } from "../../components/pages/conditionForm"
 
 /**
  * import others
  */
 import { pageNameMap } from "../../shared/const/common"
+import { InitialState, actions } from "../../store/modules"
 
 /**
  * main
  */
+const {
+  app: { checkToken },
+} = actions
+
 ConditionForm.getInitialProps = async () => {
   return {
     currentPage: pageNameMap.conditionForm,
   }
 }
 
-export default ConditionForm
+export default connect<{}, HandleActions, {}, InitialState>(
+  () => ({}),
+  () => dispatch => ({
+    handleCheckToken: () => dispatch(checkToken()),
+  }),
+)(ConditionForm)

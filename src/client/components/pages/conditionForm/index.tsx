@@ -1,7 +1,7 @@
 /**
  * import node_modules
  */
-import React from "react"
+import React, { useEffect } from "react"
 import { NextPage } from "next"
 import { Form } from "antd"
 
@@ -14,12 +14,16 @@ import FieldsRow from "../../molecules/fieldsRow"
 /**
  * import others
  */
+import { HandleActions as HandleCheckTokenActions } from "../../../store/modules/app/checkToken/types"
 import { GetInitialPropsReturn } from "../../../shared/types/common"
 import COLS from "../../../shared/const/grids"
+import isDev from "../../../shared/utils/isDev"
 
 /**
  * main
  */
+export type HandleActions = HandleCheckTokenActions
+
 const labelCol = {
   sm: {
     span: COLS.COL2_SM_LEFT,
@@ -62,7 +66,13 @@ const fields = {
   input2,
 }
 
-const ConditionForm: NextPage<{}, GetInitialPropsReturn> = () => {
+const ConditionForm: NextPage<HandleActions, GetInitialPropsReturn> = props => {
+  const { handleCheckToken } = props
+
+  useEffect(() => {
+    if (!isDev) handleCheckToken()
+  }, [])
+
   return (
     <Form labelCol={labelCol} wrapperCol={wrapperCol}>
       {/* eslint-disable @typescript-eslint/no-empty-function */}
