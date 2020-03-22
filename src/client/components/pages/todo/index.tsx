@@ -18,7 +18,7 @@ import { HandleActions } from "../../../store/modules/page/todo/types"
  * main
  */
 const Todo: NextPage<HandleActions, GetInitialPropsReturn> = props => {
-  const [items, changeItems] = useState([uuid(), uuid()])
+  const [items, changeItems] = useState<string[]>([])
   const handleAddItem = () => changeItems([...items, uuid()])
   const handleRemoveItem = (targetId: string) => changeItems(items.filter(value => value !== targetId))
 
