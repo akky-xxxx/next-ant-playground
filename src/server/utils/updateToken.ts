@@ -10,6 +10,7 @@ import { ExtendedRequest } from "../types/common"
 import getNewToken from "../middlewares/oauth/modules/getNewToken"
 import getTokenExpire from "../middlewares/oauth/modules/getTokenInfo"
 import createLogger from "./createLogger"
+import CustomError from "./CustomError"
 
 /**
  * main
@@ -22,35 +23,41 @@ const updateToken: UpdateToken = async (req, next) => {
   const { user, session } = req as ExtendedRequest
 
   if (!session) {
-    sillyLogger("session がありません")
+    const message = "session がありません"
+    sillyLogger(message)
 
     if (next) {
       next()
       return Promise.resolve()
     }
-    return Promise.reject()
+    const error = new CustomError(message, 401)
+    return Promise.reject(error)
   }
 
   if (!user) {
-    sillyLogger("user がありません")
+    const message = "user がありません"
+    sillyLogger(message)
 
     if (next) {
       next()
       return Promise.resolve()
     }
-    return Promise.reject()
+    const error = new CustomError(message, 401)
+    return Promise.reject(error)
   }
 
   const { displayName, email, expire, refreshToken } = user
 
   if (!refreshToken) {
-    sillyLogger("refreshToken がありません")
+    const message = "refreshToken がありません"
+    sillyLogger(message)
 
     if (next) {
       next()
       return Promise.resolve()
     }
-    return Promise.reject()
+    const error = new CustomError(message, 401)
+    return Promise.reject(error)
   }
 
   if (expire && new Date(expire) >= new Date()) {
@@ -100,7 +107,7 @@ const updateToken: UpdateToken = async (req, next) => {
     errorLogger({ error })
 
     if (next) next()
-    return Promise.reject()
+    return Promise.reject(error)
   }
 }
 
