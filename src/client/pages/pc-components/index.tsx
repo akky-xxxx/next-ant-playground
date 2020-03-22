@@ -1,52 +1,19 @@
 /**
  * import node_modules
  */
-import React, { Fragment } from "react"
-import { NextPage } from "next"
-import Head from "next/head"
-import { DatePicker, Select } from "antd"
-import { v4 as uuid } from "uuid"
+import { connect } from "react-redux"
 
 /**
  * import others
  */
 import { pageNameMap } from "../../shared/const/common"
+import { InitialState, actions } from "../../store/modules"
 
-/**
- * main
- */
-const { Option } = Select
+import PcComponents, { HandleActions } from "../../components/pages/pcComponents"
 
-const values = [
-  "あいうえおかきくえこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんあいうえおかきくえこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんあいうえおかきくえこさしすせそたちつ",
-  "あいうえおかきくえこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんあいうえおかきくえこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんあいうえおかきくえこさしすせそたちつ",
-] as const
-
-const optionList = values.map(value => (
-  <Option key={uuid()} value={value}>
-    {value}
-  </Option>
-))
-
-const PcComponents: NextPage = () => {
-  return (
-    <Fragment>
-      <Head>
-        <title>components of ant design</title>
-      </Head>
-      <h1>pc components</h1>
-      <h2>DatePicker</h2>
-      <div>
-        <DatePicker />
-      </div>
-
-      <h2>Select</h2>
-      <div>
-        <Select style={{ width: "100%" }}>{optionList}</Select>
-      </div>
-    </Fragment>
-  )
-}
+const {
+  app: { checkToken },
+} = actions
 
 PcComponents.getInitialProps = async () => {
   return {
@@ -54,4 +21,9 @@ PcComponents.getInitialProps = async () => {
   }
 }
 
-export default PcComponents
+export default connect<{}, HandleActions, {}, InitialState>(
+  () => ({}),
+  () => dispatch => ({
+    handleCheckToken: () => dispatch(checkToken()),
+  }),
+)(PcComponents)
