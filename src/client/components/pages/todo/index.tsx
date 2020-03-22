@@ -14,6 +14,7 @@ import { v4 as uuid } from "uuid"
 import { GetInitialPropsReturn } from "../../../shared/types/common"
 import { HandleActions as HandleTodoActions } from "../../../store/modules/page/todo/types"
 import { HandleActions as HandleCheckTokenActions } from "../../../store/modules/app/checkToken/types"
+import isDev from "../../../shared/utils/isDev"
 
 /**
  * main
@@ -28,8 +29,8 @@ const Todo: NextPage<HandleActions, GetInitialPropsReturn> = props => {
   const { handleGetTodoList, handleCheckToken } = props
 
   useEffect(() => {
+    if (!isDev) handleCheckToken()
     handleGetTodoList()
-    handleCheckToken()
   }, [])
 
   const listItems = items.map(value => (
