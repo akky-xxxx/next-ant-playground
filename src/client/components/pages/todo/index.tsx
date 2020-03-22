@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from "react"
 import { NextPage } from "next"
 import Head from "next/head"
-import { Button, List } from "antd"
+import { Button, List, Spin } from "antd"
 import QueueAnim from "rc-queue-anim"
 import { v4 as uuid } from "uuid"
 
@@ -32,7 +32,12 @@ const Todo: NextPage<TodoProps, GetInitialPropsReturn> = props => {
   const handleAddItem = () => changeItems([...items, uuid()])
   const handleRemoveItem = (targetId: string) => changeItems(items.filter(value => value !== targetId))
 
-  const { handleGetTodoList, handleCheckToken } = props
+  const {
+    handleGetTodoList,
+    handleCheckToken,
+    app: { checkToken },
+    todo: { master },
+  } = props
 
   useEffect(() => {
     if (!isDev) handleCheckToken()
@@ -55,14 +60,14 @@ const Todo: NextPage<TodoProps, GetInitialPropsReturn> = props => {
   }
 
   return (
-    <div>
+    <Spin spinning={checkToken.isLoading || master.isLoading}>
       <Head>
         <title>todo list</title>
       </Head>
       <QueueAnim component={List} componentProps={listProps} type={["right", "left"]} leaveReverse>
         <ul>{listItems}</ul>
       </QueueAnim>
-    </div>
+    </Spin>
   )
 }
 

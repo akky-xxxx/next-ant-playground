@@ -1,9 +1,10 @@
 /**
  * import node_modules
  */
-import React, { Fragment, useEffect } from "react"
+import React, { useEffect } from "react"
 import { NextPage } from "next"
 import Head from "next/head"
+import { Spin } from "antd"
 import { DatePicker, Picker, List } from "antd-mobile"
 
 /**
@@ -49,14 +50,17 @@ const indicatorStyle = {
 }
 
 const PcComponents: NextPage<PcComponents, GetInitialPropsReturn> = props => {
-  const { handleCheckToken } = props
+  const {
+    handleCheckToken,
+    app: { checkToken },
+  } = props
 
   useEffect(() => {
     if (!isDev) handleCheckToken()
   }, [])
 
   return (
-    <Fragment>
+    <Spin spinning={checkToken.isLoading}>
       <Head>
         <title>components of ant design mobile</title>
       </Head>
@@ -76,7 +80,7 @@ const PcComponents: NextPage<PcComponents, GetInitialPropsReturn> = props => {
           </Picker>
         </List>
       </div>
-    </Fragment>
+    </Spin>
   )
 }
 

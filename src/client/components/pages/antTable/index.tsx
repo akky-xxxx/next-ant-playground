@@ -3,7 +3,7 @@
  */
 import React, { Fragment, useEffect } from "react"
 import { NextPage } from "next"
-import { Table } from "antd"
+import { Table, Spin } from "antd"
 import { PaginationConfig } from "antd/es/pagination"
 import { ColumnProps } from "antd/es/table"
 
@@ -56,13 +56,20 @@ const paginationOption: PaginationConfig = {
 }
 
 const TableWindow: NextPage<TableWindowProps, GetInitialPropsReturn> = props => {
-  const { handleCheckToken } = props
+  const {
+    handleCheckToken,
+    app: { checkToken },
+  } = props
 
   useEffect(() => {
     if (!isDev) handleCheckToken()
   }, [])
 
-  return <Table columns={columns} dataSource={data} pagination={paginationOption} />
+  return (
+    <Spin spinning={checkToken.isLoading}>
+      <Table columns={columns} dataSource={data} pagination={paginationOption} />
+    </Spin>
+  )
 }
 
 export default TableWindow

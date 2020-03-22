@@ -6,7 +6,7 @@ import { NextPage } from "next"
 import Head from "next/head"
 import Link from "next/link"
 import styled from "styled-components"
-import { Button } from "antd"
+import { Button, Spin } from "antd"
 
 /**
  * import others
@@ -27,34 +27,40 @@ interface TopProps extends HandleActions {
 }
 
 const Top: NextPage<TopProps, GetInitialPropsReturn> = props => {
-  const { handleCheckToken } = props
+  const {
+    handleCheckToken,
+    app: { checkToken },
+  } = props
 
   useEffect(() => {
     if (!isDev) handleCheckToken()
   }, [])
 
   return (
-    <Wrapper>
+    <Spin spinning={checkToken.isLoading}>
       <Head>
         <title>playground of Next.js and ant design</title>
       </Head>
-      <ul>
-        {menuData
-          .filter((_, index) => index > 0)
-          .map(page => {
-            const { href, label } = page
-            return (
-              <MenuItem key={href}>
-                <Link href={href} passHref>
-                  <a>
-                    <Button>{label}</Button>
-                  </a>
-                </Link>
-              </MenuItem>
-            )
-          })}
-      </ul>
-    </Wrapper>
+
+      <Wrapper>
+        <ul>
+          {menuData
+            .filter((_, index) => index > 0)
+            .map(page => {
+              const { href, label } = page
+              return (
+                <MenuItem key={href}>
+                  <Link href={href} passHref>
+                    <a>
+                      <Button>{label}</Button>
+                    </a>
+                  </Link>
+                </MenuItem>
+              )
+            })}
+        </ul>
+      </Wrapper>
+    </Spin>
   )
 }
 

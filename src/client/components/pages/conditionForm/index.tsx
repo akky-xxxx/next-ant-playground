@@ -3,7 +3,7 @@
  */
 import React, { useEffect } from "react"
 import { NextPage } from "next"
-import { Form } from "antd"
+import { Form, Spin } from "antd"
 
 /**
  * import components
@@ -72,23 +72,28 @@ const fields = {
 }
 
 const ConditionForm: NextPage<ConditionFormProps, GetInitialPropsReturn> = props => {
-  const { handleCheckToken } = props
+  const {
+    handleCheckToken,
+    app: { checkToken },
+  } = props
 
   useEffect(() => {
     if (!isDev) handleCheckToken()
   }, [])
 
   return (
-    <Form labelCol={labelCol} wrapperCol={wrapperCol}>
-      {/* eslint-disable @typescript-eslint/no-empty-function */}
-      <LogicalOperationRow index={0} selectedValue={1} handleChangeLogicalOperation={() => {}} />
-      <FieldsRow index={0} fields={fields} />
-      <LogicalOperationRow index={1} selectedValue={1} handleChangeLogicalOperation={() => {}} />
-      <FieldsRow index={1} fields={fields} />
-      <LogicalOperationRow index={2} selectedValue={0} handleChangeLogicalOperation={() => {}} />
-      <FieldsRow index={2} fields={fields} />
-      {/* eslint-enable @typescript-eslint/no-empty-function */}
-    </Form>
+    <Spin spinning={checkToken.isLoading}>
+      <Form labelCol={labelCol} wrapperCol={wrapperCol}>
+        {/* eslint-disable @typescript-eslint/no-empty-function */}
+        <LogicalOperationRow index={0} selectedValue={1} handleChangeLogicalOperation={() => {}} />
+        <FieldsRow index={0} fields={fields} />
+        <LogicalOperationRow index={1} selectedValue={1} handleChangeLogicalOperation={() => {}} />
+        <FieldsRow index={1} fields={fields} />
+        <LogicalOperationRow index={2} selectedValue={0} handleChangeLogicalOperation={() => {}} />
+        <FieldsRow index={2} fields={fields} />
+        {/* eslint-enable @typescript-eslint/no-empty-function */}
+      </Form>
+    </Spin>
   )
 }
 

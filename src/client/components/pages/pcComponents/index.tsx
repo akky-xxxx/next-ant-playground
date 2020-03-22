@@ -1,10 +1,10 @@
 /**
  * import node_modules
  */
-import React, { Fragment, useEffect } from "react"
+import React, { useEffect } from "react"
 import { NextPage } from "next"
 import Head from "next/head"
-import { DatePicker, Select } from "antd"
+import { DatePicker, Select, Spin } from "antd"
 import { v4 as uuid } from "uuid"
 
 /**
@@ -38,14 +38,17 @@ const optionList = values.map(value => (
 ))
 
 const PcComponents: NextPage<PcComponentsProps, GetInitialPropsReturn> = props => {
-  const { handleCheckToken } = props
+  const {
+    handleCheckToken,
+    app: { checkToken },
+  } = props
 
   useEffect(() => {
     if (!isDev) handleCheckToken()
   }, [])
 
   return (
-    <Fragment>
+    <Spin spinning={checkToken.isLoading}>
       <Head>
         <title>components of ant design</title>
       </Head>
@@ -59,7 +62,7 @@ const PcComponents: NextPage<PcComponentsProps, GetInitialPropsReturn> = props =
       <div>
         <Select style={{ width: "100%" }}>{optionList}</Select>
       </div>
-    </Fragment>
+    </Spin>
   )
 }
 
