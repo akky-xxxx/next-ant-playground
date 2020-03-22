@@ -1,74 +1,29 @@
 /**
  * import node_modules
  */
-import React, { Fragment } from "react"
-import { NextPage } from "next"
-import Head from "next/head"
-import { DatePicker, Picker, List } from "antd-mobile"
+import { connect } from "react-redux"
 
 /**
  * import others
  */
 import { pageNameMap } from "../../shared/const/common"
+import { InitialState, actions } from "../../store/modules"
 
-/**
- * main
- */
-const values = [
-  {
-    label:
-      "あいうえおかきくえこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんあいうえおかきくえこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんあいうえおかきくえこさしすせそたちつ",
-    value: 1,
-    children: [],
-  },
-  {
-    label:
-      "あいうえおかきくえこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんあいうえおかきくえこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんあいうえおかきくえこさしすせそたちつ",
-    value: 2,
-    children: [],
-  },
-]
+import SpComponents, { HandleActions } from "../../components/pages/spComponents"
 
-const style = {
-  color: "red",
-  whiteSpace: "normal",
-  height: "auto",
-}
+const {
+  app: { checkToken },
+} = actions
 
-const indicatorStyle = {
-  border: "1px solid #000",
-}
-
-const PcComponents: NextPage = () => {
-  return (
-    <Fragment>
-      <Head>
-        <title>components of ant design mobile</title>
-      </Head>
-      <h1>sp components</h1>
-      <h2>DatePicker</h2>
-      <div>
-        <DatePicker mode="date">
-          <div>date picker</div>
-        </DatePicker>
-      </div>
-
-      <h2>Picker</h2>
-      <div>
-        <List>
-          <Picker data={values} cols={1} itemStyle={style} indicatorStyle={indicatorStyle}>
-            <List.Item>picker</List.Item>
-          </Picker>
-        </List>
-      </div>
-    </Fragment>
-  )
-}
-
-PcComponents.getInitialProps = async () => {
+SpComponents.getInitialProps = async () => {
   return {
     currentPage: pageNameMap.spComponents,
   }
 }
 
-export default PcComponents
+export default connect<{}, HandleActions, {}, InitialState>(
+  () => ({}),
+  () => dispatch => ({
+    handleCheckToken: () => dispatch(checkToken()),
+  }),
+)(SpComponents)
