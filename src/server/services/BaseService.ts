@@ -135,6 +135,7 @@ ENDPOINTS:${endpoints.reduce((str, endpoint) => `${str}\n- ${endpoint}`, "")}
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async create(_req: Request) {
     const options = this.options || {}
     const configs = this.configs || {}

@@ -8,7 +8,7 @@ import { fetchrRead } from "redux-effects-fetchr"
 /**
  * import others
  */
-import { InitialState } from "./types"
+import { InitialState, SuccessAction } from "./types"
 import { createAsyncActionTypes } from "../../utils"
 
 /**
@@ -34,6 +34,7 @@ export const actions = {
 const initialState: InitialState = {
   master: {
     isLoading: true,
+    todoList: [],
   },
 }
 
@@ -41,13 +42,26 @@ const initialState: InitialState = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const reducer = handleActions<InitialState, any>(
   {
-    [TODO_LIST_SUCCESS]: state => {
+    [TODO_LIST_REQUEST]: state => {
       const { master } = state
 
       return {
         ...state,
         master: {
           ...master,
+          isLoading: true,
+        },
+      }
+    },
+    [TODO_LIST_SUCCESS]: (state, action: SuccessAction) => {
+      const { master } = state
+      const { payload } = action
+
+      return {
+        ...state,
+        master: {
+          ...master,
+          todoList: payload,
           isLoading: false,
         },
       }

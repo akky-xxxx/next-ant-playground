@@ -8,6 +8,7 @@ import { Action } from "redux-actions"
  */
 export interface InitialState {
   isLoading: boolean
+  errorMessage: string
 }
 
 export interface HandleActions {

@@ -4,12 +4,15 @@
 import { connect } from "react-redux"
 
 /**
+ * import components
+ */
+import AntTable, { HandleActions } from "../../components/pages/antTable"
+
+/**
  * import others
  */
 import { pageNameMap } from "../../shared/const/common"
 import { InitialState, actions } from "../../store/modules"
-
-import AntTable, { HandleActions } from "../../components/pages/antTable"
 
 const {
   app: { checkToken },
@@ -22,7 +25,13 @@ AntTable.getInitialProps = async () => {
 }
 
 export default connect<{}, HandleActions, {}, InitialState>(
-  () => ({}),
+  state => {
+    const { app } = state
+
+    return {
+      app,
+    }
+  },
   () => dispatch => ({
     handleCheckToken: () => dispatch(checkToken()),
   }),

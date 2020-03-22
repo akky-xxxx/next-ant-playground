@@ -1,9 +1,10 @@
 /**
  * import node_modules
  */
-import React, { Fragment, useEffect } from "react"
+import React, { useEffect } from "react"
 import { NextPage } from "next"
 import Head from "next/head"
+import { Spin } from "antd"
 import { DatePicker, Picker, List } from "antd-mobile"
 
 /**
@@ -11,12 +12,17 @@ import { DatePicker, Picker, List } from "antd-mobile"
  */
 import { GetInitialPropsReturn } from "../../../shared/types/common"
 import { HandleActions as HandleCheckTokenActions } from "../../../store/modules/app/checkToken/types"
+import { InitialState as AppState } from "../../../store/modules/app"
 import isDev from "../../../shared/utils/isDev"
 
 /**
  * main
  */
 export type HandleActions = HandleCheckTokenActions
+
+interface PcComponents extends HandleActions {
+  app: AppState
+}
 
 const values = [
   {
@@ -43,15 +49,18 @@ const indicatorStyle = {
   border: "1px solid #000",
 }
 
-const PcComponents: NextPage<HandleActions, GetInitialPropsReturn> = props => {
-  const { handleCheckToken } = props
+const PcComponents: NextPage<PcComponents, GetInitialPropsReturn> = props => {
+  const {
+    handleCheckToken,
+    app: { checkToken },
+  } = props
 
   useEffect(() => {
     if (!isDev) handleCheckToken()
   }, [])
 
   return (
-    <Fragment>
+    <Spin spinning={checkToken.isLoading}>
       <Head>
         <title>components of ant design mobile</title>
       </Head>
@@ -71,7 +80,7 @@ const PcComponents: NextPage<HandleActions, GetInitialPropsReturn> = props => {
           </Picker>
         </List>
       </div>
-    </Fragment>
+    </Spin>
   )
 }
 

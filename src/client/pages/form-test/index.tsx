@@ -31,7 +31,17 @@ const {
 } = actions
 
 export default connect<{}, HandleActions, {}, InitialState>(
-  state => state.pages.formTest,
+  state => {
+    const {
+      app,
+      pages: { formTest },
+    } = state
+
+    return {
+      app,
+      formTest,
+    }
+  },
   dispatch => ({
     handleCheckToken: () => dispatch(checkToken()),
     handleAddField: payload => dispatch(addField(payload)),

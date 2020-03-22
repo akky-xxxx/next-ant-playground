@@ -4,12 +4,15 @@
 import { connect } from "react-redux"
 
 /**
+ * import components
+ */
+import SpComponents, { HandleActions } from "../../components/pages/spComponents"
+
+/**
  * import others
  */
 import { pageNameMap } from "../../shared/const/common"
 import { InitialState, actions } from "../../store/modules"
-
-import SpComponents, { HandleActions } from "../../components/pages/spComponents"
 
 const {
   app: { checkToken },
@@ -22,7 +25,13 @@ SpComponents.getInitialProps = async () => {
 }
 
 export default connect<{}, HandleActions, {}, InitialState>(
-  () => ({}),
+  state => {
+    const { app } = state
+
+    return {
+      app,
+    }
+  },
   () => dispatch => ({
     handleCheckToken: () => dispatch(checkToken()),
   }),

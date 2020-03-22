@@ -7,3 +7,9 @@ export type PageNameMap = {
 export interface GetInitialPropsReturn {
   currentPage?: PageName
 }
+
+export interface ErrorPayload {
+  payload: {
+    statusCode: number
+  }
+}

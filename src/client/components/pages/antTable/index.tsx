@@ -3,7 +3,7 @@
  */
 import React, { Fragment, useEffect } from "react"
 import { NextPage } from "next"
-import { Table } from "antd"
+import { Table, Spin } from "antd"
 import { PaginationConfig } from "antd/es/pagination"
 import { ColumnProps } from "antd/es/table"
 
@@ -12,12 +12,17 @@ import { ColumnProps } from "antd/es/table"
  */
 import { GetInitialPropsReturn } from "../../../shared/types/common"
 import { HandleActions as HandleTodoActions } from "../../../store/modules/app/checkToken/types"
+import { InitialState as AppState } from "../../../store/modules/app"
 import isDev from "../../../shared/utils/isDev"
 
 /**
  * main
  */
 export type HandleActions = HandleTodoActions
+
+interface TableWindowProps extends HandleActions {
+  app: AppState
+}
 
 interface Data {
   key: number
@@ -50,14 +55,21 @@ const paginationOption: PaginationConfig = {
   position: "both",
 }
 
-const TableWindow: NextPage<HandleActions, GetInitialPropsReturn> = props => {
-  const { handleCheckToken } = props
+const TableWindow: NextPage<TableWindowProps, GetInitialPropsReturn> = props => {
+  const {
+    handleCheckToken,
+    app: { checkToken },
+  } = props
 
   useEffect(() => {
     if (!isDev) handleCheckToken()
   }, [])
 
-  return <Table columns={columns} dataSource={data} pagination={paginationOption} />
+  return (
+    <Spin spinning={checkToken.isLoading}>
+      <Table columns={columns} dataSource={data} pagination={paginationOption} />
+    </Spin>
+  )
 }
 
 export default TableWindow

@@ -20,27 +20,30 @@ const { sillyLogger, infoLogger } = createLogger("authRequired")
  */
 const authRequired: RequestHandler = (req, res, next) => {
   const { url } = req
-  infoLogger(
-    {
-      message: "authRequired 開始",
-      data: {
-        hasUser: Boolean(req.user),
-        hasSession: Boolean(req.session),
-        isAuthenticated: req.isAuthenticated(),
-        url,
-      },
+  if (!isPageRequest(url)) {
+    next()
+    return
+  }
+
+  infoLogger({
+    message: "authRequired 開始",
+    data: {
+      hasUser: Boolean(req.user),
+      hasSession: Boolean(req.session),
+      isAuthenticated: req.isAuthenticated(),
+      url,
     },
-    !isPageRequest(url),
-  )
+  })
+
   if (!req.user && req.session && !req.isAuthenticated()) {
     req.session.oauth2return = req.originalUrl
-    sillyLogger("authRequired 終了 - 未ログイン", !isPageRequest(url))
+    sillyLogger("authRequired 終了 - 未ログイン")
     // TODO: 謎の `does not exist` error がなくなったら ignore 削除
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     return res.redirect(URLS.LOGIN)
   }
-  sillyLogger("authRequired 終了 - ログイン中", !isPageRequest(url))
+  sillyLogger("authRequired 終了 - ログイン中")
   return next()
 }
 

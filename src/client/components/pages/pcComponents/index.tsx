@@ -1,10 +1,10 @@
 /**
  * import node_modules
  */
-import React, { Fragment, useEffect } from "react"
+import React, { useEffect } from "react"
 import { NextPage } from "next"
 import Head from "next/head"
-import { DatePicker, Select } from "antd"
+import { DatePicker, Select, Spin } from "antd"
 import { v4 as uuid } from "uuid"
 
 /**
@@ -12,12 +12,18 @@ import { v4 as uuid } from "uuid"
  */
 import { GetInitialPropsReturn } from "../../../shared/types/common"
 import { HandleActions as HandleCheckTokenActions } from "../../../store/modules/app/checkToken/types"
+import { InitialState as AppState } from "../../../store/modules/app"
 import isDev from "../../../shared/utils/isDev"
 
 /**
  * main
  */
 export type HandleActions = HandleCheckTokenActions
+
+interface PcComponentsProps extends HandleActions {
+  app: AppState
+}
+
 const { Option } = Select
 
 const values = [
@@ -31,15 +37,18 @@ const optionList = values.map(value => (
   </Option>
 ))
 
-const PcComponents: NextPage<HandleActions, GetInitialPropsReturn> = props => {
-  const { handleCheckToken } = props
+const PcComponents: NextPage<PcComponentsProps, GetInitialPropsReturn> = props => {
+  const {
+    handleCheckToken,
+    app: { checkToken },
+  } = props
 
   useEffect(() => {
     if (!isDev) handleCheckToken()
   }, [])
 
   return (
-    <Fragment>
+    <Spin spinning={checkToken.isLoading}>
       <Head>
         <title>components of ant design</title>
       </Head>
@@ -53,7 +62,7 @@ const PcComponents: NextPage<HandleActions, GetInitialPropsReturn> = props => {
       <div>
         <Select style={{ width: "100%" }}>{optionList}</Select>
       </div>
-    </Fragment>
+    </Spin>
   )
 }
 
