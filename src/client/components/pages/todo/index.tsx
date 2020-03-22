@@ -12,19 +12,24 @@ import { v4 as uuid } from "uuid"
  * import others
  */
 import { GetInitialPropsReturn } from "../../../shared/types/common"
-import { HandleActions } from "../../../store/modules/page/todo/types"
+import { HandleActions as HandleTodoActions } from "../../../store/modules/page/todo/types"
+import { HandleActions as HandleCheckTokenActions } from "../../../store/modules/app/checkToken/types"
+import isDev from "../../../shared/utils/isDev"
 
 /**
  * main
  */
+export interface HandleActions extends HandleTodoActions, HandleCheckTokenActions {}
+
 const Todo: NextPage<HandleActions, GetInitialPropsReturn> = props => {
   const [items, changeItems] = useState<string[]>([])
   const handleAddItem = () => changeItems([...items, uuid()])
   const handleRemoveItem = (targetId: string) => changeItems(items.filter(value => value !== targetId))
 
-  const { handleGetTodoList } = props
+  const { handleGetTodoList, handleCheckToken } = props
 
   useEffect(() => {
+    if (!isDev) handleCheckToken()
     handleGetTodoList()
   }, [])
 

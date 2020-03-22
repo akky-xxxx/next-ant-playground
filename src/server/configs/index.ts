@@ -1,5 +1,5 @@
 // TODO: productionビルド時にはSS側の環境（ポート4000番）を見るように一旦設定しておく
-const axiosBaseURL = process.env.NODE_ENV !== "production" ? "http://localhost:3010/" : "http://localhost:4000/"
+const axiosBaseURL = "http://localhost:3010/"
 
 export default {
   // https://github.com/yahoo/fetchr
