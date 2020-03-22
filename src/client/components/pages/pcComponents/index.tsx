@@ -12,12 +12,18 @@ import { v4 as uuid } from "uuid"
  */
 import { GetInitialPropsReturn } from "../../../shared/types/common"
 import { HandleActions as HandleCheckTokenActions } from "../../../store/modules/app/checkToken/types"
+import { InitialState as AppState } from "../../../store/modules/app"
 import isDev from "../../../shared/utils/isDev"
 
 /**
  * main
  */
 export type HandleActions = HandleCheckTokenActions
+
+interface PcComponentsProps extends HandleActions {
+  app: AppState
+}
+
 const { Option } = Select
 
 const values = [
@@ -31,7 +37,7 @@ const optionList = values.map(value => (
   </Option>
 ))
 
-const PcComponents: NextPage<HandleActions, GetInitialPropsReturn> = props => {
+const PcComponents: NextPage<PcComponentsProps, GetInitialPropsReturn> = props => {
   const { handleCheckToken } = props
 
   useEffect(() => {

@@ -12,12 +12,17 @@ import { ColumnProps } from "antd/es/table"
  */
 import { GetInitialPropsReturn } from "../../../shared/types/common"
 import { HandleActions as HandleTodoActions } from "../../../store/modules/app/checkToken/types"
+import { InitialState as AppState } from "../../../store/modules/app"
 import isDev from "../../../shared/utils/isDev"
 
 /**
  * main
  */
 export type HandleActions = HandleTodoActions
+
+interface TableWindowProps extends HandleActions {
+  app: AppState
+}
 
 interface Data {
   key: number
@@ -50,7 +55,7 @@ const paginationOption: PaginationConfig = {
   position: "both",
 }
 
-const TableWindow: NextPage<HandleActions, GetInitialPropsReturn> = props => {
+const TableWindow: NextPage<TableWindowProps, GetInitialPropsReturn> = props => {
   const { handleCheckToken } = props
 
   useEffect(() => {

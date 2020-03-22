@@ -15,8 +15,12 @@ import FormRow from "../../molecules/formRow"
  * import others
  */
 import { GetInitialPropsReturn } from "../../../shared/types/common"
-import { HandleActions as HandleFormTestActions, Field } from "../../../store/modules/page/formTest/types"
+import {
+  HandleActions as HandleFormTestActions,
+  InitialState as FormTestState,
+} from "../../../store/modules/page/formTest/types"
 import { HandleActions as HandleCheckTokenActions } from "../../../store/modules/app/checkToken/types"
+import { InitialState as AppState } from "../../../store/modules/app"
 import isDev from "../../../shared/utils/isDev"
 
 /**
@@ -25,11 +29,13 @@ import isDev from "../../../shared/utils/isDev"
 export interface HandleActions extends HandleCheckTokenActions, HandleFormTestActions {}
 
 interface FormTestProps extends HandleActions {
-  fields: Field[]
+  app: AppState
+  formTest: FormTestState
 }
 
 const FormTest: NextPage<FormTestProps, GetInitialPropsReturn> = props => {
-  const { handleAddField, handleChangeValue, handleRemoveField, handleCheckToken, fields } = props
+  const { handleAddField, handleChangeValue, handleRemoveField, handleCheckToken, formTest } = props
+  const { fields } = formTest
 
   useEffect(() => {
     if (!isDev) handleCheckToken()

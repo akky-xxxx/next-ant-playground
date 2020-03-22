@@ -28,7 +28,13 @@ Top.getInitialProps = async () => {
 }
 
 export default connect<{}, HandleActions, {}, InitialState>(
-  () => ({}),
+  state => {
+    const { app } = state
+
+    return {
+      app,
+    }
+  },
   dispatch => ({
     handleCheckToken: () => dispatch(checkToken()),
   }),

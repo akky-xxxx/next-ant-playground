@@ -16,6 +16,7 @@ import FieldsRow from "../../molecules/fieldsRow"
  */
 import { HandleActions as HandleCheckTokenActions } from "../../../store/modules/app/checkToken/types"
 import { GetInitialPropsReturn } from "../../../shared/types/common"
+import { InitialState as AppState } from "../../../store/modules/app"
 import COLS from "../../../shared/const/grids"
 import isDev from "../../../shared/utils/isDev"
 
@@ -23,6 +24,10 @@ import isDev from "../../../shared/utils/isDev"
  * main
  */
 export type HandleActions = HandleCheckTokenActions
+
+interface ConditionFormProps extends HandleActions {
+  app: AppState
+}
 
 const labelCol = {
   sm: {
@@ -66,7 +71,7 @@ const fields = {
   input2,
 }
 
-const ConditionForm: NextPage<HandleActions, GetInitialPropsReturn> = props => {
+const ConditionForm: NextPage<ConditionFormProps, GetInitialPropsReturn> = props => {
   const { handleCheckToken } = props
 
   useEffect(() => {

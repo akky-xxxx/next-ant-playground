@@ -11,12 +11,17 @@ import { DatePicker, Picker, List } from "antd-mobile"
  */
 import { GetInitialPropsReturn } from "../../../shared/types/common"
 import { HandleActions as HandleCheckTokenActions } from "../../../store/modules/app/checkToken/types"
+import { InitialState as AppState } from "../../../store/modules/app"
 import isDev from "../../../shared/utils/isDev"
 
 /**
  * main
  */
 export type HandleActions = HandleCheckTokenActions
+
+interface PcComponents extends HandleActions {
+  app: AppState
+}
 
 const values = [
   {
@@ -43,7 +48,7 @@ const indicatorStyle = {
   border: "1px solid #000",
 }
 
-const PcComponents: NextPage<HandleActions, GetInitialPropsReturn> = props => {
+const PcComponents: NextPage<PcComponents, GetInitialPropsReturn> = props => {
   const { handleCheckToken } = props
 
   useEffect(() => {

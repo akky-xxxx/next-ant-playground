@@ -14,6 +14,7 @@ import { Button } from "antd"
 import { GetInitialPropsReturn } from "../../../shared/types/common"
 import { menuData, pageNameMap } from "../../../shared/const/common"
 import { HandleActions as HandleCheckTokenActions } from "../../../store/modules/app/checkToken/types"
+import { InitialState as AppState } from "../../../store/modules/app"
 import isDev from "../../../shared/utils/isDev"
 
 /**
@@ -21,7 +22,11 @@ import isDev from "../../../shared/utils/isDev"
  */
 export type HandleActions = HandleCheckTokenActions
 
-const Top: NextPage<HandleActions, GetInitialPropsReturn> = props => {
+interface TopProps extends HandleActions {
+  app: AppState
+}
+
+const Top: NextPage<TopProps, GetInitialPropsReturn> = props => {
   const { handleCheckToken } = props
 
   useEffect(() => {
