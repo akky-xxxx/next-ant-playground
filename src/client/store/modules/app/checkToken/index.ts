@@ -33,6 +33,7 @@ export const actions = {
 // initialState
 const initialState: InitialState = {
   isLoading: false,
+  errorMessage: ""
 }
 
 // reducer
