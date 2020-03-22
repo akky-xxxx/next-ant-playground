@@ -7,8 +7,8 @@ import { Request, NextFunction } from "express"
  * import others
  */
 import { ExtendedRequest } from "../types/common"
-import getNewToken from "../middlewares/oauth/modules/getNewToken"
-import getTokenExpire from "../middlewares/oauth/modules/getTokenInfo"
+import getNewToken from "./getNewToken"
+import getTokenExpire from "./getTokenInfo"
 import createLogger from "./createLogger"
 import CustomError from "./CustomError"
 

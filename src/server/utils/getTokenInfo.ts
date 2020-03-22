@@ -2,7 +2,7 @@
  * import
  */
 import connectGoogleApi from "./connectGoogleApi"
-import createLogger from "../../../utils/createLogger"
+import createLogger from "./createLogger"
 
 /**
  * main
