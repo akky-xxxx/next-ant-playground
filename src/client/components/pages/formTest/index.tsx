@@ -34,7 +34,14 @@ interface FormTestProps extends HandleActions {
 }
 
 const FormTest: NextPage<FormTestProps, GetInitialPropsReturn> = props => {
-  const { handleAddField, handleChangeValue, handleRemoveField, handleCheckToken, formTest, app: { checkToken } } = props
+  const {
+    handleAddField,
+    handleChangeValue,
+    handleRemoveField,
+    handleCheckToken,
+    formTest,
+    app: { checkToken },
+  } = props
   const { fields } = formTest
 
   useEffect(() => {
