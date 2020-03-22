@@ -2,7 +2,6 @@
  * import node_modules
  */
 import { format as formatUrl } from "url"
-import debugFactory from "debug"
 import { Request } from "express"
 import { AxiosInstance } from "axios"
 import axios from "axios"
@@ -11,11 +10,13 @@ import axios from "axios"
  * import others
  */
 import commonConfigs from "../configs"
+import createLogger from "../utils/createLogger"
 
 /**
  * main
  */
 const { axios: axiosConfig } = commonConfigs
+const { infoLogger, errorLogger } = createLogger("BaseService")
 
 type Method1 = (
   req: Request,
@@ -39,8 +40,6 @@ export type ReadMethod = Method1
 export type DeleteMethod = Method1
 export type CreateMethod = Method2
 export type UpdateMethod = Method2
-
-const debug = debugFactory("app:server:services")
 
 export interface BaseService {
   axios: AxiosInstance
@@ -102,17 +101,19 @@ export default class BaseServiceClass implements BaseService {
       },
     }
     const endpoints = this.getFormattedUrl()
-    debug(`
-[GET]
-NAME: ${this.name}
-ENDPOINTS:${endpoints.reduce((str, endpoint) => `${str}\n- ${endpoint}`, "")}
-`)
+    infoLogger({
+      data: {
+        method: "get",
+        name: this.name,
+        endpoints: endpoints.reduce((str, endpoint) => `${str}\n- ${endpoint}`, ""),
+      },
+    })
 
     try {
       const results = await Promise.all(endpoints.map(endpoint => this.axios.get(endpoint, configs)))
       return results[0].data
     } catch (error) {
-      console.error(error)
+      errorLogger({ error })
       return error.response.data
     }
   }
@@ -120,17 +121,19 @@ ENDPOINTS:${endpoints.reduce((str, endpoint) => `${str}\n- ${endpoint}`, "")}
   async delete() {
     const configs = this.configs || {}
     const endpoints = this.getFormattedUrl()
-    debug(`
-[DELETE]
-NAME: ${this.name}
-ENDPOINTS:${endpoints.reduce((str, endpoint) => `${str}\n- ${endpoint}`, "")}
-`)
+    infoLogger({
+      data: {
+        method: "delete",
+        name: this.name,
+        endpoints: endpoints.reduce((str, endpoint) => `${str}\n- ${endpoint}`, ""),
+      },
+    })
 
     try {
       const results = await Promise.all(endpoints.map(endpoint => this.axios.delete(endpoint, configs)))
       return results
     } catch (error) {
-      console.error(error)
+      errorLogger({ error })
       return error
     }
   }
@@ -139,16 +142,19 @@ ENDPOINTS:${endpoints.reduce((str, endpoint) => `${str}\n- ${endpoint}`, "")}
   async create(_req: Request) {
     const options = this.options || {}
     const configs = this.configs || {}
-    debug(`
-[POST]
-NAME: ${this.name}
-ENDPOINTS: ${this.endpoints}`)
+    infoLogger({
+      data: {
+        method: "post",
+        name: this.name,
+        endpoints: this.endpoints,
+      },
+    })
 
     try {
       const results = await Promise.all(this.endpoints.map(endpoint => this.axios.post(endpoint, options, configs)))
       return results
     } catch (error) {
-      console.error(error)
+      errorLogger({ error })
       return error
     }
   }
@@ -156,16 +162,19 @@ ENDPOINTS: ${this.endpoints}`)
   async update() {
     const options = this.options || {}
     const configs = this.configs || {}
-    debug(`
-[PUT]
-NAME: ${this.name}
-ENDPOINTS: ${this.endpoints}`)
+    infoLogger({
+      data: {
+        method: "put",
+        name: this.name,
+        endpoints: this.endpoints,
+      },
+    })
 
     try {
       const results = await Promise.all(this.endpoints.map(endpoint => this.axios.put(endpoint, options, configs)))
       return results
     } catch (error) {
-      console.error(error)
+      errorLogger({ error })
       return error
     }
   }

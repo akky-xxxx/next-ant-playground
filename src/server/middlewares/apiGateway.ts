@@ -1,7 +1,6 @@
 /**
  * import node_modules
  */
-import debugFactory from "debug"
 import { Request, Response, NextFunction } from "express"
 import Fetchr from "fetchr"
 
@@ -10,8 +9,12 @@ import Fetchr from "fetchr"
  */
 import services, { Services } from "../services"
 import { BaseService, ReadMethod, DeleteMethod, CreateMethod, UpdateMethod } from "../services/BaseService"
+import createLogger from "../utils/createLogger"
 
-const debug = debugFactory("app:server:middleware:apiGateway")
+/**
+ * main
+ */
+const { sillyLogger } = createLogger("apiGateway")
 
 type Adapter = {
   name: string
@@ -75,13 +78,13 @@ function makeServiceAdapter(service: BaseService) {
  * service を Fetchr に登録する
  */
 export default function apiGateway() {
-  debug("------------------------------------")
+  sillyLogger("------------------------------------")
   Object.values(services).forEach((Service: Services) => {
     const service = new Service()
-    debug(`❇️ Registering service: ${service.name}`)
+    sillyLogger(`❇️ Registering service: ${service.name}`)
     return Fetchr.registerService(makeServiceAdapter(service))
   })
-  debug("------------------------------------")
+  sillyLogger("------------------------------------")
 
   return (req: Request, res: Response, next: NextFunction) => {
     return Fetchr.middleware({
