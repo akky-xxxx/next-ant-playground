@@ -7,8 +7,8 @@ import dotenv from "dotenv"
  * import
  */
 import connectGoogleApi from "./connectGoogleApi"
-import createLogger from "../../../utils/createLogger"
-import str2mask from "../../../utils/str2mask"
+import createLogger from "./createLogger"
+import str2mask from "./str2mask"
 
 /**
  * main

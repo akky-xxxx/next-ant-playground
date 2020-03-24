@@ -13,13 +13,13 @@ import loginHandler from "./handlers/loginHandler"
 import callbackHandler from "./handlers/callbackHandler"
 import logoutHandler from "./handlers/logoutHandler"
 import tokenRefreshHandler from "./handlers/tokenRefreshHandler"
+import authRequired from "./handlers/authRequired"
 
 /**
  * import others
  */
 import { URLS, STRATEGY, STRATEGY_OPTION, STRATEGY_AUTH_OPTIONS } from "./const"
 import verify from "./modules/verify"
-import authRequired from "./modules/authRequired"
 
 /**
  * main

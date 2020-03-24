@@ -7,6 +7,7 @@ import { RequestHandler } from "express"
  * import others
  */
 import createLogger from "../../../utils/createLogger"
+import CustomError from "../../../utils/CustomError"
 
 /**
  * main
@@ -19,8 +20,9 @@ const callbackHandler: RequestHandler = (req, res) => {
     data: { hasSession: Boolean(req.session) },
   })
   if (!req.session) {
-    infoLogger({ message: "セッション情報を取得できませんでした" })
-    return Promise.reject()
+    const message = "セッション情報を取得できませんでした"
+    infoLogger({ message })
+    return Promise.reject(new CustomError(message, 401))
   }
 
   const redirectUrl = req.session.oauth2return || "/"

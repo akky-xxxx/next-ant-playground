@@ -7,8 +7,8 @@ import { Request, NextFunction } from "express"
  * import others
  */
 import { ExtendedRequest } from "../types/common"
-import getNewToken from "../middlewares/oauth/modules/getNewToken"
-import getTokenExpire from "../middlewares/oauth/modules/getTokenInfo"
+import getNewToken from "./getNewToken"
+import getTokenExpire from "./getTokenInfo"
 import createLogger from "./createLogger"
 import CustomError from "./CustomError"
 
@@ -30,8 +30,7 @@ const updateToken: UpdateToken = async (req, next) => {
       next()
       return Promise.resolve()
     }
-    const error = new CustomError(message, 401)
-    return Promise.reject(error)
+    return Promise.reject(new CustomError(message, 401))
   }
 
   if (!user) {
@@ -42,8 +41,7 @@ const updateToken: UpdateToken = async (req, next) => {
       next()
       return Promise.resolve()
     }
-    const error = new CustomError(message, 401)
-    return Promise.reject(error)
+    return Promise.reject(new CustomError(message, 401))
   }
 
   const { displayName, email, expire, refreshToken } = user
@@ -56,8 +54,7 @@ const updateToken: UpdateToken = async (req, next) => {
       next()
       return Promise.resolve()
     }
-    const error = new CustomError(message, 401)
-    return Promise.reject(error)
+    return Promise.reject(new CustomError(message, 401))
   }
 
   if (expire && new Date(expire) >= new Date()) {
