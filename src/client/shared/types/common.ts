@@ -10,6 +10,7 @@ export interface GetInitialPropsReturn {
 
 export interface ErrorPayload {
   payload: {
-    statusCode: number
+    statusCode?: number
+    message?: string
   }
 }

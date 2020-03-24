@@ -11,7 +11,7 @@ import { fetchrCreate } from "redux-effects-fetchr"
 import { InitialState } from "./types"
 import { createAsyncActionTypes } from "../../utils"
 import { ErrorPayload } from "../../../../shared/types/common"
-import STATUS_MESSAGES from "../../../../shared/const/statusMessages"
+import getErrorMessage from "../../../../shared/utils/getErrorMessage"
 
 /**
  * main
@@ -53,14 +53,13 @@ const reducer = handleActions<InitialState, any>(
     }),
     [CHECK_TOKEN_FAIL]: (state, action: ErrorPayload) => {
       const {
-        payload: { statusCode },
+        payload: { statusCode, message },
       } = action
-      const errorMessage = STATUS_MESSAGES[statusCode] || STATUS_MESSAGES[500]
 
       return {
         ...state,
         isLoading: false,
-        errorMessage,
+        errorMessage: getErrorMessage(message, statusCode),
       }
     },
   },
