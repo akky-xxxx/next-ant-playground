@@ -9,6 +9,7 @@ import Fetchr from "fetchr"
  */
 import services, { Services } from "../../services"
 import makeServiceAdapter from "./makeServiceAdapter"
+import responseFormatter from "./responseFormatter"
 import createLogger from "../../utils/createLogger"
 
 /**
@@ -30,14 +31,7 @@ export default function apiGateway() {
 
   return (req: Request, res: Response, next: NextFunction) => {
     return Fetchr.middleware({
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      responseFormatter: (_req: Request, responseFormatterRes: Response, result: any) => {
-        // レスポンスヘッダーを変更したいときはここをいじれば変えられる
-        // TODO: 一旦 no-cache だけ入れとく必要なかったら消す
-        responseFormatterRes.header("Cache-Control", ["no-store", "no-cache"].join(","))
-        responseFormatterRes.header("Pragma", "no-cache")
-        return result.data
-      },
+      responseFormatter,
     })(req, res, next)
   }
 }
