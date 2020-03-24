@@ -7,9 +7,9 @@ import Fetchr from "fetchr"
 /**
  * import others
  */
-import services, { Services } from "../services"
-import { BaseService, ReadMethod, DeleteMethod, CreateMethod, UpdateMethod } from "../services/BaseService"
-import createLogger from "../utils/createLogger"
+import services, { Services } from "../../services"
+import { BaseService, ReadMethod, DeleteMethod, CreateMethod, UpdateMethod } from "../../services/BaseService"
+import createLogger from "../../utils/createLogger"
 
 /**
  * main
