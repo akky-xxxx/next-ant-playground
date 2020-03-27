@@ -54,7 +54,7 @@
     "express-session": "1.17.0",
     "favalid": "0.9.1",
     "fetchr": "0.5.38",
-    "gtoken": "4.1.4",
+    "gtoken": "5.0.0",
     "less": "3.11.1",
     "logform": "2.1.2",
     "memorystore": "1.6.2",

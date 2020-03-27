@@ -8656,10 +8656,10 @@ growly@^1.3.0:
   resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
   integrity sha1-8QdIy+dq+WS3yWyTxrzCivEgwIE=
 
-gtoken@4.1.4:
-  version "4.1.4"
-  resolved "https://registry.yarnpkg.com/gtoken/-/gtoken-4.1.4.tgz#925ff1e7df3aaada06611d30ea2d2abf60fcd6a7"
-  integrity sha512-VxirzD0SWoFUo5p8RDP8Jt2AGyOmyYcT/pOUgDKJCK+iSw0TMqwrVfY37RXTNmoKwrzmDHSk0GMT9FsgVmnVSA==
+gtoken@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/gtoken/-/gtoken-5.0.0.tgz#3be5dcf23706343d8dfe4850a896f52b2172aef0"
+  integrity sha512-+TM/Mn9fm2LsAA3bZVSlCG20b0KfDdF6IC/mV/rRWuIUAwvXd2aMCGFNf1ont1qFzJh0tznnfEyY8YLQ1awqdw==
   dependencies:
     gaxios "^2.1.0"
     google-p12-pem "^2.0.0"
