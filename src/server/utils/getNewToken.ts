@@ -43,7 +43,7 @@ const postData: PostData = {
 
 const { sillyLogger, debugLogger, errorLogger } = createLogger("getNewToken")
 
-const getNewToken: GetNewToken = async refreshToken => {
+const getNewToken: GetNewToken = async (refreshToken) => {
   sillyLogger("getNewToken 開始")
   postData.refresh_token = refreshToken
   try {

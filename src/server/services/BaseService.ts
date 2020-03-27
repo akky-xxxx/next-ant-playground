@@ -82,7 +82,7 @@ export default class BaseServiceClass implements BaseService {
   getFormattedUrl() {
     if (!this.options) return this.endpoints
 
-    return this.endpoints.map(endpoint => {
+    return this.endpoints.map((endpoint) => {
       return formatUrl({
         pathname: endpoint,
         query: { ...this.options },
@@ -110,7 +110,7 @@ export default class BaseServiceClass implements BaseService {
     })
 
     try {
-      const results = await Promise.all(endpoints.map(endpoint => this.axios.get(endpoint, configs)))
+      const results = await Promise.all(endpoints.map((endpoint) => this.axios.get(endpoint, configs)))
       return results[0].data
     } catch (error) {
       errorLogger({ error })
@@ -130,7 +130,7 @@ export default class BaseServiceClass implements BaseService {
     })
 
     try {
-      const results = await Promise.all(endpoints.map(endpoint => this.axios.delete(endpoint, configs)))
+      const results = await Promise.all(endpoints.map((endpoint) => this.axios.delete(endpoint, configs)))
       return results
     } catch (error) {
       errorLogger({ error })
@@ -151,7 +151,7 @@ export default class BaseServiceClass implements BaseService {
     })
 
     try {
-      const results = await Promise.all(this.endpoints.map(endpoint => this.axios.post(endpoint, options, configs)))
+      const results = await Promise.all(this.endpoints.map((endpoint) => this.axios.post(endpoint, options, configs)))
       return results
     } catch (error) {
       errorLogger({ error })
@@ -171,7 +171,7 @@ export default class BaseServiceClass implements BaseService {
     })
 
     try {
-      const results = await Promise.all(this.endpoints.map(endpoint => this.axios.put(endpoint, options, configs)))
+      const results = await Promise.all(this.endpoints.map((endpoint) => this.axios.put(endpoint, options, configs)))
       return results
     } catch (error) {
       errorLogger({ error })

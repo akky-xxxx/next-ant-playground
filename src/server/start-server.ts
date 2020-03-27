@@ -67,7 +67,7 @@ app
       sillyLogger("========================================")
     })
   })
-  .catch(error => {
+  .catch((error) => {
     errorLogger({ error })
     process.exit(1)
   })

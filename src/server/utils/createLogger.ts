@@ -36,7 +36,7 @@ type CreateLogger = (module: ModuleName) => CrateLoggerReturn
 type GetTimeStamp = () => string
 const getDatetime: GetTimeStamp = () => format(new Date(), "yyyy-MM-dd HH:mm:ss")
 
-const createLogger: CreateLogger = module => {
+const createLogger: CreateLogger = (module) => {
   const sillyLogger: SillyLogger = (message, isHidden) => {
     if (!isHidden) winstonLogger.silly(`[${module}] ${message}`)
   }
