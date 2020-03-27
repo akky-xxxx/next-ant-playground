@@ -19,15 +19,15 @@ type MakeServiceAdapter = (service: BaseService) => Adapter
 const methods1 = ["read", "delete"] as const
 const methods2 = ["create", "update"] as const
 
-const makeServiceAdapter: MakeServiceAdapter = service => {
+const makeServiceAdapter: MakeServiceAdapter = (service) => {
   const adapter: Adapter = {
     name: service.name,
   }
   // read と delete
-  methods1.forEach(method => {
+  methods1.forEach((method) => {
     adapter[method] = async (req, resource, params, config, callback) => {
       service[method](req, resource, params, config, callback).then(
-        result => {
+        (result) => {
           callback(null, result)
         },
         (error: Record<string, unknown>) => {
@@ -38,10 +38,10 @@ const makeServiceAdapter: MakeServiceAdapter = service => {
   })
 
   // create と update
-  methods2.forEach(method => {
+  methods2.forEach((method) => {
     adapter[method] = async (req, resource, params, body, config, callback) => {
       service[method](req, resource, params, body, config, callback).then(
-        result => {
+        (result) => {
           callback(null, result)
         },
         (error: Record<string, unknown>) => {

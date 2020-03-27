@@ -69,7 +69,7 @@ const reducer = handleActions<InitialState, any>(
 
       return {
         ...newState,
-        fields: newState.fields.map(field => {
+        fields: newState.fields.map((field) => {
           const { id } = field
           if (id !== targetId) return field
 
@@ -97,7 +97,7 @@ const reducer = handleActions<InitialState, any>(
         errorMessage: null,
       }
       const { fields } = newState
-      const dividePoint = fields.findIndex(filed => filed.id === targetId) + 1
+      const dividePoint = fields.findIndex((filed) => filed.id === targetId) + 1
       const beforeFields = fields.slice(0, dividePoint)
       const afterFields = fields.slice(dividePoint, fields.length)
 
@@ -115,7 +115,7 @@ const reducer = handleActions<InitialState, any>(
 
       return {
         ...newState,
-        fields: newState.fields.filter(field => field.id !== targetId),
+        fields: newState.fields.filter((field) => field.id !== targetId),
       }
     },
 

@@ -39,7 +39,7 @@ const {
 } = actions
 
 const resetStates = (resetActions: Function[], dispatch: Dispatch) => {
-  resetActions.forEach(resetAction => dispatch(resetAction()))
+  resetActions.forEach((resetAction) => dispatch(resetAction()))
 }
 
 interface MyAppProps {

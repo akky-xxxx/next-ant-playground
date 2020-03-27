@@ -20,12 +20,12 @@ interface GlobalMenuProps {
   currentPage: PageName
 }
 
-const GlobalMenu: FunctionComponent<GlobalMenuProps> = props => {
+const GlobalMenu: FunctionComponent<GlobalMenuProps> = (props) => {
   const { currentPage } = props
   return (
     <Nav>
       <Menu mode="horizontal" theme="dark" selectedKeys={[currentPage]} data-media="pc">
-        {menuData.map(data => {
+        {menuData.map((data) => {
           const { id, href, label } = data
           return (
             <Menu.Item key={id}>
@@ -37,7 +37,7 @@ const GlobalMenu: FunctionComponent<GlobalMenuProps> = props => {
         })}
       </Menu>
       <ul data-media="tb">
-        {menuData.map(data => {
+        {menuData.map((data) => {
           const { href, label } = data
           return (
             <SpMenuListItemWrapper key={encodeURI(href + label)}>

@@ -42,12 +42,12 @@ const initialState: InitialState = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const reducer = handleActions<InitialState, any>(
   {
-    [CHECK_TOKEN_REQUEST]: state => ({
+    [CHECK_TOKEN_REQUEST]: (state) => ({
       ...state,
       isLoading: true,
       errorMessage: "",
     }),
-    [CHECK_TOKEN_SUCCESS]: state => ({
+    [CHECK_TOKEN_SUCCESS]: (state) => ({
       ...state,
       isLoading: false,
     }),

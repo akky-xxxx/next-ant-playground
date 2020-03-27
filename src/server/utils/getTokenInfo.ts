@@ -38,7 +38,7 @@ const requestData: RequestData = {
 }
 
 const { sillyLogger, debugLogger, errorLogger } = createLogger("getTokenInfo")
-const getTokenInfo: GetTokenInfo = async accessToken => {
+const getTokenInfo: GetTokenInfo = async (accessToken) => {
   sillyLogger("token 情報取得開始")
   requestData.params.accessToken = accessToken
   try {

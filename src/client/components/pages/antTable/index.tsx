@@ -46,7 +46,7 @@ const columns: ColumnProps<Data>[] = [
     title: "Sex",
     dataIndex: "sex",
     key: "sex",
-    render: value => <Fragment>{value === "1" ? "男" : "女"}</Fragment>,
+    render: (value) => <Fragment>{value === "1" ? "男" : "女"}</Fragment>,
   },
 ]
 
@@ -55,7 +55,7 @@ const paginationOption: PaginationConfig = {
   position: "both",
 }
 
-const TableWindow: NextPage<TableWindowProps, GetInitialPropsReturn> = props => {
+const TableWindow: NextPage<TableWindowProps, GetInitialPropsReturn> = (props) => {
   const {
     handleCheckToken,
     app: { checkToken },

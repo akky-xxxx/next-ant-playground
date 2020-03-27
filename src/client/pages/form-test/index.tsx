@@ -31,7 +31,7 @@ const {
 } = actions
 
 export default connect<{}, HandleActions, {}, InitialState>(
-  state => {
+  (state) => {
     const {
       app,
       pages: { formTest },
@@ -42,10 +42,10 @@ export default connect<{}, HandleActions, {}, InitialState>(
       formTest,
     }
   },
-  dispatch => ({
+  (dispatch) => ({
     handleCheckToken: () => dispatch(checkToken()),
-    handleAddField: payload => dispatch(addField(payload)),
-    handleChangeValue: payload => dispatch(changeValue(payload)),
-    handleRemoveField: payload => dispatch(removeField(payload)),
+    handleAddField: (payload) => dispatch(addField(payload)),
+    handleChangeValue: (payload) => dispatch(changeValue(payload)),
+    handleRemoveField: (payload) => dispatch(removeField(payload)),
   }),
 )(FormTest)

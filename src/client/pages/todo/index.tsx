@@ -31,7 +31,7 @@ Todo.getInitialProps = async () => {
 }
 
 export default connect<{}, HandleActions, {}, InitialState>(
-  state => {
+  (state) => {
     const {
       app,
       pages: { todo },
@@ -42,7 +42,7 @@ export default connect<{}, HandleActions, {}, InitialState>(
       todo,
     }
   },
-  dispatch => ({
+  (dispatch) => ({
     handleCheckToken: () => dispatch(checkToken()),
     handleGetTodoList: () => dispatch(getTodoList()),
   }),

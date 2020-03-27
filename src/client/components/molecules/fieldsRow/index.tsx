@@ -45,7 +45,7 @@ interface FieldsRowProps {
   }
 }
 
-const FieldsRow: FC<FieldsRowProps> = props => {
+const FieldsRow: FC<FieldsRowProps> = (props) => {
   const {
     index,
     fields: { input1, input2, isValid, handleAddField, handleRemoveField, rowId },
@@ -63,7 +63,7 @@ const FieldsRow: FC<FieldsRowProps> = props => {
             >
               <Input
                 value={input1.inputValue || ""}
-                onChange={event =>
+                onChange={(event) =>
                   input1.handleChangeValue({
                     targetId: rowId,
                     newValue: event.target.value,
@@ -84,7 +84,7 @@ const FieldsRow: FC<FieldsRowProps> = props => {
             >
               <Input
                 value={input2.inputValue || ""}
-                onChange={event =>
+                onChange={(event) =>
                   input2.handleChangeValue({
                     targetId: rowId,
                     newValue: event.target.value,

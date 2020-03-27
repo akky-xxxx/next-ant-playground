@@ -71,7 +71,7 @@ const fields = {
   input2,
 }
 
-const ConditionForm: NextPage<ConditionFormProps, GetInitialPropsReturn> = props => {
+const ConditionForm: NextPage<ConditionFormProps, GetInitialPropsReturn> = (props) => {
   const {
     handleCheckToken,
     app: { checkToken },

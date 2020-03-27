@@ -42,7 +42,7 @@ const initialState: InitialState = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const reducer = handleActions<InitialState, any>(
   {
-    [TODO_LIST_REQUEST]: state => {
+    [TODO_LIST_REQUEST]: (state) => {
       const { master } = state
 
       return {
@@ -66,7 +66,7 @@ const reducer = handleActions<InitialState, any>(
         },
       }
     },
-    [TODO_LIST_FAIL]: state => {
+    [TODO_LIST_FAIL]: (state) => {
       const { master } = state
 
       return {
