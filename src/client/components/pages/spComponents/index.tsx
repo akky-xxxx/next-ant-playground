@@ -49,7 +49,7 @@ const indicatorStyle = {
   border: "1px solid #000",
 }
 
-const PcComponents: NextPage<PcComponents, GetInitialPropsReturn> = props => {
+const PcComponents: NextPage<PcComponents, GetInitialPropsReturn> = (props) => {
   const {
     handleCheckToken,
     app: { checkToken },

@@ -5,7 +5,7 @@ interface ErrorMessageProps {
   message: null | string
 }
 
-const ErrorMessage: FunctionComponent<ErrorMessageProps> = props => {
+const ErrorMessage: FunctionComponent<ErrorMessageProps> = (props) => {
   const { message } = props
 
   if (!message) return null

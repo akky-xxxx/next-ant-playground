@@ -21,7 +21,7 @@ interface LayoutProps {
 /**
  * main
  */
-const Layout: FunctionComponent<LayoutProps> = props => {
+const Layout: FunctionComponent<LayoutProps> = (props) => {
   const { children, currentPage } = props
 
   return (

@@ -26,7 +26,7 @@ interface TopProps extends HandleActions {
   app: AppState
 }
 
-const Top: NextPage<TopProps, GetInitialPropsReturn> = props => {
+const Top: NextPage<TopProps, GetInitialPropsReturn> = (props) => {
   const {
     handleCheckToken,
     app: { checkToken },
@@ -46,7 +46,7 @@ const Top: NextPage<TopProps, GetInitialPropsReturn> = props => {
         <ul>
           {menuData
             .filter((_, index) => index > 0)
-            .map(page => {
+            .map((page) => {
               const { href, label } = page
               return (
                 <MenuItem key={href}>

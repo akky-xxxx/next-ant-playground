@@ -20,7 +20,7 @@ const fetchr = new Fetchr(bffConfig.fetchr.clientConfig)
 
 export function initializeStore(initialState?: InitialState) {
   const composeEnhancers = (isServer && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
-  const middleware = [stepsMiddleware, fetchrMiddleware(fetchr)].filter(value => value)
+  const middleware = [stepsMiddleware, fetchrMiddleware(fetchr)].filter((value) => value)
   const enhancer = composeEnhancers(applyMiddleware(...middleware))
 
   // TODO: resolve any warning

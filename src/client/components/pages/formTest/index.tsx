@@ -33,7 +33,7 @@ interface FormTestProps extends HandleActions {
   formTest: FormTestState
 }
 
-const FormTest: NextPage<FormTestProps, GetInitialPropsReturn> = props => {
+const FormTest: NextPage<FormTestProps, GetInitialPropsReturn> = (props) => {
   const {
     handleAddField,
     handleChangeValue,

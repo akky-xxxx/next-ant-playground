@@ -27,7 +27,7 @@ interface LogicalOperationRowProps {
 
 const { Option } = Select
 
-const LogicalOperationRow: FC<LogicalOperationRowProps> = props => {
+const LogicalOperationRow: FC<LogicalOperationRowProps> = (props) => {
   const { index, selectedValue, handleChangeLogicalOperation } = props
 
   if (index === 0) return null
@@ -38,7 +38,7 @@ const LogicalOperationRow: FC<LogicalOperationRowProps> = props => {
         <StyledSelectWrapper>
           <StyledSelect
             defaultValue={selectedValue.toString()}
-            onChange={newValue => handleChangeLogicalOperation({ newValue })}
+            onChange={(newValue) => handleChangeLogicalOperation({ newValue })}
           >
             <Option key={LOGICAL_OPERATION.AND} value={LOGICAL_OPERATION.AND}>
               AND

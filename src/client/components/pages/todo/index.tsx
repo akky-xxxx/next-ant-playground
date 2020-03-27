@@ -27,10 +27,10 @@ interface TodoProps extends HandleActions {
   todo: TodoState
 }
 
-const Todo: NextPage<TodoProps, GetInitialPropsReturn> = props => {
+const Todo: NextPage<TodoProps, GetInitialPropsReturn> = (props) => {
   const [items, changeItems] = useState<string[]>([])
   const handleAddItem = () => changeItems([...items, uuid()])
-  const handleRemoveItem = (targetId: string) => changeItems(items.filter(value => value !== targetId))
+  const handleRemoveItem = (targetId: string) => changeItems(items.filter((value) => value !== targetId))
 
   const {
     handleGetTodoList,
@@ -44,7 +44,7 @@ const Todo: NextPage<TodoProps, GetInitialPropsReturn> = props => {
     handleGetTodoList()
   }, [])
 
-  const listItems = items.map(value => (
+  const listItems = items.map((value) => (
     <List.Item onClick={() => handleRemoveItem(value)} key={value}>
       {value}
     </List.Item>

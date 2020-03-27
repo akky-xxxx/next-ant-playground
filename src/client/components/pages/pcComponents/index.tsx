@@ -31,13 +31,13 @@ const values = [
   "あいうえおかきくえこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんあいうえおかきくえこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをんあいうえおかきくえこさしすせそたちつ",
 ] as const
 
-const optionList = values.map(value => (
+const optionList = values.map((value) => (
   <Option key={uuid()} value={value}>
     {value}
   </Option>
 ))
 
-const PcComponents: NextPage<PcComponentsProps, GetInitialPropsReturn> = props => {
+const PcComponents: NextPage<PcComponentsProps, GetInitialPropsReturn> = (props) => {
   const {
     handleCheckToken,
     app: { checkToken },
