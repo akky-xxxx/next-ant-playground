@@ -1,57 +1,40 @@
 /**
  * import node_modules
  */
-import { createAction, handleActions } from "redux-actions"
-import { steps } from "redux-effects-steps"
-import { fetchrCreate } from "redux-effects-fetchr"
+import { createSlice } from "@reduxjs/toolkit"
 
 /**
  * import others
  */
 import { InitialState } from "./types"
-import { createAsyncActionTypes } from "../../utils"
-import { ErrorPayload } from "../../../../shared/types/common"
+import { ErrorAction } from "../../../../shared/types/common"
 import getErrorMessage from "../../../../shared/utils/getErrorMessage"
 
 /**
  * main
  */
-// create action types
-const NAMESPACE = "checkUpdate"
-const [CHECK_TOKEN_REQUEST, CHECK_TOKEN_SUCCESS, CHECK_TOKEN_FAIL] = createAsyncActionTypes(NAMESPACE)
-
-// create action
-const checkTokenRequest = createAction(CHECK_TOKEN_REQUEST)
-const checkTokenSuccess = createAction(CHECK_TOKEN_SUCCESS)
-const checkTokenFail = createAction(CHECK_TOKEN_FAIL)
-const checkToken = () => {
-  return steps(checkTokenRequest(), fetchrCreate("checkToken"), [checkTokenSuccess, checkTokenFail])
-}
-
-export const actions = {
-  checkToken,
-}
-
 // initialState
 const initialState: InitialState = {
   isLoading: false,
   errorMessage: "",
 }
 
-// reducer
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const reducer = handleActions<InitialState, any>(
-  {
-    [CHECK_TOKEN_REQUEST]: (state) => ({
+const checkTokenModule = createSlice({
+  name: "checkToken",
+  initialState,
+  reducers: {
+    request: (state) => ({
       ...state,
       isLoading: true,
       errorMessage: "",
     }),
-    [CHECK_TOKEN_SUCCESS]: (state) => ({
+
+    success: (state) => ({
       ...state,
       isLoading: false,
     }),
-    [CHECK_TOKEN_FAIL]: (state, action: ErrorPayload) => {
+
+    fail: (state, action: ErrorAction) => {
       const {
         payload: { statusCode, message },
       } = action
@@ -63,7 +46,6 @@ const reducer = handleActions<InitialState, any>(
       }
     },
   },
-  initialState,
-)
+})
 
-export default reducer
+export default checkTokenModule

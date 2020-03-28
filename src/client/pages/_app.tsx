@@ -3,9 +3,9 @@
  */
 import "core-js/stable"
 import "regenerator-runtime/runtime"
-import App from "next/app"
+import { AppProps } from "next/app"
 import React, { Fragment } from "react"
-import { Store, Dispatch } from "redux"
+import { Dispatch } from "redux"
 import { createGlobalStyle } from "styled-components"
 import { Provider } from "react-redux"
 
@@ -20,8 +20,8 @@ import Layout from "../components/layouts/layout"
 import reset from "../assets/styles/reset"
 import base from "../assets/styles/base"
 import ant from "../assets/styles/ant"
-import { InitialState, actions } from "../store/modules"
-import withRedux from "../store/with-redux-store"
+import { actions } from "../store/modules"
+import store from "../store/store"
 
 /**
  * main
@@ -34,7 +34,7 @@ const GlobalStyle = createGlobalStyle`
 
 const {
   pages: {
-    formTest: { resetField },
+    formTest: { fieldReset },
   },
 } = actions
 
@@ -42,30 +42,23 @@ const resetStates = (resetActions: Function[], dispatch: Dispatch) => {
   resetActions.forEach((resetAction) => dispatch(resetAction()))
 }
 
-interface MyAppProps {
-  reduxStore: Store<InitialState>
+const MyApp = (props: AppProps) => {
+  const { Component, pageProps } = props
+  const { currentPage } = pageProps
+
+  resetStates([fieldReset], store.dispatch)
+
+  return (
+    <Fragment>
+      <GlobalStyle />
+      <Layout currentPage={currentPage}>
+        <Provider store={store}>
+          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+          <Component {...pageProps} />
+        </Provider>
+      </Layout>
+    </Fragment>
+  )
 }
 
-class MyApp extends App<MyAppProps> {
-  render() {
-    const { Component, pageProps, reduxStore } = this.props
-    const { currentPage } = pageProps
-    const { dispatch } = reduxStore
-
-    resetStates([resetField], dispatch)
-
-    return (
-      <Fragment>
-        <GlobalStyle />
-        <Layout currentPage={currentPage}>
-          <Provider store={reduxStore}>
-            {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            <Component {...pageProps} />
-          </Provider>
-        </Layout>
-      </Fragment>
-    )
-  }
-}
-
-export default withRedux(MyApp)
+export default MyApp
