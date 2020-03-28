@@ -9,8 +9,10 @@ export interface GetInitialPropsReturn {
 }
 
 export interface ErrorPayload {
-  payload: {
-    statusCode?: number
-    message?: string
-  }
+  statusCode?: number
+  message?: string
+}
+
+export interface ErrorAction {
+  payload: ErrorPayload
 }
