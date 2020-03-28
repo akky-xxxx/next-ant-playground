@@ -26,7 +26,7 @@ FormTest.getInitialProps = async () => {
 const {
   app: { checkToken },
   pages: {
-    formTest: { addField, changeValue, removeField },
+    formTest: { fieldAdd, changeValue, fieldRemove },
   },
 } = actions
 
@@ -44,8 +44,8 @@ export default connect<{}, HandleActions, {}, InitialState>(
   },
   (dispatch) => ({
     handleCheckToken: () => dispatch(checkToken()),
-    handleAddField: (payload) => dispatch(addField(payload)),
+    handleAddField: (payload) => dispatch(fieldAdd(payload)),
     handleChangeValue: (payload) => dispatch(changeValue(payload)),
-    handleRemoveField: (payload) => dispatch(removeField(payload)),
+    handleRemoveField: (payload) => dispatch(fieldRemove(payload)),
   }),
 )(FormTest)

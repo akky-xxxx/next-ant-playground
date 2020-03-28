@@ -1,46 +1,19 @@
 /**
  * import node_modules
  */
-import { createAction, handleActions } from "redux-actions"
+import { createSlice } from "@reduxjs/toolkit"
 import { v4 as uuid } from "uuid"
 import { clone } from "remeda"
 
 /**
  * import others
  */
-import {
-  Field,
-  InitialState,
-  AddFieldPayload,
-  AddFieldAction,
-  ChangeValuePayload,
-  ChangeValueAction,
-  RemoveFieldPayload,
-  RemoveFieldAction,
-} from "./types"
+import { Field, InitialState, AddFieldAction, ChangeValueAction, RemoveFieldAction } from "./types"
 import getValidator from "../../../../shared/utils/validator/getValidator"
 
 /**
  * main
  */
-// create action types
-const CHANGE_VALUE = "changeValue"
-const FIELD_ADD = "field/add"
-const FIELD_REMOVE = "field/remove"
-const FIELD_RESET = "field/reset"
-
-// create action
-const changeValue = createAction<ChangeValuePayload>(CHANGE_VALUE)
-const addField = createAction<AddFieldPayload>(FIELD_ADD)
-const removeField = createAction<RemoveFieldPayload>(FIELD_REMOVE)
-const resetField = createAction(FIELD_RESET)
-export const actions = {
-  changeValue,
-  addField,
-  removeField,
-  resetField,
-}
-
 // initialState
 const initialState: InitialState = {
   fields: [
@@ -54,11 +27,11 @@ const initialState: InitialState = {
   ],
 }
 
-// reducer
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const reducer = handleActions<InitialState, any>(
-  {
-    [CHANGE_VALUE]: (state, action: ChangeValueAction) => {
+const formTestModule = createSlice({
+  name: "pages/formTest",
+  initialState,
+  reducers: {
+    changeValue: (state, action: ChangeValueAction) => {
       const newState = clone(state)
       const {
         payload: { newValue, targetId, isRequire },
@@ -84,7 +57,7 @@ const reducer = handleActions<InitialState, any>(
       }
     },
 
-    [FIELD_ADD]: (state, action: AddFieldAction) => {
+    fieldAdd: (state, action: AddFieldAction) => {
       const {
         payload: { targetId },
       } = action
@@ -107,7 +80,7 @@ const reducer = handleActions<InitialState, any>(
       }
     },
 
-    [FIELD_REMOVE]: (state, action: RemoveFieldAction) => {
+    fieldRemove: (state, action: RemoveFieldAction) => {
       const newState = clone(state)
       const {
         payload: { targetId },
@@ -119,9 +92,10 @@ const reducer = handleActions<InitialState, any>(
       }
     },
 
-    [FIELD_RESET]: () => initialState,
+    fieldReset: () => {
+      return initialState
+    },
   },
-  initialState,
-)
+})
 
-export default reducer
+export default formTestModule

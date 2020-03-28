@@ -34,7 +34,7 @@ const GlobalStyle = createGlobalStyle`
 
 const {
   pages: {
-    formTest: { resetField },
+    formTest: { fieldReset },
   },
 } = actions
 
@@ -46,7 +46,7 @@ const MyApp = (props: AppProps) => {
   const { Component, pageProps } = props
   const { currentPage } = pageProps
 
-  resetStates([resetField], store.dispatch)
+  resetStates([fieldReset], store.dispatch)
 
   return (
     <Fragment>
