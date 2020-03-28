@@ -1,7 +1,7 @@
 /**
  * import node_modules
  */
-import { createStore, compose, applyMiddleware } from "redux"
+import { configureStore } from "@reduxjs/toolkit"
 import Fetchr from "fetchr"
 import stepsMiddleware from "redux-effects-steps"
 import fetchrMiddleware from "redux-effects-fetchr"
@@ -10,20 +10,21 @@ import fetchrMiddleware from "redux-effects-fetchr"
  * import others
  */
 import bffConfig from "../../server/configs"
-import reducer, { InitialState } from "./modules"
-import isServer from "../shared/utils/isServer"
+import reducer from "./modules"
 
 /**
  * main
  */
 const fetchr = new Fetchr(bffConfig.fetchr.clientConfig)
+const middleware = [stepsMiddleware, fetchrMiddleware(fetchr)].filter((value) => value)
 
-export function initializeStore(initialState?: InitialState) {
-  const composeEnhancers = (isServer && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
-  const middleware = [stepsMiddleware, fetchrMiddleware(fetchr)].filter((value) => value)
-  const enhancer = composeEnhancers(applyMiddleware(...middleware))
-
-  // TODO: resolve any warning
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return createStore<any, any, any, any>(reducer, initialState, enhancer)
+const initializeStore = () => {
+  return configureStore({
+    reducer,
+    middleware,
+  })
 }
+
+const store = initializeStore()
+
+export default store
