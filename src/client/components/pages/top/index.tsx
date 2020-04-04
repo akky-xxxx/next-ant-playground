@@ -15,7 +15,6 @@ import { GetInitialPropsReturn } from "../../../shared/types/common"
 import { menuData, pageNameMap } from "../../../shared/const/common"
 import { HandleActions as HandleCheckTokenActions } from "../../../store/modules/app/checkToken/types"
 import { InitialState as AppState } from "../../../store/modules/app"
-import isDev from "../../../shared/utils/isDev"
 
 /**
  * main
@@ -33,7 +32,7 @@ const Top: NextPage<TopProps, GetInitialPropsReturn> = (props) => {
   } = props
 
   useEffect(() => {
-    if (!isDev) handleCheckToken()
+    handleCheckToken()
   }, [])
 
   return (

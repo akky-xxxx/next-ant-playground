@@ -13,7 +13,6 @@ import { DatePicker, Picker, List } from "antd-mobile"
 import { GetInitialPropsReturn } from "../../../shared/types/common"
 import { HandleActions as HandleCheckTokenActions } from "../../../store/modules/app/checkToken/types"
 import { InitialState as AppState } from "../../../store/modules/app"
-import isDev from "../../../shared/utils/isDev"
 
 /**
  * main
@@ -56,7 +55,7 @@ const PcComponents: NextPage<PcComponents, GetInitialPropsReturn> = (props) => {
   } = props
 
   useEffect(() => {
-    if (!isDev) handleCheckToken()
+    handleCheckToken()
   }, [])
 
   return (

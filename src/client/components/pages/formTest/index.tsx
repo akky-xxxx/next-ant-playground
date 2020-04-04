@@ -21,7 +21,6 @@ import {
 } from "../../../store/modules/page/formTest/types"
 import { HandleActions as HandleCheckTokenActions } from "../../../store/modules/app/checkToken/types"
 import { InitialState as AppState } from "../../../store/modules/app"
-import isDev from "../../../shared/utils/isDev"
 
 /**
  * main
@@ -45,7 +44,7 @@ const FormTest: NextPage<FormTestProps, GetInitialPropsReturn> = (props) => {
   const { fields } = formTest
 
   useEffect(() => {
-    if (!isDev) handleCheckToken()
+    handleCheckToken()
   }, [])
 
   return (

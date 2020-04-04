@@ -18,7 +18,6 @@ import { HandleActions as HandleCheckTokenActions } from "../../../store/modules
 import { GetInitialPropsReturn } from "../../../shared/types/common"
 import { InitialState as AppState } from "../../../store/modules/app"
 import COLS from "../../../shared/const/grids"
-import isDev from "../../../shared/utils/isDev"
 
 /**
  * main
@@ -78,7 +77,7 @@ const ConditionForm: NextPage<ConditionFormProps, GetInitialPropsReturn> = (prop
   } = props
 
   useEffect(() => {
-    if (!isDev) handleCheckToken()
+    handleCheckToken()
   }, [])
 
   return (

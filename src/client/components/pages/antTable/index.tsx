@@ -13,7 +13,6 @@ import { ColumnProps } from "antd/es/table"
 import { GetInitialPropsReturn } from "../../../shared/types/common"
 import { HandleActions as HandleTodoActions } from "../../../store/modules/app/checkToken/types"
 import { InitialState as AppState } from "../../../store/modules/app"
-import isDev from "../../../shared/utils/isDev"
 
 /**
  * main
@@ -62,7 +61,7 @@ const TableWindow: NextPage<TableWindowProps, GetInitialPropsReturn> = (props) =
   } = props
 
   useEffect(() => {
-    if (!isDev) handleCheckToken()
+    handleCheckToken()
   }, [])
 
   return (
