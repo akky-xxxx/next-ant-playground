@@ -18,6 +18,7 @@ import router from "./index"
 import sessionConfig from "./const/sessionConfig"
 import oauth from "./middlewares/oauth"
 import isDev from "./utils/isDev"
+import needAuth from "./utils/needAuth"
 import createLogger from "./utils/createLogger"
 
 const port = 3000
@@ -43,7 +44,7 @@ app
     const server = express()
     sillyLogger("create server")
 
-    if (!isDev) {
+    if (needAuth) {
       server.use(session(sessionConfig))
       server.use(passport.initialize())
       server.use(passport.session())

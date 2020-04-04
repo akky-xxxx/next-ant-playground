@@ -9,6 +9,7 @@ import { Request } from "express"
 import BaseServiceClass from "./BaseService"
 import updateToken from "../utils/updateToken"
 import createLogger from "../utils/createLogger"
+import needAuth from "../utils/needAuth"
 
 /**
  * main
@@ -25,6 +26,12 @@ export default class CheckToken extends BaseServiceClass {
 
   async create(req: Request) {
     sillyLogger("開始")
+
+    if (!needAuth) {
+      sillyLogger("成功")
+      return Promise.resolve()
+    }
+
     try {
       await updateToken(req)
       sillyLogger("成功")

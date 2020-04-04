@@ -20,7 +20,7 @@ import authRequired from "./handlers/authRequired"
  */
 import { URLS, STRATEGY, STRATEGY_OPTION, STRATEGY_AUTH_OPTIONS } from "./const"
 import verify from "./modules/verify"
-import isDev from "../../utils/isDev"
+import needAuth from "../../utils/needAuth"
 
 /**
  * main
@@ -30,7 +30,7 @@ dotenv.config()
 const GoogleStrategy = oauth20.Strategy
 const router = express.Router()
 
-if (!isDev) {
+if (needAuth) {
   passport.use(new GoogleStrategy(STRATEGY_OPTION, verify))
 
   passport.serializeUser((user, callback) => callback(null, user))
