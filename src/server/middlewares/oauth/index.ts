@@ -20,6 +20,7 @@ import authRequired from "./handlers/authRequired"
  */
 import { URLS, STRATEGY, STRATEGY_OPTION, STRATEGY_AUTH_OPTIONS } from "./const"
 import verify from "./modules/verify"
+import isDev from "../../utils/isDev"
 
 /**
  * main
@@ -29,10 +30,12 @@ dotenv.config()
 const GoogleStrategy = oauth20.Strategy
 const router = express.Router()
 
-passport.use(new GoogleStrategy(STRATEGY_OPTION, verify))
+if (!isDev) {
+  passport.use(new GoogleStrategy(STRATEGY_OPTION, verify))
 
-passport.serializeUser((user, callback) => callback(null, user))
-passport.deserializeUser((obj, callback) => callback(null, obj))
+  passport.serializeUser((user, callback) => callback(null, user))
+  passport.deserializeUser((obj, callback) => callback(null, obj))
+}
 
 /**
  * ログインURLへのアクセス時のハンドリング
