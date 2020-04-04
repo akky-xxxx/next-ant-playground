@@ -9,6 +9,12 @@ module.exports = {
     browser: true,
     jest: true,
   },
+  globals: {
+    page: true,
+    browser: true,
+    context: true,
+    jestPuppeteer: true,
+  },
   parser: "@typescript-eslint/parser",
   plugins: [
     "@typescript-eslint",
