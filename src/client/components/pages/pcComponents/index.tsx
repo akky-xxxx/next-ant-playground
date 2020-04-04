@@ -13,7 +13,6 @@ import { v4 as uuid } from "uuid"
 import { GetInitialPropsReturn } from "../../../shared/types/common"
 import { HandleActions as HandleCheckTokenActions } from "../../../store/modules/app/checkToken/types"
 import { InitialState as AppState } from "../../../store/modules/app"
-import isDev from "../../../shared/utils/isDev"
 
 /**
  * main
@@ -44,7 +43,7 @@ const PcComponents: NextPage<PcComponentsProps, GetInitialPropsReturn> = (props)
   } = props
 
   useEffect(() => {
-    if (!isDev) handleCheckToken()
+    handleCheckToken()
   }, [])
 
   return (
