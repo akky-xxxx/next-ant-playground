@@ -13,3 +13,4 @@ Dockerfile
 stylelint.config.js
 yarn-error.log
 bin
+.github
