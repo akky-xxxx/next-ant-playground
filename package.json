@@ -33,6 +33,7 @@
     "serve:api": "agreed-server --path ./src/api/agreed.ts --port 3010",
     "serve:bff": "cross-env node bin/start-server.js",
     "spell-check": "cspell './src/**/*.{ts,tsx}'",
+    "start": "NODE_ENV=production run-s build serve",
     "type-check": "run-p type-check:*",
     "type-check:api": "tsc -p ./src/api --noEmit",
     "type-check:client": "tsc -p ./src/client --noEmit",
