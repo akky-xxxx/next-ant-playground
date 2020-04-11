@@ -9,21 +9,21 @@ trigger:
 
 steps:
   - name: install
-    image: node:12.16.1-alpine
+    image: node:12.16.2-alpine
     commands:
       - yarn
 
   - name: spell-check
-    image: node:12.16.1-alpine
+    image: node:12.16.2-alpine
     commands:
       - yarn spell-check
 
   - name: type-check
-    image: node:12.16.1-alpine
+    image: node:12.16.2-alpine
     commands:
       - yarn type-check
 
   - name: lint
-    image: node:12.16.1-alpine
+    image: node:12.16.2-alpine
     commands:
       - yarn lint
