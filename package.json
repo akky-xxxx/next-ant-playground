@@ -127,7 +127,7 @@
     "null-loader": "3.0.0",
     "parcel-bundler": "1.12.4",
     "prettier": "2.0.4",
-    "puppeteer": "2.1.1",
+    "puppeteer": "3.0.0",
     "react-docgen-typescript-webpack-plugin": "1.1.0",
     "stylelint": "13.3.2",
     "stylelint-config-standard": "20.0.0",
