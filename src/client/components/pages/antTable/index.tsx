@@ -4,8 +4,7 @@
 import React, { Fragment, useEffect } from "react"
 import { NextPage } from "next"
 import { Table, Spin } from "antd"
-import { PaginationConfig } from "antd/es/pagination"
-import { ColumnProps } from "antd/es/table"
+import { ColumnProps, TablePaginationConfig } from "antd/es/table"
 
 /**
  * import others
@@ -49,9 +48,9 @@ const columns: ColumnProps<Data>[] = [
   },
 ]
 
-const paginationOption: PaginationConfig = {
+const paginationOption: TablePaginationConfig = {
   defaultPageSize: 20,
-  position: "both",
+  position: ["bottomRight"],
 }
 
 const TableWindow: NextPage<TableWindowProps, GetInitialPropsReturn> = (props) => {
