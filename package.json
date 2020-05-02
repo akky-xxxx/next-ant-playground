@@ -79,7 +79,7 @@
     "remeda": "0.0.19",
     "reselect": "4.0.0",
     "styled-components": "5.1.0",
-    "uuid": "7.0.3",
+    "uuid": "8.0.0",
     "winston": "3.2.1"
   },
   "devDependencies": {
