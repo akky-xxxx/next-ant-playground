@@ -17,9 +17,21 @@ declare module "fetchr" {
     read(resource: string, params: AnyObject, config: AnyObject, callback: Function): void
     read(resource: string, params: AnyObject, config: AnyObject, callback: null): Promise<Record<string, unknown>>
     create(resource: string, params: AnyObject, body: AnyObject, config: AnyObject, callback: Function): void
-    create(resource: string, params: AnyObject, body: AnyObject, config: AnyObject, callback: null): Promise<Record<string, unknown>>
+    create(
+      resource: string,
+      params: AnyObject,
+      body: AnyObject,
+      config: AnyObject,
+      callback: null,
+    ): Promise<Record<string, unknown>>
     update(resource: string, params: AnyObject, body: AnyObject, config: AnyObject, callback: Function): void
-    update(resource: string, params: AnyObject, body: AnyObject, config: AnyObject, callback: null): Promise<Record<string, unknown>>
+    update(
+      resource: string,
+      params: AnyObject,
+      body: AnyObject,
+      config: AnyObject,
+      callback: null,
+    ): Promise<Record<string, unknown>>
     delete(resource: string, params: AnyObject, config: AnyObject, callback: Function): void
     delete(resource: string, params: AnyObject, config: AnyObject, callback: null): Promise<Record<string, unknown>>
   }
