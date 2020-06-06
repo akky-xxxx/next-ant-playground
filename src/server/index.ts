@@ -1,7 +1,7 @@
 /**
  * import node_modules
  */
-import express, { Request, Response, NextFunction } from "express"
+import express, { Request, Response, NextFunction, Router } from "express"
 
 /**
  * import others
@@ -9,7 +9,7 @@ import express, { Request, Response, NextFunction } from "express"
 import { apiGateway } from "./middlewares"
 import config from "./configs"
 
-export default function router() {
+export default function router(): Router {
   const app = express.Router()
   app.use((_req: Request, _res: Response, next: NextFunction) => {
     next()

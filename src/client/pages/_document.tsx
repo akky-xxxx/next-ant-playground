@@ -4,6 +4,8 @@ import { ServerStyleSheet } from "styled-components"
 import { clone } from "remeda"
 
 export default class MyDocument extends Document {
+  // TODO: 戻り値の型の厳密化
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   static async getInitialProps(context: DocumentContext) {
     const sheet = new ServerStyleSheet()
     const originalRenderPage = clone(context.renderPage)

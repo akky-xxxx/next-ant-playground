@@ -27,7 +27,7 @@ ConditionForm.getInitialProps = async () => {
   }
 }
 
-export default connect<{}, HandleActions, {}, InitialState>(
+export default connect<unknown, HandleActions, unknown, InitialState>(
   (state) => {
     const { app } = state
 

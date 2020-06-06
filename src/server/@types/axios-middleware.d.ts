@@ -8,7 +8,7 @@ interface Middleware {
 
 declare module "axios-middleware" {
   export default class HttpMiddlewareService {
-    constructor(axios: AxiosInstance)
+    constructor(axios: AxiosInstance): void
 
     public setHttp(axios: AxiosInstance): this
 
