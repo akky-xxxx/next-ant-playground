@@ -1,7 +1,7 @@
 /**
  * import node_modules
  */
-import { Request, Response, NextFunction } from "express"
+import { Request, Response, NextFunction, RequestHandler } from "express"
 import Fetchr from "fetchr"
 
 /**
@@ -20,7 +20,7 @@ const { sillyLogger } = createLogger("apiGateway")
 /**
  * service を Fetchr に登録する
  */
-export default function apiGateway() {
+export default function apiGateway(): RequestHandler {
   sillyLogger("------------------------------------")
   Object.values(services).forEach((Service: Services) => {
     const service = new Service()

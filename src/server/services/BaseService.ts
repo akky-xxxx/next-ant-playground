@@ -23,6 +23,7 @@ type Method1 = (
   resource: string,
   params: Record<string, unknown>,
   config: unknown,
+  // eslint-disable-next-line @typescript-eslint/ban-types
   callback: Function,
 ) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
 Promise<any>
@@ -32,6 +33,7 @@ type Method2 = (
   params: Record<string, unknown>,
   body: Record<string, unknown>,
   config: unknown,
+  // eslint-disable-next-line @typescript-eslint/ban-types
   callback: Function,
 ) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
 Promise<any>
@@ -79,7 +81,7 @@ export default class BaseServiceClass implements BaseService {
   /**
    * get parameterを使ってリクエスト URL を生成する
    */
-  getFormattedUrl() {
+  getFormattedUrl(): string[] {
     if (!this.options) return this.endpoints
 
     return this.endpoints.map((endpoint) => {
@@ -90,6 +92,8 @@ export default class BaseServiceClass implements BaseService {
     })
   }
 
+  // TODO: 戻り値の型解決
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   async read() {
     const configs = {
       data: {
@@ -118,6 +122,8 @@ export default class BaseServiceClass implements BaseService {
     }
   }
 
+  // TODO: 戻り値の型解決
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   async delete() {
     const configs = this.configs || {}
     const endpoints = this.getFormattedUrl()
@@ -138,7 +144,8 @@ export default class BaseServiceClass implements BaseService {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // TODO: 戻り値の型解決
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-unused-vars
   async create(_req: Request) {
     const options = this.options || {}
     const configs = this.configs || {}
@@ -159,6 +166,8 @@ export default class BaseServiceClass implements BaseService {
     }
   }
 
+  // TODO: 戻り値の型解決
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   async update() {
     const options = this.options || {}
     const configs = this.configs || {}

@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 
+// TODO: 型の厳密化
+/* eslint-disable @typescript-eslint/ban-types */
 declare module "fetchr" {
   export interface Fetchr {
     registerService(fetcher: unknown): void | Error
@@ -23,3 +25,4 @@ declare module "fetchr" {
 
   export default class Fetchr implements Fetchr {}
 }
+/* eslint-enable @typescript-eslint/ban-types */

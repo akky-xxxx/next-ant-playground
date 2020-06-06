@@ -24,6 +24,8 @@ export default class CheckToken extends BaseServiceClass {
     super("checkToken", [])
   }
 
+  // TODO: 戻り値の型解決
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   async create(req: Request) {
     sillyLogger("開始")
 
