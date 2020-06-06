@@ -38,6 +38,8 @@ const {
   },
 } = actions
 
+// TODO: 型の厳密化
+// eslint-disable-next-line @typescript-eslint/ban-types
 const resetStates = (resetActions: Function[], dispatch: Dispatch) => {
   resetActions.forEach((resetAction) => dispatch(resetAction()))
 }

@@ -16,3 +16,5 @@ export interface ErrorPayload {
 export interface ErrorAction {
   payload: ErrorPayload
 }
+
+export type AnyObject = Record<string, unknown>

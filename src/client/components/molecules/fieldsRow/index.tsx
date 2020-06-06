@@ -19,6 +19,8 @@ import ErrorMessage from "../../atoms/errorMessage"
 /**
  * main
  */
+// TODO: 型の厳密化
+/* eslint-disable @typescript-eslint/ban-types */
 interface FieldsRowProps {
   index: number
   fields: {
@@ -44,6 +46,7 @@ interface FieldsRowProps {
     }
   }
 }
+/* eslint-enable @typescript-eslint/ban-types */
 
 const FieldsRow: FC<FieldsRowProps> = (props) => {
   const {

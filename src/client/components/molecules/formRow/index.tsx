@@ -39,10 +39,10 @@ const FormRow: FunctionComponent<FormRowProps> = (props) => {
 
   useEffect(() => {
     // TODO: linter が optional chaining に対応したら disable comment 削除
-    /* eslint-disable no-unused-expressions,no-undef,prettier/prettier,no-restricted-globals,@typescript-eslint/ban-ts-ignore */
+    /* eslint-disable no-unused-expressions,no-undef,prettier/prettier,no-restricted-globals,@typescript-eslint/ban-ts-comment */
     // @ts-ignore
     self?.current?.focus()
-    /* eslint-enable no-unused-expressions,no-undef,prettier/prettier,no-restricted-globals,@typescript-eslint/ban-ts-ignore */
+    /* eslint-enable no-unused-expressions,no-undef,prettier/prettier,no-restricted-globals,@typescript-eslint/ban-ts-comment */
   }, [self])
 
   return (

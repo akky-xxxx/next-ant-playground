@@ -22,6 +22,8 @@ enum LOGICAL_OPERATION {
 interface LogicalOperationRowProps {
   index: number
   selectedValue: number
+  // TODO: 型の厳密化
+  // eslint-disable-next-line @typescript-eslint/ban-types
   handleChangeLogicalOperation: Function
 }
 
