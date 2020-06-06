@@ -3,7 +3,6 @@
  */
 import "core-js/stable"
 import "regenerator-runtime/runtime"
-import { AppProps } from "next/app"
 import React, { Fragment } from "react"
 import { Dispatch } from "redux"
 import { createGlobalStyle } from "styled-components"
@@ -44,7 +43,9 @@ const resetStates = (resetActions: Function[], dispatch: Dispatch) => {
   resetActions.forEach((resetAction) => dispatch(resetAction()))
 }
 
-const MyApp = (props: AppProps) => {
+// TODO: 型の厳密化
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const MyApp = (props: any) => {
   const { Component, pageProps } = props
   const { currentPage } = pageProps
 
