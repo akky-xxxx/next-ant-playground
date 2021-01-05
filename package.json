@@ -48,7 +48,7 @@
     "antd": "4.4.0",
     "antd-mobile": "2.3.3",
     "antd-pro": "0.7.0",
-    "axios": "0.19.2",
+    "axios": "0.21.1",
     "axios-middleware": "0.3.1",
     "core-js": "3.6.5",
     "cross-env": "7.0.2",
